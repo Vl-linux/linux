@@ -1,0 +1,75 @@
+
+Disk /dev/sda: 125 MB, 125829120 bytes, 245760 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/sdb: 125 MB, 125829120 bytes, 245760 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/sdc: 125 MB, 125829120 bytes, 245760 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/sdd: 125 MB, 125829120 bytes, 245760 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/sde: 125 MB, 125829120 bytes, 245760 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/sdf: 125 MB, 125829120 bytes, 245760 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/sdg: 42.9 GB, 42949672960 bytes, 83886080 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x000a218d
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdg1            2048        4095        1024   83  Linux
+/dev/sdg2   *        4096     2101247     1048576   83  Linux
+/dev/sdg3         2101248    83886079    40892416   8e  Linux LVM
+
+Disk /dev/mapper/VolGroup00-LogVol00: 40.2 GB, 40231763968 bytes, 78577664 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/mapper/VolGroup00-LogVol01: 1610 MB, 1610612736 bytes, 3145728 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/md10: 374 MB, 374341632 bytes, 731136 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 524288 bytes / 1572864 bytes
+Disk label type: gpt
+Disk identifier: 15217E07-9066-44E5-AADE-675DAAF10D45
+
+
+#         Start          End    Size  Type            Name
+ 1         2048       145810   70.2M  Linux filesyste Linux filesystem
+ 2       147456       291620   70.4M  Linux filesyste Linux filesystem
+ 3       292864       437430   70.6M  Linux filesyste Linux filesystem
+ 4       438272       583240   70.8M  Linux filesyste Linux filesystem
+ 5       583680       731102     72M  Linux filesyste Linux filesystem
