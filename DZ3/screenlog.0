@@ -1,0 +1,723 @@
+user@debian:~$ lsblk
+NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+loop0                     7:0    0  193M  1 loop /lib/live/mount/rootfs/filesystem.squashfs
+sda                       8:0    0   60G  0 disk
+sdb                       8:16   0   40G  0 disk
+  sdb1                    8:17   0    1M  0 part
+  sdb2                    8:18   0    1G  0 part
+  sdb3                    8:19   0   39G  0 part
+    VolGroup00-LogVol00 254:0    0 37.5G  0 lvm
+    VolGroup00-LogVol01 254:1    0  1.5G  0 lvm
+sr0                      11:0    1  230M  0 rom  /lib/live/mount/medium
+user@debian:~$
+user@debian:~$ sudo fdisk /dev/sda
+
+Welcome to fdisk (util-linux 2.31.1).
+ [[0mChanges will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table.
+Created a new DOS disklabel with disk identifier 0x98ba858f.
+
+Command (m for help): p
+ [[1mDisk /dev/sda: 60 GiB, 64424509440 bytes, 125829120 sectors
+ [[0mUnits: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x98ba858f
+
+Command (m for help): n
+Partition type
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended (container for logical partitions)
+Select (default p): p
+Partition number (1-4, default 1): 1
+First sector (2048-125829119, default 2048):
+Last sector, +sectors or +size{K,M,G,T,P} (2048-125829119, default 125829119): +30G
+
+Created a new partition 1 of type 'Linux' and of size 30 GiB.
+
+Command (m for help): n
+Partition type
+   p   primary (1 primary, 0 extended, 3 free)
+   e   extended (container for logical partitions)
+Select (default p): p
+Partition number (2-4, default 2): 2
+First sector (62916608-125829119, default 62916608):
+Last sector, +sectors or +size{K,M,G,T,P} (62916608-125829119, default 125829119):
+
+Created a new partition 2 of type 'Linux' and of size 30 GiB.
+Command (m for help): w
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.
+user@debian:~$
+user@debian:~$ lsblk
+NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+loop0                     7:0    0  193M  1 loop /lib/live/mount/rootfs/filesystem.squashfs
+sda                       8:0    0   60G  0 disk
+  sda1                    8:1    0   30G  0 part
+  sda2                    8:2    0   30G  0 part
+sdb                       8:16   0   40G  0 disk
+  sdb1                    8:17   0    1M  0 part
+  sdb2                    8:18   0    1G  0 part
+  sdb3                    8:19   0   39G  0 part
+    VolGroup00-LogVol00 254:0    0 37.5G  0 lvm
+    VolGroup00-LogVol01 254:1    0  1.5G  0 lvm
+sr0                      11:0    1  230M  0 rom  /lib/live/mount/medium
+user@debian:~$ sudo mkfs.ext4 /dev/sda1
+mke2fs 1.44.1 (24-Mar-2018)
+Creating filesystem with 7864320 4k blocks and 1966080 inodes
+Filesystem UUID: b8786acf-011e-4154-a88e-1e3a969fc73b
+Superblock backups stored on blocks:
+        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
+        4096000
+
+Allocating group tables:   0/240 done
+Writing inode tables:   0/240 done
+Creating journal (32768 blocks): done
+Writing superblocks and filesystem accounting information:   0/240 done
+user@debian:~$
+user@debian:~$ sudo vgscan
+  Reading volume groups from cache.
+  Found volume group "VolGroup00" using metadata type lvm2
+user@debian:~$ sudo vgdisplay
+  --- Volume group ---
+  VG Name               VolGroup00
+  System ID
+Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  3
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                2
+  Open LV               0
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <38.97 GiB
+  PE Size               32.00 MiB
+  Total PE              1247
+  Alloc PE / Size       1247 / <38.97 GiB
+  Free  PE / Size       0 / 0
+  VG UUID               dGc57I-fYMz-Paey-V1Pw-yN1w-gPOe-9qc4FM
+user@debian:~$ sudo lvdisplay
+  --- Logical volume ---
+  LV Path                /dev/VolGroup00/LogVol00
+  LV Name                LogVol00
+  VG Name                VolGroup00
+  LV UUID                JFy25w-Tsx0-5yp0-ehiu-t7Ne-u5hc-rs6idU
+  LV Write Access        read/write
+  LV Creation host, time localhost.localdomain, 2018-04-03 21:42:14 +0000
+  LV Status              available
+  # open                 0
+  LV Size                <37.47 GiB
+  Current LE             1199
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           254:0
+
+  --- Logical volume ---
+LV Path                /dev/VolGroup00/LogVol01
+  LV Name                LogVol01
+  VG Name                VolGroup00
+  LV UUID                89624j-KIdt-YZqE-jERC-KEiB-Aycr-8FYeB3
+  LV Write Access        read/write
+  LV Creation host, time localhost.localdomain, 2018-04-03 21:42:14 +0000
+  LV Status              available
+  # open                 0
+  LV Size                1.50 GiB
+  Current LE             48
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           254:1
+user@debian:~$
+user@debian:~$ sudo mkdir /mnt/vol
+user@debian:~$ sudo mkdir /mnt/dump
+user@debian:~$sudo mount /dev/VolGroup00/LogVol00 /mnt/vol
+user@debian:~$ sudo mount /dev/sda1 /mnt/dump
+user@debian:~$ sudo xfsdump -f /mnt/dump/vol00.dump /mnt/vol
+xfsdump: using file dump (drive_simple) strategy
+xfsdump: version 3.1.6 (dump format 3.0) - type  C for status and control
+
+ ============================= dump label dialog ==============================
+
+please enter label for this dump session (timeout in 300 sec)
+ ->
+session label entered: ""
+
+ --------------------------------- end dialog ---------------------------------
+
+xfsdump: WARNING: no session label specified
+xfsdump: level 0 dump of debian:/mnt/vol
+xfsdump: dump date: Sun May 13 13:45:14 2018
+xfsdump: session id: 72351637-b041-4217-96cd-02223e266764
+xfsdump: session label: ""
+xfsdump: ino map phase 1: constructing initial dump list
+xfsdump: ino map phase 2: skipping (no pruning necessary)
+xfsdump: ino map phase 3: skipping (only one dump stream)
+xfsdump: ino map construction complete
+xfsdump: estimated dump size: 609739648 bytes
+xfsdump: /var/lib/xfsdump/inventory created
+
+ ============================= media label dialog =============================
+
+please enter label for media in drive 0 (timeout in 300 sec)
+ ->
+media label entered: ""
+
+ --------------------------------- end dialog ---------------------------------
+xfsdump: WARNING: no media label specified
+xfsdump: creating dump session media file 0 (media 0, file 0)
+xfsdump: dumping ino map
+xfsdump: dumping directories
+xfsdump: dumping non-directory files
+xfsdump: ending media file
+xfsdump: media file size 587435408 bytes
+xfsdump: dump size (non-dir files) : 574698984 bytes
+xfsdump: dump complete: 25 seconds elapsed
+xfsdump: Dump Summary:
+xfsdump:   stream 0 /mnt/dump/vol00.dump OK (success)
+xfsdump: Dump Status: SUCCESS
+user@debian:~$ 
+user@debian:~$ 
+user@debian:~$ sudo umount /dev/VolGroup00/LogVol00
+user@debian:~$ sudo lvremove /dev/VolGroup00/LogVol00
+Do you really want to remove active logical volume VolGroup00/LogVol00? [y/n]: y
+  Logical volume "LogVol00" successfully removed
+user@debian:~$ sudo lvdisplay
+  --- Logical volume ---
+  LV Path                /dev/VolGroup00/LogVol01
+  LV Name                LogVol01
+  VG Name                VolGroup00
+  LV UUID                89624j-KIdt-YZqE-jERC-KEiB-Aycr-8FYeB3
+  LV Write Access        read/write
+  LV Creation host, time localhost.localdomain, 2018-04-03 21:42:14 +0000
+  LV Status              available
+  # open                 0
+  LV Size                1.50 GiB
+ Current LE             48
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           254:1
+user@debian:~$
+user@debian:~$ sudo lvcreate -n LogVol00 -L 8G VolGroup00
+WARNING: xfs signature detected on /dev/VolGroup00/LogVol00 at offset 0. Wipe it? [y/n]: y
+  Wiping xfs signature on /dev/VolGroup00/LogVol00.
+  Logical volume "LogVol00" created.
+user@debian:~$ sudo lvdisplay
+  --- Logical volume ---
+  LV Path                /dev/VolGroup00/LogVol01
+  LV Name                LogVol01
+  VG Name                VolGroup00
+  LV UUID                89624j-KIdt-YZqE-jERC-KEiB-Aycr-8FYeB3
+  LV Write Access        read/write
+  LV Creation host, time localhost.localdomain, 2018-04-03 21:42:14 +0000
+  LV Status              available
+  # open                 0
+  LV Size                1.50 GiB
+  Current LE             48
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           254:1
+
+  --- Logical volume ---
+  LV Path                /dev/VolGroup00/LogVol00
+  LV Name                LogVol00
+  VG Name                VolGroup00
+  LV UUID                mJY1KU-JCa1-k3ge-EnRY-3POX-iJJJ-K717Ug
+  LV Write Access        read/write
+LV Creation host, time debian, 2018-05-13 13:51:20 +0000
+  LV Status              available
+  # open                 0
+  LV Size                8.00 GiB
+  Current LE             256
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           254:0
+user@debian:~$
+user@debian:~$ sudo mkfs.xfs /dev/VolGroup00/LogVol00
+meta-data=/dev/VolGroup00/LogVol00 isize=512    agcount=4, agsize=524288 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=0, rmapbt=0, reflink=0
+data     =                       bsize=4096   blocks=2097152, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log	 =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+user@debian:~$
+user@debian:~$
+user@debian:~$ sudo mount /dev/VolGroup00/LogVol00 /mnt/vol
+user@debian:~$ sudo xfsrestore -f /mnt/dump/vol00.dump /mnt/vol
+xfsrestore: using file dump (drive_simple) strategy
+xfsrestore: version 3.1.6 (dump format 3.0) - type  C for status and control
+xfsrestore: searching media for dump
+xfsrestore: examining media file 0
+xfsrestore: dump description:
+xfsrestore: hostname: debian
+xfsrestore: mount point: /mnt/vol
+xfsrestore: volume: /dev/mapper/VolGroup00-LogVol00
+xfsrestore: session time: Sun May 13 13:45:14 2018
+xfsrestore: level: 0
+xfsrestore: session label: ""
+xfsrestore: media label: ""
+xfsrestore: file system id: fca2ab64-5588-4787-89bc-03642ce7ccca
+xfsrestore: session id: 72351637-b041-4217-96cd-02223e266764
+xfsrestore: media id: b32a926d-c2b0-48d1-9d07-0e7b8b09db51
+xfsrestore: using online session inventory
+xfsrestore: searching media for directory dump
+xfsrestore: reading directories
+xfsrestore: 2594 directories and 22903 entries processed
+xfsrestore: directory post-processing
+xfsrestore: restoring non-directory files
+xfsrestore: restore complete: 11 seconds elapsed
+xfsrestore: Restore Summary:
+xfsrestore:   stream 0 /mnt/dump/vol00.dump OK (success)
+xfsrestore: Restore Status: SUCCESS
+user@debian:~$ cd /mnt/vol
+user@debian:/mnt/vol$ ls -l
+total 12
+lrwxrwxrwx.  1 root root    7 May 13 13:55  [[0m [[01;36mbin [[0m ->  [[01;34musr/bin [[0m
+drwxr-xr-x.  2 root root    6 Apr  3 21:42  [[01;34mboot [[0m
+drwxr-xr-x.  2 root root    6 Apr  3 21:42  [[01;34mdev [[0m
+drwxr-xr-x. 77 root root 8192 May 13 13:25  [[01;34metc [[0m
+drwxr-xr-x.  3 root root   21 Apr  3 21:45  [[01;34mhome [[0m
+lrwxrwxrwx.  1 root root    7 May 13 13:55  [[01;36mlib [[0m ->  [[01;34musr/lib [[0m
+lrwxrwxrwx.  1 root root    9 May 13 13:55  [[01;36mlib64 [[0m ->  [[01;34musr/lib64 [[0m
+drwxr-xr-x.  2 root root    6 Nov  5  2016  [[01;34mmedia [[0m
+drwxr-xr-x.  2 root root    6 Nov  5  2016  [[01;34mmnt [[0m
+drwxr-xr-x.  2 root root    6 Nov  5  2016  [[01;34mopt [[0m
+drwxr-xr-x.  2 root root    6 Apr  3 21:42  [[01;34mproc [[0m
+dr-xr-x---.  3 root root  149 May 13 13:25  [[01;34mroot [[0m
+drwxr-xr-x.  2 root root    6 Apr  3 21:42  [[01;34mrun [[0m
+lrwxrwxrwx.  1 root root    8 May 13 13:55  [[01;36msbin [[0m ->  [[01;34musr/sbin [[0m
+drwxr-xr-x.  2 root root    6 Nov  5  2016  [[01;34msrv [[0m
+drwxr-xr-x.  2 root root    6 Apr  3 21:42  [[01;34msys [[0m
+drwxrwxrwt.  7 root root  177 May 13 13:25  [[30;42mtmp [[0m
+drwxr-xr-x. 13 root root  155 Apr  3 21:42  [[01;34musr [[0m
+drwxr-xr-x.  3 user user   75 May 13 13:24  [[01;34mvagrant [[0m
+drwxr-xr-x. 18 root root  254 May 13 13:24  [[01;34mvar [[0m
+user@debian:/mnt/vol$ cd
+user@debian:~$
+user@debian:~$ 
+user@debian:~$ lsblk
+NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+loop0                     7:0    0  193M  1 loop /lib/live/mount/rootfs/filesystem.squashfs
+sda                       8:0    0   60G  0 disk 
+├─sda1                    8:1    0   30G  0 part 
+└─sda2                    8:2    0   30G  0 part 
+sdb                       8:16   0   40G  0 disk 
+├─sdb1                    8:17   0    1M  0 part 
+├─sdb2                    8:18   0    1G  0 part 
+└─sdb3                    8:19   0   39G  0 part 
+  ├─VolGroup00-LogVol01 254:0    0  1.5G  0 lvm  
+  └─VolGroup00-LogVol00 254:1    0    8G  0 lvm  
+sr0                      11:0    1  230M  0 rom  /lib/live/mount/medium
+
+user@debian:~$ sudo lvcreate -n LogVol02 -L 16G VolGroup00
+  Logical volume "LogVol02" created.
+user@debian:~$ sudo lvcreate -n LogVol03 -L 8G VolGroup00
+  Logical volume "LogVol03" created.
+user@debian:~$
+user@debian:~$ sudo vgextend VolGroup00 /dev/sda2
+  Physical volume "/dev/sda2" successfully created.
+  Volume group "VolGroup00" successfully extended
+user@debian:~$ 
+user@debian:~$ sudo lvcreate -n LogVol04 -L 16G VolGroup00
+  Logical volume "LogVol04" created.
+user@debian:~$ sudo lvdisplay
+  --- Logical volume ---
+  LV Path                /dev/VolGroup00/LogVol01
+  LV Name                LogVol01
+  VG Name                VolGroup00
+  LV UUID                89624j-KIdt-YZqE-jERC-KEiB-Aycr-8FYeB3
+  LV Write Access        read/write
+  LV Creation host, time localhost.localdomain, 2018-04-03 21:42:14 +0000
+  LV Status              available
+  # open                 0
+  LV Size                1.50 GiB
+  Current LE             48
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           254:0
+   
+  --- Logical volume ---
+  LV Path                /dev/VolGroup00/LogVol00
+  LV Name                LogVol00
+  VG Name                VolGroup00
+  LV UUID                mJY1KU-JCa1-k3ge-EnRY-3POX-iJJJ-K717Ug
+  LV Write Access        read/write
+  LV Creation host, time debian, 2018-05-13 13:51:20 +0000
+  LV Status              available
+  # open                 0
+  LV Size                8.00 GiB
+  Current LE             256
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           254:1
+   
+  --- Logical volume ---
+  LV Path                /dev/VolGroup00/LogVol02
+  LV Name                LogVol02
+  VG Name                VolGroup00
+  LV UUID                lwS1Mw-t4bd-GETp-R22R-ZDNV-f3fc-0ZlkVc
+  LV Write Access        read/write
+  LV Creation host, time debian, 2018-05-13 16:10:13 +0000
+  LV Status              available
+  # open                 0
+  LV Size                16.00 GiB
+  Current LE             512
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           254:2
+   
+  --- Logical volume ---
+  LV Path                /dev/VolGroup00/LogVol03
+  LV Name                LogVol03
+  VG Name                VolGroup00
+  LV UUID                DzYzgM-sYIW-ejqA-QapR-clSi-OZhu-3KRMA7
+  LV Write Access        read/write
+  LV Creation host, time debian, 2018-05-13 16:10:56 +0000
+  LV Status              available
+  # open                 0
+  LV Size                8.00 GiB
+  Current LE             256
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           254:3
+   
+  --- Logical volume ---
+  LV Path                /dev/VolGroup00/LogVol04
+  LV Name                LogVol04
+  VG Name                VolGroup00
+  LV UUID                8BEPo3-2JvI-wt4B-OLIa-i2gf-Gbm8-24Lxa5
+  LV Write Access        read/write
+  LV Creation host, time debian, 2018-05-13 16:18:23 +0000
+  LV Status              available
+  # open                 0
+  LV Size                16.00 GiB
+  Current LE             512
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           254:4
+user@debian:~$
+user@debian:~$ lsblk
+NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+loop0                     7:0    0  193M  1 loop /lib/live/mount/rootfs/filesystem.squashfs
+sda                       8:0    0   60G  0 disk 
+├─sda1                    8:1    0   30G  0 part 
+└─sda2                    8:2    0   30G  0 part 
+  └─VolGroup00-LogVol04 254:4    0   16G  0 lvm  
+sdb                       8:16   0   40G  0 disk 
+├─sdb1                    8:17   0    1M  0 part 
+├─sdb2                    8:18   0    1G  0 part 
+└─sdb3                    8:19   0   39G  0 part 
+  ├─VolGroup00-LogVol01 254:0    0  1.5G  0 lvm  
+  ├─VolGroup00-LogVol00 254:1    0    8G  0 lvm  
+  ├─VolGroup00-LogVol02 254:2    0   16G  0 lvm  
+  └─VolGroup00-LogVol03 254:3    0    8G  0 lvm  
+sr0                      11:0    1  230M  0 rom  /lib/live/mount/medium
+user@debian:~$
+user@debian:~$ sudo mkdir /mnt/var
+user@debian:~$ sudo mkdir /mnt/home
+user@debian:~$ sudo mkfs.xfs /dev/VolGroup00/LogVol02
+user@debian:~$ sudo mkfs.ext4 /dev/VolGroup00/LogVol03
+user@debian:~$ sudo mount /dev/VolGroup00/LogVol02 /mnt/var
+user@debian:~$ sudo mount /dev/VolGroup00/LogVol03 /mnt/home
+user@debian:~$ sudo cp -aR /mnt/vol/var/* /mnt/var
+user@debian:~$ sudo cp -aR /mnt/vol/home/* /mnt/home
+user@debian:~$
+user@debian:~$
+user@debian:~$ sudo blkid
+/dev/sr0: UUID="2018-03-29-14-00-57-00" LABEL="2.5.5-38-i686-pae" TYPE="iso9660" PTUUID="36839c99" PTTYPE="dos"
+/dev/sda1: UUID="b8786acf-011e-4154-a88e-1e3a969fc73b" TYPE="ext4" PARTUUID="98ba858f-01"
+/dev/sda2: UUID="VgAolA-j84C-cUsH-HFZv-FLmD-sraH-EH38D1" TYPE="LVM2_member" PARTUUID="98ba858f-02"
+/dev/sdb1: PARTUUID="000a218d-01"
+/dev/sdb2: UUID="a9953552-87ca-4e1c-972e-fb484ce749fe" TYPE="xfs" PARTUUID="000a218d-02"
+/dev/sdb3: UUID="StnCI5-rd4r-8PPk-FAdf-Y5n1-HMHk-0ic6Sf" TYPE="LVM2_member" PARTUUID="000a218d-03"
+/dev/loop0: TYPE="squashfs"
+/dev/mapper/VolGroup00-LogVol01: UUID="63974128-1f7b-4926-860f-e75b056c4d72" TYPE="swap"
+/dev/mapper/VolGroup00-LogVol03: UUID="e48eabaf-5e78-480b-b969-455f89dc44c9" TYPE="ext4"
+/dev/mapper/VolGroup00-LogVol04: UUID="a6659ff2-9e27-4f81-8be4-1fbb75083f36" TYPE="xfs"
+/dev/mapper/VolGroup00-LogVol02: UUID="e3d7a030-6ea7-40f2-af42-638344be120b" TYPE="xfs"
+/dev/mapper/VolGroup00-LogVol00: UUID="e50042b8-6dc6-4604-a479-996a28c7eb7b" TYPE="xfs"
+user@debian:~$
+user@debian:~$ sudo reboot
+
+
+
+
+
+
+
+[vagrant@otuslinux ~]$ cat /etc/fstab
+
+#
+# /etc/fstab
+# Created by anaconda on Tue Apr  3 21:42:15 2018
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/VolGroup00-LogVol00 /                       xfs     defaults        0 0
+UUID=a9953552-87ca-4e1c-972e-fb484ce749fe /boot                   xfs     defaults        0 0
+/dev/mapper/VolGroup00-LogVol01 swap                    swap    defaults        0 0
+UUID=e3d7a030-6ea7-40f2-af42-638344be120b /var                    xfs     defaults        0 0
+UUID=e48eabaf-5e78-480b-b969-455f89dc44c9 /home                   ext4    defaults        0 0
+[vagrant@otuslinux ~]$ 
+[vagrant@otuslinux ~]$ sudo lvremove /dev/VolGroup00/LogVol04 
+Do you really want to remove active logical volume VolGroup00/LogVol04? [y/n]: y
+  Logical volume "LogVol04" successfully removed
+[vagrant@otuslinux ~]$ sudo lvconvert -m 1 /dev/VolGroup00/LogVol02 /dev/sda3 /dev/sdb2
+Are you sure you want to convert linear LV VolGroup00/LogVol02 to raid1 with 2 images enhancing resilience? [y/n]: y
+  Logical volume VolGroup00/LogVol02 successfully converted.
+[vagrant@otuslinux ~]$ 
+[vagrant@otuslinux ~]$ sudo lvdisplay
+  --- Logical volume ---
+  LV Path                /dev/VolGroup00/LogVol01
+  LV Name                LogVol01
+  VG Name                VolGroup00
+  LV UUID                89624j-KIdt-YZqE-jERC-KEiB-Aycr-8FYeB3
+  LV Write Access        read/write
+  LV Creation host, time localhost.localdomain, 2018-04-03 21:42:14 +0000
+  LV Status              available
+  # open                 2
+  LV Size                1.50 GiB
+  Current LE             48
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     8192
+  Block device           253:1
+   
+  --- Logical volume ---
+  LV Path                /dev/VolGroup00/LogVol03
+  LV Name                LogVol03
+  VG Name                VolGroup00
+  LV UUID                DzYzgM-sYIW-ejqA-QapR-clSi-OZhu-3KRMA7
+  LV Write Access        read/write
+  LV Creation host, time debian, 2018-05-13 16:10:56 +0000
+  LV Status              available
+  # open                 1
+  LV Size                8.00 GiB
+  Current LE             256
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     8192
+  Block device           253:2
+   
+  --- Logical volume ---
+  LV Path                /dev/VolGroup00/LogVol02
+  LV Name                LogVol02
+  VG Name                VolGroup00
+  LV UUID                6HY47e-bDtF-Eqdz-el7m-WOVG-6X8K-v3kvzt
+  LV Write Access        read/write
+  LV Creation host, time debian, 2018-05-13 16:55:59 +0000
+  LV Status              available
+  # open                 1
+  LV Size                16.00 GiB
+  Current LE             512
+  Mirrored volumes       2
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     8192
+  Block device           253:4
+   
+  --- Logical volume ---
+  LV Path                /dev/VolGroup00/LogVol00
+  LV Name                LogVol00
+  VG Name                VolGroup00
+  LV UUID                0nPmCi-nP0W-NkQ0-akIs-PzMk-V1Ts-OmBxGM
+  LV Write Access        read/write
+  LV Creation host, time debian, 2018-05-13 17:12:31 +0000
+  LV Status              available
+  # open                 1
+  LV Size                8.00 GiB
+  Current LE             256
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     8192
+  Block device           253:0
+   
+[vagrant@otuslinux ~]$ lsblk
+NAME                             MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                                8:0    0   40G  0 disk 
+|-sda1                             8:1    0    1M  0 part 
+|-sda2                             8:2    0    1G  0 part /boot
+`-sda3                             8:3    0   39G  0 part 
+  |-VolGroup00-LogVol00          253:0    0    8G  0 lvm  /
+  |-VolGroup00-LogVol01          253:1    0  1.5G  0 lvm  [SWAP]
+  |-VolGroup00-LogVol03          253:2    0    8G  0 lvm  /home
+  |-VolGroup00-LogVol02_rmeta_0  253:3    0   32M  0 lvm  
+  | `-VolGroup00-LogVol02        253:4    0   16G  0 lvm  /var
+  `-VolGroup00-LogVol02_rimage_0 253:5    0   16G  0 lvm  
+    `-VolGroup00-LogVol02        253:4    0   16G  0 lvm  /var
+sdb                                8:16   0   60G  0 disk 
+|-sdb1                             8:17   0   30G  0 part 
+`-sdb2                             8:18   0   30G  0 part 
+  |-VolGroup00-LogVol02_rmeta_1  253:6    0   32M  0 lvm  
+  | `-VolGroup00-LogVol02        253:4    0   16G  0 lvm  /var
+  `-VolGroup00-LogVol02_rimage_1 253:7    0   16G  0 lvm  
+    `-VolGroup00-LogVol02        253:4    0   16G  0 lvm  /var
+sr0                               11:0    1 1024M  0 rom  
+[vagrant@otuslinux ~]$ 
+[vagrant@otuslinux ~]$ 
+[vagrant@otuslinux ~]$ 
+[vagrant@otuslinux ~]$ touch file_{1..29}
+[vagrant@otuslinux ~]$ ls -l
+total 4
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_1
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_10
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_11
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_12
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_13
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_14
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_15
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_16
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_17
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_18
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_19
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_2
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_20
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_21
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_22
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_23
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_24
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_25
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_26
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_27
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_28
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_29
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_3
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_4
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_5
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_6
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_7
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_8
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_9
+drwxr-xr-x. 2 root    root    4096 May 13 18:03 log
+[vagrant@otuslinux ~]$ 
+[vagrant@otuslinux ~]$ sudo lvcreate -l 5%FREE -s -n LogVol03-snap0 /dev/VolGroup00/LogVol03
+  Using default stripesize 64.00 KiB.
+  Logical volume "LogVol03-snap0" created.
+[vagrant@otuslinux ~]$ lsblk
+NAME                               MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                                  8:0    0   60G  0 disk 
+|-sda1                               8:1    0   30G  0 part 
+`-sda2                               8:2    0   30G  0 part 
+  |-VolGroup00-LogVol02_rmeta_1    253:5    0   32M  0 lvm  
+  | `-VolGroup00-LogVol02          253:7    0   16G  0 lvm  /var
+  `-VolGroup00-LogVol02_rimage_1   253:6    0   16G  0 lvm  
+    `-VolGroup00-LogVol02          253:7    0   16G  0 lvm  /var
+sdb                                  8:16   0   40G  0 disk 
+|-sdb1                               8:17   0    1M  0 part 
+|-sdb2                               8:18   0    1G  0 part /boot
+`-sdb3                               8:19   0   39G  0 part 
+  |-VolGroup00-LogVol00            253:0    0    8G  0 lvm  /
+  |-VolGroup00-LogVol01            253:1    0  1.5G  0 lvm  [SWAP]
+  |-VolGroup00-LogVol02_rmeta_0    253:3    0   32M  0 lvm  
+  | `-VolGroup00-LogVol02          253:7    0   16G  0 lvm  /var
+  |-VolGroup00-LogVol02_rimage_0   253:4    0   16G  0 lvm  
+  | `-VolGroup00-LogVol02          253:7    0   16G  0 lvm  /var
+  |-VolGroup00-LogVol03-real       253:8    0    8G  0 lvm  
+  | |-VolGroup00-LogVol03          253:2    0    8G  0 lvm  /home
+  | `-VolGroup00-LogVol03--snap0   253:10   0    8G  0 lvm  
+  `-VolGroup00-LogVol03--snap0-cow 253:9    0  992M  0 lvm  
+    `-VolGroup00-LogVol03--snap0   253:10   0    8G  0 lvm  
+sr0                                 11:0    1 1024M  0 rom  
+[vagrant@otuslinux ~]$ 
+[vagrant@otuslinux ~]$ rm -f file_2*
+[vagrant@otuslinux ~]$ ls -l
+total 4
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_1
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_10
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_11
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_12
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_13
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_14
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_15
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_16
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_17
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_18
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_19
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_3
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_4
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_5
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_6
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_7
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_8
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_9
+drwxr-xr-x. 2 root    root    4096 May 13 18:03 log
+[vagrant@otuslinux ~]$ 
+[vagrant@otuslinux ~]$ cd /
+[vagrant@otuslinux /]$ sudo umount /home
+[vagrant@otuslinux /]$ sudo lvconvert --merge /dev/VolGroup00/LogVol03-snap0
+  Merging of volume VolGroup00/LogVol03-snap0 started.
+  LogVol03: Merged: 99.99%
+  LogVol03: Merged: 100.00%
+[vagrant@otuslinux /]$ sudo mount -a    
+[vagrant@otuslinux /]$ cd ~/
+[vagrant@otuslinux ~]$ ls -L
+file_1   file_11  file_13  file_15  file_17  file_19  file_20  file_22  file_24  file_26  file_28  file_3  file_5  file_7  file_9
+file_10  file_12  file_14  file_16  file_18  file_2   file_21  file_23  file_25  file_27  file_29  file_4  file_6  file_8  log
+[vagrant@otuslinux ~]$ ls -l
+total 4
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_1
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_10
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_11
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_12
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_13
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_14
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_15
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_16
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_17
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_18
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_19
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_2
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_20
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_21
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_22
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_23
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_24
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_25
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_26
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_27
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_28
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_29
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_3
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_4
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_5
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_6
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_7
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_8
+-rw-rw-r--. 1 vagrant vagrant    0 May 16 19:47 file_9
+drwxr-xr-x. 2 root    root    4096 May 13 18:03 log
+[vagrant@otuslinux ~]$ 
+
+
