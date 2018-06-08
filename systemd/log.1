@@ -1,0 +1,59 @@
+[vagrant@otuslinux ~]$ cat /lib/systemd/system/mon.log.service
+[Unit]
+Description=Monitor-log
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/sysconfig/monlog
+ExecStart=/usr/bin/grep $SLOVO $FILELOG
+ExecStop=/bin/kill -WINCH ${MAINPID}
+Restart=on-success
+RestartSec=30s
+
+[Install]
+WantedBy=multi-user.target
+[vagrant@otuslinux ~]$ cat /etc/sysconfig/monlog
+SLOVO=AUTH
+FILELOG=/var/log/audit/audit.log
+[vagrant@otuslinux ~]$
+[vagrant@otuslinux ~]$
+[vagrant@otuslinux ~]$sudo systemctl daemon-reload
+[vagrant@otuslinux ~]$
+[vagrant@otuslinux ~]$
+[vagrant@otuslinux ~]$ sudo systemctl start mon.log.service
+[vagrant@otuslinux ~]$ sudo journalctl -u mon.log.service
+-- Logs begin at Thu 2018-06-07 07:24:11 UTC, end at Thu 2018-06-07 07:59:19 UTC. --
+Jun 07 07:59:13 otuslinux systemd[1]: Started Monitor-log.
+Jun 07 07:59:13 otuslinux systemd[1]: Starting Monitor-log...
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1526940422.493:46): pid=1136 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1526940422.495:47): pid=1136 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1526940422.506:50): pid=1136 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1526940431.267:319): pid=1831 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1526940431.267:320): pid=1831 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1526940431.283:323): pid=1831 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1526940441.034:675): pid=3237 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1526940441.034:676): pid=3237 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1526940441.059:679): pid=3237 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1526952586.223:832): pid=3519 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1526952586.223:833): pid=3519 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1526952586.242:836): pid=3519 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527498511.434:45): pid=1118 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527498511.434:46): pid=1118 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527498511.448:49): pid=1118 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527498523.385:527): pid=2505 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527498523.385:528): pid=2505 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527498523.409:531): pid=2505 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527498564.631:609): pid=2629 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527498564.631:610): pid=2629 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527498564.650:613): pid=2629 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527513176.580:46): pid=1110 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527513176.580:47): pid=1110 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527513176.595:50): pid=1110 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527513190.040:528): pid=2480 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527513190.040:529): pid=2480 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527513190.066:532): pid=2480 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527513201.097:609): pid=2597 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527513201.097:610): pid=2597 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+Jun 07 07:59:13 otuslinux grep[2709]: type=USER_AUTH msg=audit(1527513201.114:613): pid=2597 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system
+lines 1-33
+
