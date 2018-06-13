@@ -1,0 +1,8 @@
+[vagrant@otuslinux ~]$ ps axl | grep zero
+4     0  2712  2711   0 -20 110220 102852 ?     R<+  pts/2      0:04 dd if=/dev/zero of=/dev/null bs=100M count=1000
+0  1000  2714  2629  20   0  12492   680 -      R+   pts/0      0:00 grep --color=auto zero
+[vagrant@otuslinux ~]$ ps axl | grep zero
+0     0  2715  2711  39  19 110220 102848 ?     RN+  pts/2      0:02 dd if=/dev/zero of=/dev/null bs=100M count=1000
+0  1000  2717  2629  20   0  12492   680 -      R+   pts/0      0:00 grep --color=auto zero
+[vagrant@otuslinux ~]$ 
+
