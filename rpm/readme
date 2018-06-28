@@ -1,0 +1,114 @@
+Инструкция
+
+
+1. Создаем rpm пакет.
+
+Устанавливаем для этого все необходимое:
+sudo yum install rpmdevtools rpm-build tree wget
+
+Теперь нужно создать структуру каталогов для сборки:
+rpmdev-setuptree
+tree -d -L 1 ~/rpmbuild
+/home/vagrant/rpmbuild
+|-- BUILD
+|-- RPMS
+|-- SOURCES
+|-- SPECS
+`-- SRPMS
+
+Идём в папку SOURCE и с помощью wget кладем туда приложение, которое будем собирать. В моём случае это Midnight Commander. С официального сайта забираем архив с последней версией (на текущий момент времени это mc-4.8.21.tar.xz)
+Достаем от туда файл: 
+~/mc-4.8.21/contrib/dist/redhat/mc.spec.in и сохраняем его в ~/rpmbuild/SPECS/mc.spec
+
+Редактируем данный SPEC-файл:
+В поле %define прописываем текущую версию
+В строке Source0: корректируем формат архива т.к. у нас используется tar.xz
+
+Приступим к сборке:
+rpmbuild -bb mc.spec — сборка RPM
+И тут же система сообщает нам об необходимых зависимостях:
+error: Failed build dependencies:
+	e2fsprogs-devel is needed by mc-3:4.8-21.el7.centos.x86_64
+	gpm-devel is needed by mc-3:4.8-21.el7.centos.x86_64
+	glib2-devel is needed by mc-3:4.8-21.el7.centos.x86_64
+	slang-devel is needed by mc-3:4.8-21.el7.centos.x86_64
+Все это нужно установить:
+sudo yum install gcc gcc-c++ e2fsprogs-devel gpm-devel glib2-devel slang-devel
+
+И собираем ...
+Далее при сборке натыкаемся на грабли:
+Ошибки сборки пакетов:
+    Файл не найден: /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/etc/mc/mc.menu.*
+    Файл не найден: /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/etc/mc/mc.keymap.*
+Помогло от них избавиться комментирование соответствующих строк в spec-файле
+#%config(noreplace) %{_sysconfdir}/mc/mc.menu.*
+#%config(noreplace) %{_sysconfdir}/mc/mc.keymap.*
+
+Собираем снова...
+Перед самым завершением сборки, rpmbuild выдаёт сообщение о найденных, но неупакованных файлах. 
+Ошибки сборки пакетов:
+    Обнаружен(ы) установленный(е) (но не упакованный(е)) файл(ы):
+   /etc/mc/mc.default.keymap
+   /etc/mc/mc.emacs.keymap
+   /usr/libexec/mc/ext.d/archive.sh
+   /usr/libexec/mc/ext.d/doc.sh
+   /usr/libexec/mc/ext.d/image.sh
+   /usr/libexec/mc/ext.d/misc.sh
+   /usr/libexec/mc/ext.d/package.sh
+   /usr/libexec/mc/ext.d/sound.sh
+   /usr/libexec/mc/ext.d/text.sh
+   /usr/libexec/mc/ext.d/video.sh
+   /usr/libexec/mc/ext.d/web.sh
+
+Необходимо просто добавить их в поле %files нашего spec-файла, после чего собираем снова
+По окончании сборки в каталоге ~/rpmbuild/RPMS/ находятся собранные rpm-пакеты
+cd x86_64/
+ls
+mc-4.8-21.el7.centos.x86_64.rpm  mc-debuginfo-4.8-21.el7.centos.x86_64.rpm
+
+Все действия подробно отражены в 1-м лог-файле.
+
+
+
+2.Создаем локальный репозиторий и кладем туда наш РПМ-пакет.
+
+Устанавливаем утилиту createrepo:
+sudo yum install createrepo
+
+Создаем каталог для локального репозитория:
+sudo mkdir -p /repos/CentOS/7/
+
+И копируем в него наш РПМ-пакет
+sudo cp mc-4.8-21.el7.centos.x86_64.rpm /repos/CentOS/7/
+
+Переходим в каталог /etc/yum.repos.d/ и создаем там файл репозитория:
+sudo vi CentOS-Local.repo 
+cat CentOS-Local.repo
+[local-repo]
+name=Local-repo
+baseurl=file:///repos/CentOS/7/
+enabled=1
+gpgcheck=0
+
+Создаем репозиторий:
+sudo createrepo /repos/CentOS/7/
+Spawning worker 0 with 1 pkgs
+Workers Finished
+Saving Primary metadata
+Saving file lists metadata
+Saving other metadata
+Generating sqlite DBs
+Sqlite DBs complete
+
+Проверяем:
+yum repolist
+sudo yum repo-pkgs local-repo list
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: centos-mirror.rbc.ru
+ * extras: mirror.logol.ru
+ * updates: mirror.logol.ru
+Available Packages
+mc.x86_64                                                    3:4.8-21.el7.centos     
+
+Все действия по созданию репозитория отражены во 2-м лог-файле.

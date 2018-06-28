@@ -1,0 +1,157 @@
+[vagrant@otuslinux x86_64]$ sudo yum install createrepo
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.logol.ru
+ * extras: mirrors.powernet.com.ru
+ * updates: mirror.logol.ru
+Resolving Dependencies
+--> Running transaction check
+---> Package createrepo.noarch 0:0.9.9-28.el7 will be installed
+--> Processing Dependency: python-deltarpm for package: createrepo-0.9.9-28.el7.noarch
+--> Running transaction check
+---> Package python-deltarpm.x86_64 0:3.6-3.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+========================================================================================================================================================================
+ Package                                       Arch                                 Version                                    Repository                          Size
+========================================================================================================================================================================
+Installing:
+ createrepo                                    noarch                               0.9.9-28.el7                               base                                94 k
+Installing for dependencies:
+ python-deltarpm                               x86_64                               3.6-3.el7                                  base                                31 k
+
+Transaction Summary
+========================================================================================================================================================================
+Install  1 Package (+1 Dependent package)
+
+Total download size: 125 k
+Installed size: 348 k
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/2): python-deltarpm-3.6-3.el7.x86_64.rpm                                                                                                      |  31 kB  00:00:00     
+(2/2): createrepo-0.9.9-28.el7.noarch.rpm                                                                                                        |  94 kB  00:00:01     
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                   114 kB/s | 125 kB  00:00:01     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : python-deltarpm-3.6-3.el7.x86_64                                                                                                                     1/2 
+  Installing : createrepo-0.9.9-28.el7.noarch                                                                                                                       2/2 
+  Verifying  : createrepo-0.9.9-28.el7.noarch                                                                                                                       1/2 
+  Verifying  : python-deltarpm-3.6-3.el7.x86_64                                                                                                                     2/2 
+
+Installed:
+  createrepo.noarch 0:0.9.9-28.el7                                                                                                                                      
+
+Dependency Installed:
+  python-deltarpm.x86_64 0:3.6-3.el7                                                                                                                                    
+
+Complete!
+[vagrant@otuslinux x86_64]$ 
+[vagrant@otuslinux x86_64]$ 
+[vagrant@otuslinux x86_64]$ cd ~/ 
+[vagrant@otuslinux /]$ sudo mkdir -p /repos/CentOS/7/
+[vagrant@otuslinux /]$ cd ~/rpmbuild/RPMS/
+[vagrant@otuslinux RPMS]$ ls -l
+total 0
+drwxr-xr-x. 2 vagrant vagrant 94 июн 27 13:49 x86_64
+[vagrant@otuslinux RPMS]$ cd x86_64/
+[vagrant@otuslinux x86_64]$ ls -l
+total 3764
+-rw-rw-r--. 1 vagrant vagrant 1973460 июн 27 13:49 mc-4.8-21.el7.centos.x86_64.rpm
+-rw-rw-r--. 1 vagrant vagrant 1878932 июн 27 13:49 mc-debuginfo-4.8-21.el7.centos.x86_64.rpm
+[vagrant@otuslinux x86_64]$ sudo cp mc-4.8-21.el7.centos.x86_64.rpm /repos/CentOS/7/
+[vagrant@otuslinux x86_64]$ cd /etc/yum.repos.d/
+[vagrant@otuslinux yum.repos.d]$ ls -l
+total 28
+-rw-r--r--. 1 root root 1664 авг 30  2017 CentOS-Base.repo
+-rw-r--r--. 1 root root 1309 авг 30  2017 CentOS-CR.repo
+-rw-r--r--. 1 root root  649 авг 30  2017 CentOS-Debuginfo.repo
+-rw-r--r--. 1 root root  314 авг 30  2017 CentOS-fasttrack.repo
+-rw-r--r--. 1 root root  630 авг 30  2017 CentOS-Media.repo
+-rw-r--r--. 1 root root 1331 авг 30  2017 CentOS-Sources.repo
+-rw-r--r--. 1 root root 3830 авг 30  2017 CentOS-Vault.repo
+[vagrant@otuslinux yum.repos.d]$ sudo createrepo /repos/CentOS/7/
+Spawning worker 0 with 1 pkgs
+Workers Finished
+Saving Primary metadata
+Saving file lists metadata
+Saving other metadata
+Generating sqlite DBs
+Sqlite DBs complete
+[vagrant@otuslinux yum.repos.d]$ 
+[vagrant@otuslinux yum.repos.d]$ sudo vi CentOS-Local.repo 
+[vagrant@otuslinux yum.repos.d]$ cat CentOS-Local.repo
+[local-repo]
+name=Local-repo
+baseurl=file:///repos/CentOS/7/
+enabled=1
+gpgcheck=0
+[vagrant@otuslinux yum.repos.d]$ yum repolist
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.yandex.ru
+ * extras: mirror.reconn.ru
+ * updates: mirror.yandex.ru
+repo id                                                                         repo name                                                                         status
+base/7/x86_64                                                                   CentOS-7 - Base                                                                   9 911
+extras/7/x86_64                                                                 CentOS-7 - Extras                                                                   313
+local-repo                                                                      Local-repo                                                                            1
+updates/7/x86_64                                                                CentOS-7 - Updates                                                                  711
+repolist: 10 936
+[vagrant@otuslinux yum.repos.d]$ sudo yum repo-pkgs local-repo list
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: centos-mirror.rbc.ru
+ * extras: mirror.logol.ru
+ * updates: mirror.logol.ru
+Available Packages
+mc.x86_64                                                                 3:4.8-21.el7.centos                                                                 local-repo
+[vagrant@otuslinux yum.repos.d]$ sudo yum --enablerepo=local-repo install mc
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: centos-mirror.rbc.ru
+ * extras: mirror.logol.ru
+ * updates: mirror.logol.ru
+Resolving Dependencies
+--> Running transaction check
+---> Package mc.x86_64 3:4.8-21.el7.centos will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+========================================================================================================================================================================
+ Package                          Arch                                 Version                                           Repository                                Size
+========================================================================================================================================================================
+Installing:
+ mc                               x86_64                               3:4.8-21.el7.centos                               local-repo                               1.9 M
+
+Transaction Summary
+========================================================================================================================================================================
+Install  1 Package
+
+Total download size: 1.9 M
+Installed size: 6.8 M
+Is this ok [y/d/N]: y
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : 3:mc-4.8-21.el7.centos.x86_64                                                                                                                        1/1 
+предупреждение: пользователь vcsa не существует - используется root
+  Verifying  : 3:mc-4.8-21.el7.centos.x86_64                                                                                                                        1/1 
+
+Installed:
+  mc.x86_64 3:4.8-21.el7.centos                                                                                                                                         
+
+Complete!
+[vagrant@otuslinux yum.repos.d]$ 
+[vagrant@otuslinux yum.repos.d]$ mc
+
+[vagrant@otuslinux yum.repos.d]$ 
+
+

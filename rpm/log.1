@@ -1,0 +1,1633 @@
+[vagrant@otuslinux ~]$ sudo yum install rpmdevtools rpm-build
+Failed to set locale, defaulting to C
+Loaded plugins: fastestmirror
+base                                                                                                                                             | 3.6 kB  00:00:00     
+extras                                                                                                                                           | 3.4 kB  00:00:00     
+updates                                                                                                                                          | 3.4 kB  00:00:00     
+(1/4): base/7/x86_64/group_gz                                                                                                                    | 166 kB  00:00:02     
+(2/4): extras/7/x86_64/primary_db                                                                                                                | 149 kB  00:00:06     
+(3/4): base/7/x86_64/primary_db                                                                                                                  | 5.9 MB  00:01:10     
+(4/4): updates/7/x86_64/primary_db                                                                                                               | 2.7 MB  00:01:15     
+Determining fastest mirrors
+ * base: centos-mirror.rbc.ru
+ * extras: mirror.corbina.net
+ * updates: mirror.satellite-service.ru
+Resolving Dependencies
+--> Running transaction check
+---> Package rpm-build.x86_64 0:4.11.3-32.el7 will be installed
+--> Processing Dependency: rpm = 4.11.3-32.el7 for package: rpm-build-4.11.3-32.el7.x86_64
+--> Processing Dependency: patch >= 2.5 for package: rpm-build-4.11.3-32.el7.x86_64
+--> Processing Dependency: elfutils >= 0.128 for package: rpm-build-4.11.3-32.el7.x86_64
+--> Processing Dependency: unzip for package: rpm-build-4.11.3-32.el7.x86_64
+--> Processing Dependency: system-rpm-config for package: rpm-build-4.11.3-32.el7.x86_64
+--> Processing Dependency: perl(threads) for package: rpm-build-4.11.3-32.el7.x86_64
+--> Processing Dependency: perl(Thread::Queue) for package: rpm-build-4.11.3-32.el7.x86_64
+--> Processing Dependency: perl(Getopt::Long) for package: rpm-build-4.11.3-32.el7.x86_64
+--> Processing Dependency: perl(File::Temp) for package: rpm-build-4.11.3-32.el7.x86_64
+--> Processing Dependency: perl(File::Basename) for package: rpm-build-4.11.3-32.el7.x86_64
+--> Processing Dependency: /usr/bin/perl for package: rpm-build-4.11.3-32.el7.x86_64
+--> Processing Dependency: /usr/bin/gdb-add-index for package: rpm-build-4.11.3-32.el7.x86_64
+---> Package rpmdevtools.noarch 0:8.3-5.el7 will be installed
+--> Processing Dependency: perl(File::Spec) for package: rpmdevtools-8.3-5.el7.noarch
+--> Processing Dependency: emacs-filesystem for package: rpmdevtools-8.3-5.el7.noarch
+--> Running transaction check
+---> Package elfutils.x86_64 0:0.170-4.el7 will be installed
+--> Processing Dependency: elfutils-libs(x86-64) = 0.170-4.el7 for package: elfutils-0.170-4.el7.x86_64
+--> Processing Dependency: elfutils-libelf(x86-64) = 0.170-4.el7 for package: elfutils-0.170-4.el7.x86_64
+---> Package emacs-filesystem.noarch 1:24.3-20.el7_4 will be installed
+---> Package gdb.x86_64 0:7.6.1-110.el7 will be installed
+---> Package patch.x86_64 0:2.7.1-10.el7_5 will be installed
+---> Package perl.x86_64 4:5.16.3-292.el7 will be installed
+--> Processing Dependency: perl-libs = 4:5.16.3-292.el7 for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl(Socket) >= 1.3 for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl(Scalar::Util) >= 1.10 for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl-macros for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl-libs for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl(threads::shared) for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl(constant) for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl(Time::Local) for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl(Time::HiRes) for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl(Storable) for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl(Socket) for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl(Scalar::Util) for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl(Pod::Simple::XHTML) for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl(Pod::Simple::Search) for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl(Filter::Util::Call) for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl(File::Path) for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl(Exporter) for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: perl(Carp) for package: 4:perl-5.16.3-292.el7.x86_64
+--> Processing Dependency: libperl.so()(64bit) for package: 4:perl-5.16.3-292.el7.x86_64
+---> Package perl-File-Temp.noarch 0:0.23.01-3.el7 will be installed
+---> Package perl-Getopt-Long.noarch 0:2.40-3.el7 will be installed
+--> Processing Dependency: perl(Pod::Usage) >= 1.14 for package: perl-Getopt-Long-2.40-3.el7.noarch
+--> Processing Dependency: perl(Text::ParseWords) for package: perl-Getopt-Long-2.40-3.el7.noarch
+---> Package perl-PathTools.x86_64 0:3.40-5.el7 will be installed
+---> Package perl-Thread-Queue.noarch 0:3.02-2.el7 will be installed
+---> Package perl-threads.x86_64 0:1.87-4.el7 will be installed
+---> Package redhat-rpm-config.noarch 0:9.1.0-80.el7.centos will be installed
+--> Processing Dependency: dwz >= 0.4 for package: redhat-rpm-config-9.1.0-80.el7.centos.noarch
+--> Processing Dependency: zip for package: redhat-rpm-config-9.1.0-80.el7.centos.noarch
+--> Processing Dependency: perl-srpm-macros for package: redhat-rpm-config-9.1.0-80.el7.centos.noarch
+---> Package rpm.x86_64 0:4.11.3-25.el7 will be updated
+--> Processing Dependency: rpm = 4.11.3-25.el7 for package: rpm-python-4.11.3-25.el7.x86_64
+--> Processing Dependency: rpm = 4.11.3-25.el7 for package: rpm-libs-4.11.3-25.el7.x86_64
+---> Package rpm.x86_64 0:4.11.3-32.el7 will be an update
+---> Package unzip.x86_64 0:6.0-19.el7 will be installed
+--> Running transaction check
+---> Package dwz.x86_64 0:0.11-3.el7 will be installed
+---> Package elfutils-libelf.x86_64 0:0.168-8.el7 will be updated
+---> Package elfutils-libelf.x86_64 0:0.170-4.el7 will be an update
+---> Package elfutils-libs.x86_64 0:0.168-8.el7 will be updated
+---> Package elfutils-libs.x86_64 0:0.170-4.el7 will be an update
+---> Package perl-Carp.noarch 0:1.26-244.el7 will be installed
+---> Package perl-Exporter.noarch 0:5.68-3.el7 will be installed
+---> Package perl-File-Path.noarch 0:2.09-2.el7 will be installed
+---> Package perl-Filter.x86_64 0:1.49-3.el7 will be installed
+---> Package perl-Pod-Simple.noarch 1:3.28-4.el7 will be installed
+--> Processing Dependency: perl(Pod::Escapes) >= 1.04 for package: 1:perl-Pod-Simple-3.28-4.el7.noarch
+--> Processing Dependency: perl(Encode) for package: 1:perl-Pod-Simple-3.28-4.el7.noarch
+---> Package perl-Pod-Usage.noarch 0:1.63-3.el7 will be installed
+--> Processing Dependency: perl(Pod::Text) >= 3.15 for package: perl-Pod-Usage-1.63-3.el7.noarch
+--> Processing Dependency: perl-Pod-Perldoc for package: perl-Pod-Usage-1.63-3.el7.noarch
+---> Package perl-Scalar-List-Utils.x86_64 0:1.27-248.el7 will be installed
+---> Package perl-Socket.x86_64 0:2.010-4.el7 will be installed
+---> Package perl-Storable.x86_64 0:2.45-3.el7 will be installed
+---> Package perl-Text-ParseWords.noarch 0:3.29-4.el7 will be installed
+---> Package perl-Time-HiRes.x86_64 4:1.9725-3.el7 will be installed
+---> Package perl-Time-Local.noarch 0:1.2300-2.el7 will be installed
+---> Package perl-constant.noarch 0:1.27-2.el7 will be installed
+---> Package perl-libs.x86_64 4:5.16.3-292.el7 will be installed
+---> Package perl-macros.x86_64 4:5.16.3-292.el7 will be installed
+---> Package perl-srpm-macros.noarch 0:1-8.el7 will be installed
+---> Package perl-threads-shared.x86_64 0:1.43-6.el7 will be installed
+---> Package rpm-libs.x86_64 0:4.11.3-25.el7 will be updated
+--> Processing Dependency: rpm-libs(x86-64) = 4.11.3-25.el7 for package: rpm-build-libs-4.11.3-25.el7.x86_64
+---> Package rpm-libs.x86_64 0:4.11.3-32.el7 will be an update
+---> Package rpm-python.x86_64 0:4.11.3-25.el7 will be updated
+---> Package rpm-python.x86_64 0:4.11.3-32.el7 will be an update
+---> Package zip.x86_64 0:3.0-11.el7 will be installed
+--> Running transaction check
+---> Package perl-Encode.x86_64 0:2.51-7.el7 will be installed
+---> Package perl-Pod-Escapes.noarch 1:1.04-292.el7 will be installed
+---> Package perl-Pod-Perldoc.noarch 0:3.20-4.el7 will be installed
+--> Processing Dependency: perl(parent) for package: perl-Pod-Perldoc-3.20-4.el7.noarch
+--> Processing Dependency: perl(HTTP::Tiny) for package: perl-Pod-Perldoc-3.20-4.el7.noarch
+---> Package perl-podlators.noarch 0:2.5.1-3.el7 will be installed
+---> Package rpm-build-libs.x86_64 0:4.11.3-25.el7 will be updated
+---> Package rpm-build-libs.x86_64 0:4.11.3-32.el7 will be an update
+--> Running transaction check
+---> Package perl-HTTP-Tiny.noarch 0:0.033-3.el7 will be installed
+---> Package perl-parent.noarch 1:0.225-244.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+========================================================================================================================================================================
+ Package                                         Arch                            Version                                         Repository                        Size
+========================================================================================================================================================================
+Installing:
+ rpm-build                                       x86_64                          4.11.3-32.el7                                   base                             147 k
+ rpmdevtools                                     noarch                          8.3-5.el7                                       base                              97 k
+Installing for dependencies:
+ dwz                                             x86_64                          0.11-3.el7                                      base                              99 k
+ elfutils                                        x86_64                          0.170-4.el7                                     base                             282 k
+ emacs-filesystem                                noarch                          1:24.3-20.el7_4                                 base                              58 k
+ gdb                                             x86_64                          7.6.1-110.el7                                   base                             2.4 M
+ patch                                           x86_64                          2.7.1-10.el7_5                                  updates                          110 k
+ perl                                            x86_64                          4:5.16.3-292.el7                                base                             8.0 M
+ perl-Carp                                       noarch                          1.26-244.el7                                    base                              19 k
+ perl-Encode                                     x86_64                          2.51-7.el7                                      base                             1.5 M
+ perl-Exporter                                   noarch                          5.68-3.el7                                      base                              28 k
+ perl-File-Path                                  noarch                          2.09-2.el7                                      base                              26 k
+ perl-File-Temp                                  noarch                          0.23.01-3.el7                                   base                              56 k
+ perl-Filter                                     x86_64                          1.49-3.el7                                      base                              76 k
+ perl-Getopt-Long                                noarch                          2.40-3.el7                                      base                              56 k
+ perl-HTTP-Tiny                                  noarch                          0.033-3.el7                                     base                              38 k
+ perl-PathTools                                  x86_64                          3.40-5.el7                                      base                              82 k
+ perl-Pod-Escapes                                noarch                          1:1.04-292.el7                                  base                              51 k
+ perl-Pod-Perldoc                                noarch                          3.20-4.el7                                      base                              87 k
+ perl-Pod-Simple                                 noarch                          1:3.28-4.el7                                    base                             216 k
+ perl-Pod-Usage                                  noarch                          1.63-3.el7                                      base                              27 k
+ perl-Scalar-List-Utils                          x86_64                          1.27-248.el7                                    base                              36 k
+ perl-Socket                                     x86_64                          2.010-4.el7                                     base                              49 k
+ perl-Storable                                   x86_64                          2.45-3.el7                                      base                              77 k
+ perl-Text-ParseWords                            noarch                          3.29-4.el7                                      base                              14 k
+ perl-Thread-Queue                               noarch                          3.02-2.el7                                      base                              17 k
+ perl-Time-HiRes                                 x86_64                          4:1.9725-3.el7                                  base                              45 k
+ perl-Time-Local                                 noarch                          1.2300-2.el7                                    base                              24 k
+ perl-constant                                   noarch                          1.27-2.el7                                      base                              19 k
+ perl-libs                                       x86_64                          4:5.16.3-292.el7                                base                             688 k
+ perl-macros                                     x86_64                          4:5.16.3-292.el7                                base                              43 k
+ perl-parent                                     noarch                          1:0.225-244.el7                                 base                              12 k
+ perl-podlators                                  noarch                          2.5.1-3.el7                                     base                             112 k
+ perl-srpm-macros                                noarch                          1-8.el7                                         base                             4.6 k
+ perl-threads                                    x86_64                          1.87-4.el7                                      base                              49 k
+ perl-threads-shared                             x86_64                          1.43-6.el7                                      base                              39 k
+ redhat-rpm-config                               noarch                          9.1.0-80.el7.centos                             base                              79 k
+ unzip                                           x86_64                          6.0-19.el7                                      base                             170 k
+ zip                                             x86_64                          3.0-11.el7                                      base                             260 k
+Updating for dependencies:
+ elfutils-libelf                                 x86_64                          0.170-4.el7                                     base                             195 k
+ elfutils-libs                                   x86_64                          0.170-4.el7                                     base                             267 k
+ rpm                                             x86_64                          4.11.3-32.el7                                   base                             1.2 M
+ rpm-build-libs                                  x86_64                          4.11.3-32.el7                                   base                             105 k
+ rpm-libs                                        x86_64                          4.11.3-32.el7                                   base                             276 k
+ rpm-python                                      x86_64                          4.11.3-32.el7                                   base                              82 k
+
+Transaction Summary
+========================================================================================================================================================================
+Install  2 Packages (+37 Dependent packages)
+Upgrade             (  6 Dependent packages)
+
+Total download size: 17 M
+Is this ok [y/d/N]: y
+Downloading packages:
+No Presto metadata available for base
+warning: /var/cache/yum/x86_64/7/base/packages/emacs-filesystem-24.3-20.el7_4.noarch.rpm: Header V3 RSA/SHA256 Signature, key ID f4a80eb5: NOKEY | 282 kB  00:03:10 ETA 
+Public key for emacs-filesystem-24.3-20.el7_4.noarch.rpm is not installed
+(1/45): emacs-filesystem-24.3-20.el7_4.noarch.rpm                                                                                                |  58 kB  00:00:03     
+(2/45): dwz-0.11-3.el7.x86_64.rpm                                                                                                                |  99 kB  00:00:06     
+(3/45): elfutils-libelf-0.170-4.el7.x86_64.rpm                                                                                                   | 195 kB  00:00:07     
+(4/45): elfutils-libs-0.170-4.el7.x86_64.rpm                                                                                                     | 267 kB  00:00:10     
+Public key for patch-2.7.1-10.el7_5.x86_64.rpm is not installed       6% [====                                                        ] 119 kB/s | 1.2 MB  00:02:16 ETA 
+(5/45): patch-2.7.1-10.el7_5.x86_64.rpm                                                                                                          | 110 kB  00:00:04     
+(6/45): perl-Carp-1.26-244.el7.noarch.rpm                                                                                                        |  19 kB  00:00:01     
+(7/45): elfutils-0.170-4.el7.x86_64.rpm                                                                                                          | 282 kB  00:00:12     
+(8/45): perl-File-Path-2.09-2.el7.noarch.rpm                                                                                                     |  26 kB  00:00:00     
+(9/45): perl-File-Temp-0.23.01-3.el7.noarch.rpm                                                                                                  |  56 kB  00:00:00     
+(10/45): perl-Exporter-5.68-3.el7.noarch.rpm                                                                                                     |  28 kB  00:00:03     
+(11/45): perl-Getopt-Long-2.40-3.el7.noarch.rpm                                                                                                  |  56 kB  00:00:01     
+(12/45): perl-Filter-1.49-3.el7.x86_64.rpm                                                                                                       |  76 kB  00:00:03     
+(13/45): perl-HTTP-Tiny-0.033-3.el7.noarch.rpm                                                                                                   |  38 kB  00:00:01     
+(14/45): perl-PathTools-3.40-5.el7.x86_64.rpm                                                                                                    |  82 kB  00:00:03     
+(15/45): perl-Pod-Escapes-1.04-292.el7.noarch.rpm                                                                                                |  51 kB  00:00:02     
+(16/45): perl-Pod-Perldoc-3.20-4.el7.noarch.rpm                                                                                                  |  87 kB  00:00:05     
+(17/45): perl-Pod-Usage-1.63-3.el7.noarch.rpm                                                                                                    |  27 kB  00:00:01     
+(18/45): perl-Scalar-List-Utils-1.27-248.el7.x86_64.rpm                                                                                          |  36 kB  00:00:01     
+(19/45): perl-Pod-Simple-3.28-4.el7.noarch.rpm                                                                                                   | 216 kB  00:00:11     
+(20/45): perl-Socket-2.010-4.el7.x86_64.rpm                                                                                                      |  49 kB  00:00:05     
+(21/45): perl-Storable-2.45-3.el7.x86_64.rpm                                                                                                     |  77 kB  00:00:04     
+(22/45): perl-Text-ParseWords-3.29-4.el7.noarch.rpm                                                                                              |  14 kB  00:00:01     
+(23/45): perl-Thread-Queue-3.02-2.el7.noarch.rpm                                                                                                 |  17 kB  00:00:00     
+(24/45): perl-Time-HiRes-1.9725-3.el7.x86_64.rpm                                                                                                 |  45 kB  00:00:01     
+(25/45): perl-Time-Local-1.2300-2.el7.noarch.rpm                                                                                                 |  24 kB  00:00:01     
+(26/45): perl-constant-1.27-2.el7.noarch.rpm                                                                                                     |  19 kB  00:00:01     
+(27/45): perl-macros-5.16.3-292.el7.x86_64.rpm                                                                                                   |  43 kB  00:00:02     
+(28/45): perl-parent-0.225-244.el7.noarch.rpm                                                                                                    |  12 kB  00:00:00     
+(29/45): perl-podlators-2.5.1-3.el7.noarch.rpm                                                                                                   | 112 kB  00:00:04     
+(30/45): perl-srpm-macros-1-8.el7.noarch.rpm                                                                                                     | 4.6 kB  00:00:00     
+(31/45): perl-threads-1.87-4.el7.x86_64.rpm                                                                                                      |  49 kB  00:00:02     
+(32/45): perl-threads-shared-1.43-6.el7.x86_64.rpm                                                                                               |  39 kB  00:00:01     
+(33/45): redhat-rpm-config-9.1.0-80.el7.centos.noarch.rpm                                                                                        |  79 kB  00:00:03     
+(34/45): perl-Encode-2.51-7.el7.x86_64.rpm                                                                                                       | 1.5 MB  00:00:51     
+(35/45): rpm-build-4.11.3-32.el7.x86_64.rpm                                                                                                      | 147 kB  00:00:04     
+(36/45): rpm-build-libs-4.11.3-32.el7.x86_64.rpm                                                                                                 | 105 kB  00:00:02     
+(37/45): rpm-libs-4.11.3-32.el7.x86_64.rpm                                                                                                       | 276 kB  00:00:09     
+(38/45): perl-libs-5.16.3-292.el7.x86_64.rpm                                                                                                     | 688 kB  00:00:41     
+(39/45): rpm-python-4.11.3-32.el7.x86_64.rpm                                                                                                     |  82 kB  00:00:02     
+(40/45): unzip-6.0-19.el7.x86_64.rpm                                                                                                             | 170 kB  00:00:04     
+(41/45): gdb-7.6.1-110.el7.x86_64.rpm                                                                                                            | 2.4 MB  00:01:23     
+(42/45): rpmdevtools-8.3-5.el7.noarch.rpm                                                                                                        |  97 kB  00:00:06     
+(43/45): zip-3.0-11.el7.x86_64.rpm                                                                                                               | 260 kB  00:00:05     
+(44/45): rpm-4.11.3-32.el7.x86_64.rpm                                                                                                            | 1.2 MB  00:00:43     
+(45/45): perl-5.16.3-292.el7.x86_64.rpm                                                                                                          | 8.0 MB  00:02:19     
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                   120 kB/s |  17 MB  00:02:26     
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+Importing GPG key 0xF4A80EB5:
+ Userid     : "CentOS-7 Key (CentOS 7 Official Signing Key) <security@centos.org>"
+ Fingerprint: 6341 ab27 53d7 8a78 a7c2 7bb1 24c6 a8a7 f4a8 0eb5
+ Package    : centos-release-7-4.1708.el7.centos.x86_64 (@anaconda)
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+Is this ok [y/N]: y
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Updating   : elfutils-libelf-0.170-4.el7.x86_64                                                                                                                  1/51 
+  Updating   : rpm-4.11.3-32.el7.x86_64                                                                                                                            2/51 
+  Updating   : rpm-libs-4.11.3-32.el7.x86_64                                                                                                                       3/51 
+  Updating   : rpm-build-libs-4.11.3-32.el7.x86_64                                                                                                                 4/51 
+  Updating   : rpm-python-4.11.3-32.el7.x86_64                                                                                                                     5/51 
+  Installing : dwz-0.11-3.el7.x86_64                                                                                                                               6/51 
+  Updating   : elfutils-libs-0.170-4.el7.x86_64                                                                                                                    7/51 
+  Installing : elfutils-0.170-4.el7.x86_64                                                                                                                         8/51 
+  Installing : 1:perl-parent-0.225-244.el7.noarch                                                                                                                  9/51 
+  Installing : perl-HTTP-Tiny-0.033-3.el7.noarch                                                                                                                  10/51 
+  Installing : perl-podlators-2.5.1-3.el7.noarch                                                                                                                  11/51 
+  Installing : perl-Pod-Perldoc-3.20-4.el7.noarch                                                                                                                 12/51 
+  Installing : 1:perl-Pod-Escapes-1.04-292.el7.noarch                                                                                                             13/51 
+  Installing : perl-Text-ParseWords-3.29-4.el7.noarch                                                                                                             14/51 
+  Installing : perl-Encode-2.51-7.el7.x86_64                                                                                                                      15/51 
+  Installing : perl-Pod-Usage-1.63-3.el7.noarch                                                                                                                   16/51 
+  Installing : 4:perl-macros-5.16.3-292.el7.x86_64                                                                                                                17/51 
+  Installing : 4:perl-libs-5.16.3-292.el7.x86_64                                                                                                                  18/51 
+  Installing : 4:perl-Time-HiRes-1.9725-3.el7.x86_64                                                                                                              19/51 
+  Installing : perl-Exporter-5.68-3.el7.noarch                                                                                                                    20/51 
+  Installing : perl-constant-1.27-2.el7.noarch                                                                                                                    21/51 
+  Installing : perl-Time-Local-1.2300-2.el7.noarch                                                                                                                22/51 
+  Installing : perl-Socket-2.010-4.el7.x86_64                                                                                                                     23/51 
+  Installing : perl-Carp-1.26-244.el7.noarch                                                                                                                      24/51 
+  Installing : perl-Storable-2.45-3.el7.x86_64                                                                                                                    25/51 
+  Installing : perl-PathTools-3.40-5.el7.x86_64                                                                                                                   26/51 
+  Installing : perl-Scalar-List-Utils-1.27-248.el7.x86_64                                                                                                         27/51 
+  Installing : perl-File-Temp-0.23.01-3.el7.noarch                                                                                                                28/51 
+  Installing : perl-File-Path-2.09-2.el7.noarch                                                                                                                   29/51 
+  Installing : perl-threads-shared-1.43-6.el7.x86_64                                                                                                              30/51 
+  Installing : perl-threads-1.87-4.el7.x86_64                                                                                                                     31/51 
+  Installing : perl-Filter-1.49-3.el7.x86_64                                                                                                                      32/51 
+  Installing : 1:perl-Pod-Simple-3.28-4.el7.noarch                                                                                                                33/51 
+  Installing : perl-Getopt-Long-2.40-3.el7.noarch                                                                                                                 34/51 
+  Installing : 4:perl-5.16.3-292.el7.x86_64                                                                                                                       35/51 
+  Installing : perl-Thread-Queue-3.02-2.el7.noarch                                                                                                                36/51 
+  Installing : unzip-6.0-19.el7.x86_64                                                                                                                            37/51 
+  Installing : gdb-7.6.1-110.el7.x86_64                                                                                                                           38/51 
+  Installing : 1:emacs-filesystem-24.3-20.el7_4.noarch                                                                                                            39/51 
+  Installing : patch-2.7.1-10.el7_5.x86_64                                                                                                                        40/51 
+  Installing : perl-srpm-macros-1-8.el7.noarch                                                                                                                    41/51 
+  Installing : zip-3.0-11.el7.x86_64                                                                                                                              42/51 
+  Installing : redhat-rpm-config-9.1.0-80.el7.centos.noarch                                                                                                       43/51 
+  Installing : rpm-build-4.11.3-32.el7.x86_64                                                                                                                     44/51 
+  Installing : rpmdevtools-8.3-5.el7.noarch                                                                                                                       45/51 
+  Cleanup    : rpm-python-4.11.3-25.el7.x86_64                                                                                                                    46/51 
+  Cleanup    : rpm-build-libs-4.11.3-25.el7.x86_64                                                                                                                47/51 
+  Cleanup    : rpm-libs-4.11.3-25.el7.x86_64                                                                                                                      48/51 
+  Cleanup    : rpm-4.11.3-25.el7.x86_64                                                                                                                           49/51 
+  Cleanup    : elfutils-libs-0.168-8.el7.x86_64                                                                                                                   50/51 
+  Cleanup    : elfutils-libelf-0.168-8.el7.x86_64                                                                                                                 51/51 
+  Verifying  : perl-HTTP-Tiny-0.033-3.el7.noarch                                                                                                                   1/51 
+  Verifying  : perl-threads-shared-1.43-6.el7.x86_64                                                                                                               2/51 
+  Verifying  : 4:perl-Time-HiRes-1.9725-3.el7.x86_64                                                                                                               3/51 
+  Verifying  : zip-3.0-11.el7.x86_64                                                                                                                               4/51 
+  Verifying  : perl-Exporter-5.68-3.el7.noarch                                                                                                                     5/51 
+  Verifying  : perl-constant-1.27-2.el7.noarch                                                                                                                     6/51 
+  Verifying  : perl-PathTools-3.40-5.el7.x86_64                                                                                                                    7/51 
+  Verifying  : 4:perl-macros-5.16.3-292.el7.x86_64                                                                                                                 8/51 
+  Verifying  : dwz-0.11-3.el7.x86_64                                                                                                                               9/51 
+  Verifying  : 1:perl-parent-0.225-244.el7.noarch                                                                                                                 10/51 
+  Verifying  : 4:perl-5.16.3-292.el7.x86_64                                                                                                                       11/51 
+  Verifying  : 1:perl-Pod-Simple-3.28-4.el7.noarch                                                                                                                12/51 
+  Verifying  : perl-srpm-macros-1-8.el7.noarch                                                                                                                    13/51 
+  Verifying  : perl-Thread-Queue-3.02-2.el7.noarch                                                                                                                14/51 
+  Verifying  : perl-File-Temp-0.23.01-3.el7.noarch                                                                                                                15/51 
+  Verifying  : elfutils-0.170-4.el7.x86_64                                                                                                                        16/51 
+  Verifying  : perl-Getopt-Long-2.40-3.el7.noarch                                                                                                                 17/51 
+  Verifying  : perl-Time-Local-1.2300-2.el7.noarch                                                                                                                18/51 
+  Verifying  : elfutils-libs-0.170-4.el7.x86_64                                                                                                                   19/51 
+  Verifying  : 4:perl-libs-5.16.3-292.el7.x86_64                                                                                                                  20/51 
+  Verifying  : perl-Socket-2.010-4.el7.x86_64                                                                                                                     21/51 
+  Verifying  : perl-Carp-1.26-244.el7.noarch                                                                                                                      22/51 
+  Verifying  : rpm-build-4.11.3-32.el7.x86_64                                                                                                                     23/51 
+  Verifying  : redhat-rpm-config-9.1.0-80.el7.centos.noarch                                                                                                       24/51 
+  Verifying  : perl-Storable-2.45-3.el7.x86_64                                                                                                                    25/51 
+  Verifying  : perl-Scalar-List-Utils-1.27-248.el7.x86_64                                                                                                         26/51 
+  Verifying  : patch-2.7.1-10.el7_5.x86_64                                                                                                                        27/51 
+  Verifying  : 1:perl-Pod-Escapes-1.04-292.el7.noarch                                                                                                             28/51 
+  Verifying  : rpmdevtools-8.3-5.el7.noarch                                                                                                                       29/51 
+  Verifying  : perl-Pod-Usage-1.63-3.el7.noarch                                                                                                                   30/51 
+  Verifying  : perl-Encode-2.51-7.el7.x86_64                                                                                                                      31/51 
+  Verifying  : 1:emacs-filesystem-24.3-20.el7_4.noarch                                                                                                            32/51 
+  Verifying  : perl-Pod-Perldoc-3.20-4.el7.noarch                                                                                                                 33/51 
+  Verifying  : perl-podlators-2.5.1-3.el7.noarch                                                                                                                  34/51 
+  Verifying  : rpm-python-4.11.3-32.el7.x86_64                                                                                                                    35/51 
+  Verifying  : perl-File-Path-2.09-2.el7.noarch                                                                                                                   36/51 
+  Verifying  : rpm-build-libs-4.11.3-32.el7.x86_64                                                                                                                37/51 
+  Verifying  : perl-threads-1.87-4.el7.x86_64                                                                                                                     38/51 
+  Verifying  : perl-Filter-1.49-3.el7.x86_64                                                                                                                      39/51 
+  Verifying  : gdb-7.6.1-110.el7.x86_64                                                                                                                           40/51 
+  Verifying  : perl-Text-ParseWords-3.29-4.el7.noarch                                                                                                             41/51 
+  Verifying  : unzip-6.0-19.el7.x86_64                                                                                                                            42/51 
+  Verifying  : rpm-libs-4.11.3-32.el7.x86_64                                                                                                                      43/51 
+  Verifying  : rpm-4.11.3-32.el7.x86_64                                                                                                                           44/51 
+  Verifying  : elfutils-libelf-0.170-4.el7.x86_64                                                                                                                 45/51 
+  Verifying  : rpm-4.11.3-25.el7.x86_64                                                                                                                           46/51 
+  Verifying  : elfutils-libs-0.168-8.el7.x86_64                                                                                                                   47/51 
+  Verifying  : rpm-python-4.11.3-25.el7.x86_64                                                                                                                    48/51 
+  Verifying  : rpm-build-libs-4.11.3-25.el7.x86_64                                                                                                                49/51 
+  Verifying  : rpm-libs-4.11.3-25.el7.x86_64                                                                                                                      50/51 
+  Verifying  : elfutils-libelf-0.168-8.el7.x86_64                                                                                                                 51/51 
+
+Installed:
+  rpm-build.x86_64 0:4.11.3-32.el7                                                    rpmdevtools.noarch 0:8.3-5.el7                                                   
+
+Dependency Installed:
+  dwz.x86_64 0:0.11-3.el7                              elfutils.x86_64 0:0.170-4.el7                               emacs-filesystem.noarch 1:24.3-20.el7_4             
+  gdb.x86_64 0:7.6.1-110.el7                           patch.x86_64 0:2.7.1-10.el7_5                               perl.x86_64 4:5.16.3-292.el7                        
+  perl-Carp.noarch 0:1.26-244.el7                      perl-Encode.x86_64 0:2.51-7.el7                             perl-Exporter.noarch 0:5.68-3.el7                   
+  perl-File-Path.noarch 0:2.09-2.el7                   perl-File-Temp.noarch 0:0.23.01-3.el7                       perl-Filter.x86_64 0:1.49-3.el7                     
+  perl-Getopt-Long.noarch 0:2.40-3.el7                 perl-HTTP-Tiny.noarch 0:0.033-3.el7                         perl-PathTools.x86_64 0:3.40-5.el7                  
+  perl-Pod-Escapes.noarch 1:1.04-292.el7               perl-Pod-Perldoc.noarch 0:3.20-4.el7                        perl-Pod-Simple.noarch 1:3.28-4.el7                 
+  perl-Pod-Usage.noarch 0:1.63-3.el7                   perl-Scalar-List-Utils.x86_64 0:1.27-248.el7                perl-Socket.x86_64 0:2.010-4.el7                    
+  perl-Storable.x86_64 0:2.45-3.el7                    perl-Text-ParseWords.noarch 0:3.29-4.el7                    perl-Thread-Queue.noarch 0:3.02-2.el7               
+  perl-Time-HiRes.x86_64 4:1.9725-3.el7                perl-Time-Local.noarch 0:1.2300-2.el7                       perl-constant.noarch 0:1.27-2.el7                   
+  perl-libs.x86_64 4:5.16.3-292.el7                    perl-macros.x86_64 4:5.16.3-292.el7                         perl-parent.noarch 1:0.225-244.el7                  
+  perl-podlators.noarch 0:2.5.1-3.el7                  perl-srpm-macros.noarch 0:1-8.el7                           perl-threads.x86_64 0:1.87-4.el7                    
+  perl-threads-shared.x86_64 0:1.43-6.el7              redhat-rpm-config.noarch 0:9.1.0-80.el7.centos              unzip.x86_64 0:6.0-19.el7                           
+  zip.x86_64 0:3.0-11.el7                             
+
+Dependency Updated:
+  elfutils-libelf.x86_64 0:0.170-4.el7        elfutils-libs.x86_64 0:0.170-4.el7        rpm.x86_64 0:4.11.3-32.el7        rpm-build-libs.x86_64 0:4.11.3-32.el7       
+  rpm-libs.x86_64 0:4.11.3-32.el7             rpm-python.x86_64 0:4.11.3-32.el7        
+
+Complete!
+[vagrant@otuslinux ~]$ rpmdev-setuptree                      
+[vagrant@otuslinux ~]$ sudo yum install tree                 
+Failed to set locale, defaulting to C
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: centos-mirror.rbc.ru
+ * extras: mirror.corbina.net
+ * updates: mirror.satellite-service.ru
+Resolving Dependencies
+--> Running transaction check
+---> Package tree.x86_64 0:1.6.0-10.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+========================================================================================================================================================================
+ Package                              Arch                                   Version                                         Repository                            Size
+========================================================================================================================================================================
+Installing:
+ tree                                 x86_64                                 1.6.0-10.el7                                    base                                  46 k
+
+Transaction Summary
+========================================================================================================================================================================
+Install  1 Package
+
+Total download size: 46 k
+Installed size: 87 k
+Is this ok [y/d/N]: y
+Downloading packages:
+tree-1.6.0-10.el7.x86_64.rpm                                                                                                                     |  46 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : tree-1.6.0-10.el7.x86_64                                                                                                                             1/1 
+  Verifying  : tree-1.6.0-10.el7.x86_64                                                                                                                             1/1 
+
+Installed:
+  tree.x86_64 0:1.6.0-10.el7                                                                                                                                            
+
+Complete!
+[vagrant@otuslinux ~]$ tree -d -L 1 ~/rpmbuild
+/home/vagrant/rpmbuild
+|-- BUILD
+|-- RPMS
+|-- SOURCES
+|-- SPECS
+`-- SRPMS
+
+5 directories
+[vagrant@otuslinux ~]$ cd rpmbuild/SOURCES/
+[vagrant@otuslinux SOURCES]$ sudo yum install wget
+Failed to set locale, defaulting to C
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: centos-mirror.rbc.ru
+ * extras: mirror.corbina.net
+ * updates: mirror.satellite-service.ru
+Resolving Dependencies
+--> Running transaction check
+---> Package wget.x86_64 0:1.14-15.el7_4.1 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+========================================================================================================================================================================
+ Package                              Arch                                   Version                                         Repository                            Size
+========================================================================================================================================================================
+Installing:
+ wget                                 x86_64                                 1.14-15.el7_4.1                                 base                                 547 k
+
+Transaction Summary
+========================================================================================================================================================================
+Install  1 Package
+
+Total download size: 547 k
+Installed size: 2.0 M
+Is this ok [y/d/N]: y
+Downloading packages:
+wget-1.14-15.el7_4.1.x86_64.rpm                                                                                                                  | 547 kB  00:00:04     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : wget-1.14-15.el7_4.1.x86_64                                                                                                                          1/1 
+  Verifying  : wget-1.14-15.el7_4.1.x86_64                                                                                                                          1/1 
+
+Installed:
+  wget.x86_64 0:1.14-15.el7_4.1                                                                                                                                         
+
+Complete!
+[vagrant@otuslinux SOURCES]$ wget http://ftp.midnight-commander.org/mc-4.8.21.tar.xz
+--2018-06-27 10:46:59--  http://ftp.midnight-commander.org/mc-4.8.21.tar.xz
+Resolving ftp.midnight-commander.org (ftp.midnight-commander.org)... 140.211.166.134, 64.50.236.52, 64.50.233.100
+Connecting to ftp.midnight-commander.org (ftp.midnight-commander.org)|140.211.166.134|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2528292 (2.4M) [application/x-xz]
+Saving to: 'mc-4.8.21.tar.xz'
+
+100%[==============================================================================================================================>] 2,528,292    126KB/s   in 21s    
+
+2018-06-27 10:47:21 (120 KB/s) - 'mc-4.8.21.tar.xz' saved [2528292/2528292]
+
+[vagrant@otuslinux SOURCES]$ 
+[vagrant@otuslinux rpmbuild]$ cd ~/rpmbuild/SPECS/
+[vagrant@otuslinux SPECS]$ vi mc.spec
+[vagrant@otuslinux SPECS]$ cat mc.spec 
+# Note that this is NOT a relocatable package
+
+%define legacy_rhel 0%{?el4}%{?el3}
+
+%if %{legacy_rhel}
+        %define _with_screen --with-screen=ncurses
+        %define _with_glib_static --with-glib-static
+        %define glib_version 2.12
+        %define glib_stepping .3
+%else
+        %define _with_screen --with-screen=slang
+%endif
+
+%define mc_version @DISTR_VERSION@
+%define mc_release @DISTR_RELEASE@
+%define mc_tarball @VERSION@
+
+Summary:        User-friendly text console file manager and visual shell
+Name:           mc
+Version:        %{mc_version}
+Release:        %{mc_release}%{?dist}
+Epoch:          3
+License:        GPL3+
+Group:          System Environment/Shells
+Source0:        %{name}-%{mc_tarball}.tar.gz
+
+%if %{legacy_rhel}
+Source1:        http://ftp.gnome.org/pub/gnome/sources/glib/%{glib_version}/glib-%{glib_version}%{?glib_stepping}.tar.bz2
+Patch0:         glib2-CVE-2008-4316.patch
+%endif
+
+URL:            http://www.midnight-commander.org/
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires:  e2fsprogs-devel gpm-devel perl
+
+%if %{legacy_rhel}%{?el5}
+BuildRequires:  pcre-devel
+%endif
+
+%if %{legacy_rhel}
+
+BuildRequires:  ncurses-devel
+
+# From Glib
+BuildRequires:  pkgconfig gettext
+
+%else
+BuildRequires:  glib2-devel slang-devel
+%endif
+
+%description
+GNU Midnight Commander is a visual file manager. It's a feature rich
+full-screen text mode application that allows you to copy, move and
+delete files and whole directory trees, search for files and run
+commands in the subshell. Internal viewer and editor are included. Mouse
+is supported on Linux console. VFS (Virtual Filesystem) allows you to
+view archives and files on remote servers (via SAMBA, FTP or SSH).
+
+%prep
+
+%setup -q -n %{name}-%{mc_tarball}
+
+%if %{legacy_rhel}
+
+%setup -q -T -D -a 1 -n %{name}-%{mc_tarball}
+
+cd glib-%{glib_version}%{?glib_stepping}
+%patch0 -p1 -b .CVE-2008-4316
+
+%endif
+
+%build
+
+%if %{legacy_rhel}
+
+pushd glib-%{glib_version}%{?glib_stepping}
+RESULT_DIR=`pwd`/result
+
+./configure \
+        --disable-gtk-doc \
+        --disable-shared \
+        --enable-static \
+        --prefix="$RESULT_DIR" \
+        --exec-prefix="$RESULT_DIR" \
+        --libdir="$RESULT_DIR/usr/%{_lib}"
+
+%{__make} %{?_smp_mflags} CFLAGS="%{optflags} -fno-strict-aliasing" install
+popd
+
+PKG_CONFIG_PATH="$RESULT_DIR/usr/%{_lib}/pkgconfig:$PKG_CONFIG_PATH" ; export PKG_CONFIG_PATH ;
+%endif
+
+%configure \
+        %{_with_screen} \
+        %{?_with_glib_static} \
+        --enable-charset \
+        --enable-vfs-smb \
+        --without-x \
+        --with-gpm-mouse \
+        --disable-doxygen-doc
+
+%{__make} %{?_smp_mflags} CFLAGS="%{optflags}"
+
+%install
+rm -rf $RPM_BUILD_ROOT
+
+make install DESTDIR="$RPM_BUILD_ROOT"
+
+install -d -m 755 $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
+install contrib/{mc.sh,mc.csh} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
+
+%find_lang %{name}
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files -f %{name}.lang
+%defattr(-, root, root)
+
+%doc doc/FAQ doc/COPYING doc/NEWS doc/README
+%{_bindir}/mc
+%{_bindir}/mcedit
+%{_bindir}/mcview
+%{_bindir}/mcdiff
+
+%dir %{_libexecdir}/mc
+%dir %{_libexecdir}/mc/extfs.d
+%dir %{_libexecdir}/mc/fish
+%attr(4511, vcsa, tty) %{_libexecdir}/mc/cons.saver
+%{_libexecdir}/mc/mc*sh
+%{_libexecdir}/mc/extfs.d/*
+%{_libexecdir}/mc/fish/*
+
+%{_mandir}/man1/*
+%lang(es) %{_mandir}/es/man1/mc.1*
+%lang(hu) %{_mandir}/hu/man1/mc.1*
+%lang(it) %{_mandir}/it/man1/mc.1*
+%lang(pl) %{_mandir}/pl/man1/mc.1*
+%lang(ru) %{_mandir}/ru/man1/mc.1*
+%lang(sr) %{_mandir}/sr/man1/mc.1*
+
+%{_sysconfdir}/profile.d/*
+
+%config(noreplace) %{_sysconfdir}/mc/filehighlight.ini
+%config(noreplace) %{_sysconfdir}/mc/*edit*
+%config(noreplace) %{_sysconfdir}/mc/mc.ext
+%config(noreplace) %{_sysconfdir}/mc/mc.menu
+%config(noreplace) %{_sysconfdir}/mc/mc.menu.*
+%config(noreplace) %{_sysconfdir}/mc/sfs.ini
+%config(noreplace) %{_sysconfdir}/mc/mc.keymap
+%config(noreplace) %{_sysconfdir}/mc/mc.keymap.*
+
+%dir %{_datadir}/mc
+%{_datadir}/mc/*
+
+%changelog
+
+* Fri Oct 14 2011 Slava Zanko <slavazanko@gmail.com>
+- Changed License version
+
+* Thu Jul 14 2011 Slava Zanko <slavazanko@gmail.com>
+- Added %{_libexecdir}/mc/fish directory to spec file
+
+* Thu Sep 16 2010 Andrew Borodin <aborodin@vmail.ru>
+- Some files are installed now into %%{_datadir}/mc instead of %%{_sysconfdir}/mc.
+
+* Wed Apr 28 2010 Yury V. Zaytsev <yury@shurup.com>
+- Added mcdiff to the list of packaged files.
+
+* Tue Feb 09 2010 Andrew Borodin <aborodin@vmail.ru>
+- Fixed file list because of EXTFS VFS reorganizing.
+
+* Wed Dec 30 2009 Yury V. Zaytsev <yury@shurup.com>
+- Bumped the epoch again and changed the versioning scheme.
+- Thanks to Slava Zanko for all his hard work on m4 vodoo!
+
+* Fri Dec 25 2009 Yury V. Zaytsev <yury@shurup.com>
+- Had to bump the epoch because of the braindead versioning scheme used.
+
+* Fri Nov 27 2009 Yury V. Zaytsev <yury@shurup.com>
+- Fixed debug info generation for legacy distros.
+- Rewritten and simplified static build procedure.
+
+* Mon Oct 26 2009 Andrew Borodin <aborodin@vmail.ru>
+- Added new %%{_sysconfdir}/mc/mc.keymap.* files.
+
+* Fri Sep 04 2009 Slava Zanko <slavazanko@gmail.com>
+- Add new file %%{_sysconfdir}/mc/filehighlight.ini.
+
+* Sat Aug 01 2009 Yury V. Zaytsev <yury@shurup.com>
+- Fixed EL4 (and supposedly EL3) builds.
+- Fixed some of the rpmlint warnings.
+
+* Sat Jul 04 2009 Yury V. Zaytsev <yury@shurup.com>
+- Fix the issue when wrappers were left unpackaged.
+
+* Thu May 21 2009 Slava Zanko <slavazanko@gmail.com>
+- Fix install patches: use %%{_sysconfdir}/mc directory.
+
+* Fri May 8 2009 Slava Zanko <slavazanko@gmail.com>
+- Reviewed spec-file to build on the current distributions.
+- Changed build rules.
+- Fixed install paths.
+
+* Fri Jun 22 2007 Pavel Roskin <proski@gnu.org>
+- Made cons.saver suid vcsa, it's needed for Fedora 7.
+
+* Thu Dec 21 2006 Pavel Roskin <proski@gnu.org>
+- Don't rely on brace expansion, it may be disabled.
+
+* Mon Jan 30 2006 Pavel Roskin <proski@gnu.org>
+- Avoid using %%{_prefix} where more specialized macros are available.
+
+* Tue Aug 02 2005 Pavel Roskin <proski@gnu.org>
+- Replace obsolete "Copyright" with "License".
+
+* Thu Mar 31 2005 Pavel Roskin <proski@gnu.org>
+- Comment out build dependencies - they are too distribution specific.
+
+* Tue Sep 23 2003 Pavel Roskin <proski@gnu.org>
+- Remove term directory, it's obsolete and irrelevant on modern systems.
+- Include translated menu files.
+
+* Sun Feb 16 2003 Pavel Roskin <proski@gnu.org>
+- Remove obsolete dependency on /sbin/chkconfig.
+
+* Tue Dec 24 2002 Pavel Roskin <proski@gnu.org>
+- Work around bug in rpm 4.1 that expands defines in comments.
+- Handle --without-x.
+
+* Mon Nov 04 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
+- Handle --with ext2undel.
+
+* Fri Nov 01 2002 Pavel Roskin <proski@gnu.org>
+- Add wrappers to support setting last directory on exit.  Keep all
+  scripts in their original directory, just copy them.
+
+* Tue Oct 22 2002 Pavel Roskin <proski@gnu.org>
+- Don't use the included S-Lang, there is a workaround for Red Hat 8.0
+  S-Lang, and binary compatibility with Red Hat 7.x doesn't work anyway.
+
+* Tue Oct 08 2002 Pavel Roskin <proski@gnu.org>
+- Use the included S-Lang again, since we include a better version now.
+  This should avoid incompatibility with Red Hat 7.x.
+- Add _with_glib2 option.
+
+* Mon Oct 07 2002 Pavel Roskin <proski@gnu.org>
+- Remove installed mc.sh and mc.csh from %%{_prefix}/share/mc/bin to
+  suppress a warning about installed but unpackaged files.
+
+* Mon Sep 30 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
+- Don't require slang-devel if _with_ncurses.
+- Handle --with samba.
+
+* Sun Sep 29 2002 Pavel Roskin <proski@gnu.org>
+- Use --with-screen instead of --with-ncurses and --with-included-slang.
+
+* Mon Sep 23 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
+- Restore %%config for %%{_prefix}/share/mc/mc.charsets.
+- Restore %%{_prefix}/share/mc/edit.spell.rc.
+
+* Sat Sep 21 2002 Pavel Roskin <proski@gnu.org>
+- Use FHS-compliant paths.
+- Drop %%config from files under /usr/share - users are not supposed to
+  edit them.  Local copies under ~/.mc should be used for that.
+
+* Wed Aug 21 2002 Pavel Roskin <proski@gnu.org>
+- Change description, update URLs, allow dash in the version.
+
+* Tue Aug 20 2002 Pavel Roskin <proski@gnu.org>
+- Support conditional builds.
+
+* Tue Aug 20 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
+- Add /usr/lib/mc/mc.charsets.
+- Add %%{_mandir}/*/man1/*.
+
+* Fri Aug 16 2002 Pavel Roskin <proski@gnu.org>
+- Remove mc.global.
+
+* Mon Jan 21 2002 Pavel Roskin <proski@gnu.org>
+- Remove --with-gnome and --with-included-slang from configure options.
+- Add BuildPrereq.
+
+* Fri Aug 24 2001 Pavel Roskin <proski@gnu.org>
+- Remove gmc.  Reunite mc and mc-common.
+
+* Sun Aug 05 2001 Pavel Roskin <proski@gnu.org>
+- Set epoch.
+
+* Sun Jul 15 2001 Pavel Roskin <proski@gnu.org>
+- Remove /usr/lib/mc/layout.
+
+* Sat Jun 09 2001 Pavel Roskin <proski@gnu.org>
+- Use %%{_prefix} and %%{_mandir}. Specify --mandir to configure.
+
+* Fri May 25 2001 Pavel Roskin <proski@gnu.org>
+- Change groups. Don't include locale directories. More config files.
+
+* Sun May 20 2001 Pavel Roskin <proski@gnu.org>
+- Don't require stylesheets, since HTML files are now in the tarball.
+
+* Thu Apr 19 2001 Pavel Roskin <proski@gnu.org>
+- Remove package mcserv. Drop dependency on PAM.
+
+* Mon Feb 26 2001 Pavel Roskin <proski@gnu.org>
+- Remove mc-gnome.ext.
+
+* Thu Jan 11 2001 Pavel Roskin <proski@gnu.org>
+- Include mcview.
+
+* Mon Oct 23 2000 Pavel Roskin <proski@gnu.org>
+- Allow mcserv.8 to be gzipped.
+
+* Sat Sep 30 2000 Pavel Roskin <proski@gnu.org>
+- New package mc-common.
+- Use DESTDIR instead of misusing prefix.
+- Don't install old icons - they don't exist
+
+* Sat Sep 23 2000 Pavel Roskin <proski@gnu.org>
+- Include translations with mc, not gmc.
+- chkconfig --del in %%preun, not %%postun.
+- --without-debug not needed.
+- /etc/X11/wmconfig not needed.
+- /etc/pam.d/mcserv shouldn't be executable.
+- New files in %%{prefix}/lib/mc/ - translated hints, editor files.
+
+* Thu Sep 09 1999 Elliot Lee <sopwith@redhat.com>
+- Include .idl files in the package.
+
+* Sat Sep 04 1999 Gregory McLean <gregm@comstar.net>
+- Added a build prereq so that rpms get built with documentation ;)
+
+* Mon Jul 12 1999 Kjartan Maraas  <kmaraas@online.no>
+- Added help and locale files to %%files.
+
+* Tue Jun 22 1999 Vladimir Kondratiev <vkondra@iil.intel.com>
+- Added syntax files to %%files.
+
+* Wed May 26 1999 Cody Russell <bratsche@dfw.net>
+- Chmod cons.saver at $RPM_BUILD_ROOT%%{prefix}/lib rather than at
+  $RPM_BUILD_ROOT/usr/lib. We can now install to somewhere other than /usr.
+
+* Sun Apr 18 1999 Gregory McLean <gregm@comstar.net>
+- Updated the specfile, removed some kludges.
+
+* Thu Aug 20 1998 Michael Fulbright <msf@redhat.com>
+- Rebuilt against gnome-libs 0.27 and gtk+-1.1.
+
+* Thu Jul 09 1998 Michael Fulbright <msf@redhat.com>
+- Made cons.saver not setuid.
+
+* Sun Apr 19 1998 Marc Ewing <marc@redhat.com>
+- Removed tkmc.
+
+* Wed Apr 8 1998 Marc Ewing <marc@redhat.com>
+- Add /usr/lib/mc/layout to gmc.
+
+[vagrant@otuslinux SPECS]$ 
+[vagrant@otuslinux SPECS]$ 
+[vagrant@otuslinux SPECS]$ 
+[vagrant@otuslinux SPECS]$ 
+[vagrant@otuslinux SPECS]$ 
+[vagrant@otuslinux SPECS]$ rpmbuild -bb mc.spec
+error: Failed build dependencies:
+	e2fsprogs-devel is needed by mc-3:4.8-21.el7.centos.x86_64
+	gpm-devel is needed by mc-3:4.8-21.el7.centos.x86_64
+	glib2-devel is needed by mc-3:4.8-21.el7.centos.x86_64
+	slang-devel is needed by mc-3:4.8-21.el7.centos.x86_64
+[vagrant@otuslinux SPECS]$ sudo yum install gcc gcc-c++ e2fsprogs-devel gpm-devel glib2-devel slang-devel
+Failed to set locale, defaulting to C
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: centos-mirror.rbc.ru
+ * extras: mirror.corbina.net
+ * updates: mirror.satellite-service.ru
+Resolving Dependencies
+--> Running transaction check
+---> Package e2fsprogs-devel.x86_64 0:1.42.9-12.el7_5 will be installed
+--> Processing Dependency: libcom_err-devel(x86-64) = 1.42.9-12.el7_5 for package: e2fsprogs-devel-1.42.9-12.el7_5.x86_64
+--> Processing Dependency: e2fsprogs-libs(x86-64) = 1.42.9-12.el7_5 for package: e2fsprogs-devel-1.42.9-12.el7_5.x86_64
+--> Processing Dependency: pkgconfig(com_err) for package: e2fsprogs-devel-1.42.9-12.el7_5.x86_64
+---> Package gcc.x86_64 0:4.8.5-28.el7_5.1 will be installed
+--> Processing Dependency: libgomp = 4.8.5-28.el7_5.1 for package: gcc-4.8.5-28.el7_5.1.x86_64
+--> Processing Dependency: cpp = 4.8.5-28.el7_5.1 for package: gcc-4.8.5-28.el7_5.1.x86_64
+--> Processing Dependency: libgcc >= 4.8.5-28.el7_5.1 for package: gcc-4.8.5-28.el7_5.1.x86_64
+--> Processing Dependency: glibc-devel >= 2.2.90-12 for package: gcc-4.8.5-28.el7_5.1.x86_64
+--> Processing Dependency: libmpfr.so.4()(64bit) for package: gcc-4.8.5-28.el7_5.1.x86_64
+--> Processing Dependency: libmpc.so.3()(64bit) for package: gcc-4.8.5-28.el7_5.1.x86_64
+---> Package gcc-c++.x86_64 0:4.8.5-28.el7_5.1 will be installed
+--> Processing Dependency: libstdc++-devel = 4.8.5-28.el7_5.1 for package: gcc-c++-4.8.5-28.el7_5.1.x86_64
+--> Processing Dependency: libstdc++ = 4.8.5-28.el7_5.1 for package: gcc-c++-4.8.5-28.el7_5.1.x86_64
+---> Package glib2-devel.x86_64 0:2.54.2-2.el7 will be installed
+--> Processing Dependency: glib2(x86-64) = 2.54.2-2.el7 for package: glib2-devel-2.54.2-2.el7.x86_64
+--> Processing Dependency: pkgconfig(libpcre) for package: glib2-devel-2.54.2-2.el7.x86_64
+---> Package gpm-devel.x86_64 0:1.20.7-5.el7 will be installed
+--> Processing Dependency: gpm-libs = 1.20.7-5.el7 for package: gpm-devel-1.20.7-5.el7.x86_64
+--> Processing Dependency: gpm = 1.20.7-5.el7 for package: gpm-devel-1.20.7-5.el7.x86_64
+--> Processing Dependency: libgpm.so.2()(64bit) for package: gpm-devel-1.20.7-5.el7.x86_64
+---> Package slang-devel.x86_64 0:2.2.4-11.el7 will be installed
+--> Running transaction check
+---> Package cpp.x86_64 0:4.8.5-28.el7_5.1 will be installed
+---> Package e2fsprogs-libs.x86_64 0:1.42.9-10.el7 will be updated
+--> Processing Dependency: e2fsprogs-libs(x86-64) = 1.42.9-10.el7 for package: e2fsprogs-1.42.9-10.el7.x86_64
+---> Package e2fsprogs-libs.x86_64 0:1.42.9-12.el7_5 will be an update
+--> Processing Dependency: libcom_err(x86-64) = 1.42.9-12.el7_5 for package: e2fsprogs-libs-1.42.9-12.el7_5.x86_64
+---> Package glib2.x86_64 0:2.50.3-3.el7 will be updated
+---> Package glib2.x86_64 0:2.54.2-2.el7 will be an update
+---> Package glibc-devel.x86_64 0:2.17-222.el7 will be installed
+--> Processing Dependency: glibc-headers = 2.17-222.el7 for package: glibc-devel-2.17-222.el7.x86_64
+--> Processing Dependency: glibc = 2.17-222.el7 for package: glibc-devel-2.17-222.el7.x86_64
+--> Processing Dependency: glibc-headers for package: glibc-devel-2.17-222.el7.x86_64
+---> Package gpm.x86_64 0:1.20.7-5.el7 will be installed
+--> Processing Dependency: linuxconsoletools for package: gpm-1.20.7-5.el7.x86_64
+---> Package gpm-libs.x86_64 0:1.20.7-5.el7 will be installed
+---> Package libcom_err-devel.x86_64 0:1.42.9-12.el7_5 will be installed
+---> Package libgcc.x86_64 0:4.8.5-16.el7_4.2 will be updated
+---> Package libgcc.x86_64 0:4.8.5-28.el7_5.1 will be an update
+---> Package libgomp.x86_64 0:4.8.5-16.el7_4.2 will be updated
+---> Package libgomp.x86_64 0:4.8.5-28.el7_5.1 will be an update
+---> Package libmpc.x86_64 0:1.0.1-3.el7 will be installed
+---> Package libstdc++.x86_64 0:4.8.5-16.el7_4.2 will be updated
+---> Package libstdc++.x86_64 0:4.8.5-28.el7_5.1 will be an update
+---> Package libstdc++-devel.x86_64 0:4.8.5-28.el7_5.1 will be installed
+---> Package mpfr.x86_64 0:3.1.1-4.el7 will be installed
+---> Package pcre-devel.x86_64 0:8.32-17.el7 will be installed
+--> Running transaction check
+---> Package e2fsprogs.x86_64 0:1.42.9-10.el7 will be updated
+---> Package e2fsprogs.x86_64 0:1.42.9-12.el7_5 will be an update
+--> Processing Dependency: libss = 1.42.9-12.el7_5 for package: e2fsprogs-1.42.9-12.el7_5.x86_64
+---> Package glibc.x86_64 0:2.17-196.el7_4.2 will be updated
+--> Processing Dependency: glibc = 2.17-196.el7_4.2 for package: glibc-common-2.17-196.el7_4.2.x86_64
+---> Package glibc.x86_64 0:2.17-222.el7 will be an update
+---> Package glibc-headers.x86_64 0:2.17-222.el7 will be installed
+--> Processing Dependency: kernel-headers >= 2.2.1 for package: glibc-headers-2.17-222.el7.x86_64
+--> Processing Dependency: kernel-headers for package: glibc-headers-2.17-222.el7.x86_64
+---> Package libcom_err.x86_64 0:1.42.9-10.el7 will be updated
+---> Package libcom_err.x86_64 0:1.42.9-12.el7_5 will be an update
+---> Package linuxconsoletools.x86_64 0:1.4.5-3.el7 will be installed
+--> Processing Dependency: libSDL-1.2.so.0()(64bit) for package: linuxconsoletools-1.4.5-3.el7.x86_64
+--> Running transaction check
+---> Package SDL.x86_64 0:1.2.15-14.el7 will be installed
+---> Package glibc-common.x86_64 0:2.17-196.el7_4.2 will be updated
+---> Package glibc-common.x86_64 0:2.17-222.el7 will be an update
+---> Package kernel-headers.x86_64 0:3.10.0-862.3.3.el7 will be installed
+---> Package libss.x86_64 0:1.42.9-10.el7 will be updated
+---> Package libss.x86_64 0:1.42.9-12.el7_5 will be an update
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+========================================================================================================================================================================
+ Package                                      Arch                              Version                                        Repository                          Size
+========================================================================================================================================================================
+Installing:
+ e2fsprogs-devel                              x86_64                            1.42.9-12.el7_5                                updates                             71 k
+ gcc                                          x86_64                            4.8.5-28.el7_5.1                               updates                             16 M
+ gcc-c++                                      x86_64                            4.8.5-28.el7_5.1                               updates                            7.2 M
+ glib2-devel                                  x86_64                            2.54.2-2.el7                                   base                               446 k
+ gpm-devel                                    x86_64                            1.20.7-5.el7                                   base                                25 k
+ slang-devel                                  x86_64                            2.2.4-11.el7                                   base                                91 k
+Installing for dependencies:
+ SDL                                          x86_64                            1.2.15-14.el7                                  base                               204 k
+ cpp                                          x86_64                            4.8.5-28.el7_5.1                               updates                            5.9 M
+ glibc-devel                                  x86_64                            2.17-222.el7                                   base                               1.1 M
+ glibc-headers                                x86_64                            2.17-222.el7                                   base                               678 k
+ gpm                                          x86_64                            1.20.7-5.el7                                   base                               183 k
+ gpm-libs                                     x86_64                            1.20.7-5.el7                                   base                                32 k
+ kernel-headers                               x86_64                            3.10.0-862.3.3.el7                             updates                            7.1 M
+ libcom_err-devel                             x86_64                            1.42.9-12.el7_5                                updates                             31 k
+ libmpc                                       x86_64                            1.0.1-3.el7                                    base                                51 k
+ libstdc++-devel                              x86_64                            4.8.5-28.el7_5.1                               updates                            1.5 M
+ linuxconsoletools                            x86_64                            1.4.5-3.el7                                    base                                60 k
+ mpfr                                         x86_64                            3.1.1-4.el7                                    base                               203 k
+ pcre-devel                                   x86_64                            8.32-17.el7                                    base                               480 k
+Updating for dependencies:
+ e2fsprogs                                    x86_64                            1.42.9-12.el7_5                                updates                            699 k
+ e2fsprogs-libs                               x86_64                            1.42.9-12.el7_5                                updates                            167 k
+ glib2                                        x86_64                            2.54.2-2.el7                                   base                               2.4 M
+ glibc                                        x86_64                            2.17-222.el7                                   base                               3.6 M
+ glibc-common                                 x86_64                            2.17-222.el7                                   base                                11 M
+ libcom_err                                   x86_64                            1.42.9-12.el7_5                                updates                             41 k
+ libgcc                                       x86_64                            4.8.5-28.el7_5.1                               updates                            101 k
+ libgomp                                      x86_64                            4.8.5-28.el7_5.1                               updates                            156 k
+ libss                                        x86_64                            1.42.9-12.el7_5                                updates                             45 k
+ libstdc++                                    x86_64                            4.8.5-28.el7_5.1                               updates                            303 k
+
+Transaction Summary
+========================================================================================================================================================================
+Install  6 Packages (+13 Dependent packages)
+Upgrade             ( 10 Dependent packages)
+
+Total download size: 60 M
+Is this ok [y/d/N]: y
+Downloading packages:
+No Presto metadata available for base
+updates/7/x86_64/prestodelta                                                                                                                     | 259 kB  00:00:01     
+Delta RPMs reduced 1.5 M of updates to 554 k (63% saved)
+(1/29): e2fsprogs-libs-1.42.9-10.el7_1.42.9-12.el7_5.x86_64.drpm                                                                                 |  40 kB  00:00:00     
+/usr/share/doc/e2fsprogs-libs-1.42.9/COPYING: No such file or directory% [                                                            ]  0.0 B/s |  40 kB  --:--:-- ETA 
+cannot reconstruct rpm from disk files
+(2/29): libss-1.42.9-10.el7_1.42.9-12.el7_5.x86_64.drpm                                                                                          |  27 kB  00:00:00     
+/usr/share/doc/libss-1.42.9/COPYING: No such file or directory
+cannot reconstruct rpm from disk files
+(3/29): libcom_err-1.42.9-10.el7_1.42.9-12.el7_5.x86_64.drpm                                                                                     |  26 kB  00:00:01     
+/usr/share/doc/libcom_err-1.42.9/COPYING: No such file or directory
+cannot reconstruct rpm from disk files
+(4/29): libgcc-4.8.5-16.el7_4.2_4.8.5-28.el7_5.1.x86_64.drpm                                                                                     |  44 kB  00:00:02     
+/usr/share/doc/libgcc-4.8.5/COPYING: No such file or directory
+cannot reconstruct rpm from disk files
+(5/29): libstdc++-4.8.5-16.el7_4.2_4.8.5-28.el7_5.1.x86_64.drpm                                                                                  |  69 kB  00:00:01     
+(6/29): libgomp-4.8.5-16.el7_4.2_4.8.5-28.el7_5.1.x86_64.drpm                                                                                    |  47 kB  00:00:03     
+/usr/share/doc/libgomp-4.8.5/ChangeLog.bz2: No such file or directory
+cannot reconstruct rpm from disk files
+(7/29): e2fsprogs-devel-1.42.9-12.el7_5.x86_64.rpm                                                                                               |  71 kB  00:00:03     
+(8/29): SDL-1.2.15-14.el7.x86_64.rpm                                                                                                             | 204 kB  00:00:08     
+(9/29): e2fsprogs-1.42.9-10.el7_1.42.9-12.el7_5.x86_64.drpm                                                                                      | 301 kB  00:00:14     
+/usr/share/doc/e2fsprogs-1.42.9/COPYING: No such file or directory
+cannot reconstruct rpm from disk files
+(10/29): glib2-devel-2.54.2-2.el7.x86_64.rpm                                                                                                     | 446 kB  00:00:13     
+(11/29): glibc-2.17-222.el7.x86_64.rpm                                                                                                           | 3.6 MB  00:01:50     
+(12/29): glib2-2.54.2-2.el7.x86_64.rpm                                                                                                           | 2.4 MB  00:02:24     
+(13/29): glibc-devel-2.17-222.el7.x86_64.rpm                                                                                                     | 1.1 MB  00:00:52     
+(14/29): glibc-headers-2.17-222.el7.x86_64.rpm                                                                                                   | 678 kB  00:00:18     
+(15/29): gpm-1.20.7-5.el7.x86_64.rpm                                                                                                             | 183 kB  00:00:04     
+(16/29): gpm-devel-1.20.7-5.el7.x86_64.rpm                                                                                                       |  25 kB  00:00:00     
+(17/29): gpm-libs-1.20.7-5.el7.x86_64.rpm                                                                                                        |  32 kB  00:00:00     
+(18/29): gcc-c++-4.8.5-28.el7_5.1.x86_64.rpm                                                                                                     | 7.2 MB  00:03:50     
+(19/29): libcom_err-devel-1.42.9-12.el7_5.x86_64.rpm                                                                                             |  31 kB  00:00:01     
+(20/29): libmpc-1.0.1-3.el7.x86_64.rpm                                                                                                           |  51 kB  00:00:01     
+(21/29): libstdc++-devel-4.8.5-28.el7_5.1.x86_64.rpm                                                                                             | 1.5 MB  00:00:40     
+(22/29): linuxconsoletools-1.4.5-3.el7.x86_64.rpm                                                                                                |  60 kB  00:00:01     
+(23/29): mpfr-3.1.1-4.el7.x86_64.rpm                                                                                                             | 203 kB  00:00:06     
+(24/29): pcre-devel-8.32-17.el7.x86_64.rpm                                                                                                       | 480 kB  00:00:14     
+(25/29): slang-devel-2.2.4-11.el7.x86_64.rpm                                                                                                     |  91 kB  00:00:02     
+(26/29): cpp-4.8.5-28.el7_5.1.x86_64.rpm                                                                                                         | 5.9 MB  00:05:21     
+(27/29): gcc-4.8.5-28.el7_5.1.x86_64.rpm                                                                                                         |  16 MB  00:07:41     
+(28/29): kernel-headers-3.10.0-862.3.3.el7.x86_64.rpm                                                                                            | 7.1 MB  00:04:13     
+(29/29): glibc-common-2.17-222.el7.x86_64.rpm                                                                                                    |  11 MB  00:06:09     
+Some delta RPMs failed to download or rebuild. Retrying..
+(1/6): libgcc-4.8.5-28.el7_5.1.x86_64.rpm                                                                                                        | 101 kB  00:00:02     
+(2/6): libcom_err-1.42.9-12.el7_5.x86_64.rpm                                                                                                     |  41 kB  00:00:03     
+(3/6): libss-1.42.9-12.el7_5.x86_64.rpm                                                                                                          |  45 kB  00:00:01     
+(4/6): libgomp-4.8.5-28.el7_5.1.x86_64.rpm                                                                                                       | 156 kB  00:00:04     
+(5/6): e2fsprogs-libs-1.42.9-12.el7_5.x86_64.rpm                                                                                                 | 167 kB  00:00:06     
+(6/6): e2fsprogs-1.42.9-12.el7_5.x86_64.rpm                                                                                                      | 699 kB  00:00:10     
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                   120 kB/s |  61 MB  00:08:37     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Updating   : libgcc-4.8.5-28.el7_5.1.x86_64                                                                                                                      1/39 
+  Updating   : glibc-common-2.17-222.el7.x86_64                                                                                                                    2/39 
+  Updating   : glibc-2.17-222.el7.x86_64                                                                                                                           3/39 
+  Updating   : libcom_err-1.42.9-12.el7_5.x86_64                                                                                                                   4/39 
+  Installing : mpfr-3.1.1-4.el7.x86_64                                                                                                                             5/39 
+  Installing : libmpc-1.0.1-3.el7.x86_64                                                                                                                           6/39 
+  Updating   : e2fsprogs-libs-1.42.9-12.el7_5.x86_64                                                                                                               7/39 
+  Installing : gpm-libs-1.20.7-5.el7.x86_64                                                                                                                        8/39 
+  Updating   : libstdc++-4.8.5-28.el7_5.1.x86_64                                                                                                                   9/39 
+  Installing : libstdc++-devel-4.8.5-28.el7_5.1.x86_64                                                                                                            10/39 
+  Installing : cpp-4.8.5-28.el7_5.1.x86_64                                                                                                                        11/39 
+  Updating   : libss-1.42.9-12.el7_5.x86_64                                                                                                                       12/39 
+  Installing : libcom_err-devel-1.42.9-12.el7_5.x86_64                                                                                                            13/39 
+  Updating   : libgomp-4.8.5-28.el7_5.1.x86_64                                                                                                                    14/39 
+  Installing : SDL-1.2.15-14.el7.x86_64                                                                                                                           15/39 
+  Installing : linuxconsoletools-1.4.5-3.el7.x86_64                                                                                                               16/39 
+  Installing : gpm-1.20.7-5.el7.x86_64                                                                                                                            17/39 
+  Updating   : glib2-2.54.2-2.el7.x86_64                                                                                                                          18/39 
+  Installing : pcre-devel-8.32-17.el7.x86_64                                                                                                                      19/39 
+  Installing : kernel-headers-3.10.0-862.3.3.el7.x86_64                                                                                                           20/39 
+  Installing : glibc-headers-2.17-222.el7.x86_64                                                                                                                  21/39 
+  Installing : glibc-devel-2.17-222.el7.x86_64                                                                                                                    22/39 
+  Installing : gcc-4.8.5-28.el7_5.1.x86_64                                                                                                                        23/39 
+  Installing : gcc-c++-4.8.5-28.el7_5.1.x86_64                                                                                                                    24/39 
+  Installing : glib2-devel-2.54.2-2.el7.x86_64                                                                                                                    25/39 
+  Installing : gpm-devel-1.20.7-5.el7.x86_64                                                                                                                      26/39 
+  Installing : e2fsprogs-devel-1.42.9-12.el7_5.x86_64                                                                                                             27/39 
+  Updating   : e2fsprogs-1.42.9-12.el7_5.x86_64                                                                                                                   28/39 
+  Installing : slang-devel-2.2.4-11.el7.x86_64                                                                                                                    29/39 
+  Cleanup    : e2fsprogs-1.42.9-10.el7.x86_64                                                                                                                     30/39 
+  Cleanup    : e2fsprogs-libs-1.42.9-10.el7.x86_64                                                                                                                31/39 
+  Cleanup    : libss-1.42.9-10.el7.x86_64                                                                                                                         32/39 
+  Cleanup    : libstdc++-4.8.5-16.el7_4.2.x86_64                                                                                                                  33/39 
+  Cleanup    : libcom_err-1.42.9-10.el7.x86_64                                                                                                                    34/39 
+  Cleanup    : glib2-2.50.3-3.el7.x86_64                                                                                                                          35/39 
+  Cleanup    : libgomp-4.8.5-16.el7_4.2.x86_64                                                                                                                    36/39 
+  Cleanup    : glibc-common-2.17-196.el7_4.2.x86_64                                                                                                               37/39 
+  Cleanup    : glibc-2.17-196.el7_4.2.x86_64                                                                                                                      38/39 
+  Cleanup    : libgcc-4.8.5-16.el7_4.2.x86_64                                                                                                                     39/39 
+  Verifying  : libss-1.42.9-12.el7_5.x86_64                                                                                                                        1/39 
+  Verifying  : glibc-devel-2.17-222.el7.x86_64                                                                                                                     2/39 
+  Verifying  : glibc-headers-2.17-222.el7.x86_64                                                                                                                   3/39 
+  Verifying  : libgomp-4.8.5-28.el7_5.1.x86_64                                                                                                                     4/39 
+  Verifying  : libstdc++-devel-4.8.5-28.el7_5.1.x86_64                                                                                                             5/39 
+  Verifying  : kernel-headers-3.10.0-862.3.3.el7.x86_64                                                                                                            6/39 
+  Verifying  : gcc-4.8.5-28.el7_5.1.x86_64                                                                                                                         7/39 
+  Verifying  : gpm-1.20.7-5.el7.x86_64                                                                                                                             8/39 
+  Verifying  : SDL-1.2.15-14.el7.x86_64                                                                                                                            9/39 
+  Verifying  : glib2-devel-2.54.2-2.el7.x86_64                                                                                                                    10/39 
+  Verifying  : gpm-libs-1.20.7-5.el7.x86_64                                                                                                                       11/39 
+  Verifying  : libcom_err-devel-1.42.9-12.el7_5.x86_64                                                                                                            12/39 
+  Verifying  : glibc-2.17-222.el7.x86_64                                                                                                                          13/39 
+  Verifying  : e2fsprogs-1.42.9-12.el7_5.x86_64                                                                                                                   14/39 
+  Verifying  : e2fsprogs-libs-1.42.9-12.el7_5.x86_64                                                                                                              15/39 
+  Verifying  : libgcc-4.8.5-28.el7_5.1.x86_64                                                                                                                     16/39 
+  Verifying  : e2fsprogs-devel-1.42.9-12.el7_5.x86_64                                                                                                             17/39 
+  Verifying  : slang-devel-2.2.4-11.el7.x86_64                                                                                                                    18/39 
+  Verifying  : gpm-devel-1.20.7-5.el7.x86_64                                                                                                                      19/39 
+  Verifying  : cpp-4.8.5-28.el7_5.1.x86_64                                                                                                                        20/39 
+  Verifying  : libmpc-1.0.1-3.el7.x86_64                                                                                                                          21/39 
+  Verifying  : glibc-common-2.17-222.el7.x86_64                                                                                                                   22/39 
+  Verifying  : libcom_err-1.42.9-12.el7_5.x86_64                                                                                                                  23/39 
+  Verifying  : gcc-c++-4.8.5-28.el7_5.1.x86_64                                                                                                                    24/39 
+  Verifying  : pcre-devel-8.32-17.el7.x86_64                                                                                                                      25/39 
+  Verifying  : glib2-2.54.2-2.el7.x86_64                                                                                                                          26/39 
+  Verifying  : mpfr-3.1.1-4.el7.x86_64                                                                                                                            27/39 
+  Verifying  : linuxconsoletools-1.4.5-3.el7.x86_64                                                                                                               28/39 
+  Verifying  : libstdc++-4.8.5-28.el7_5.1.x86_64                                                                                                                  29/39 
+  Verifying  : libss-1.42.9-10.el7.x86_64                                                                                                                         30/39 
+  Verifying  : libgcc-4.8.5-16.el7_4.2.x86_64                                                                                                                     31/39 
+  Verifying  : e2fsprogs-libs-1.42.9-10.el7.x86_64                                                                                                                32/39 
+  Verifying  : libstdc++-4.8.5-16.el7_4.2.x86_64                                                                                                                  33/39 
+  Verifying  : libcom_err-1.42.9-10.el7.x86_64                                                                                                                    34/39 
+  Verifying  : libgomp-4.8.5-16.el7_4.2.x86_64                                                                                                                    35/39 
+  Verifying  : e2fsprogs-1.42.9-10.el7.x86_64                                                                                                                     36/39 
+  Verifying  : glib2-2.50.3-3.el7.x86_64                                                                                                                          37/39 
+  Verifying  : glibc-2.17-196.el7_4.2.x86_64                                                                                                                      38/39 
+  Verifying  : glibc-common-2.17-196.el7_4.2.x86_64                                                                                                               39/39 
+
+Installed:
+  e2fsprogs-devel.x86_64 0:1.42.9-12.el7_5       gcc.x86_64 0:4.8.5-28.el7_5.1           gcc-c++.x86_64 0:4.8.5-28.el7_5.1       glib2-devel.x86_64 0:2.54.2-2.el7      
+  gpm-devel.x86_64 0:1.20.7-5.el7                slang-devel.x86_64 0:2.2.4-11.el7      
+
+Dependency Installed:
+  SDL.x86_64 0:1.2.15-14.el7        cpp.x86_64 0:4.8.5-28.el7_5.1               glibc-devel.x86_64 0:2.17-222.el7            glibc-headers.x86_64 0:2.17-222.el7        
+  gpm.x86_64 0:1.20.7-5.el7         gpm-libs.x86_64 0:1.20.7-5.el7              kernel-headers.x86_64 0:3.10.0-862.3.3.el7   libcom_err-devel.x86_64 0:1.42.9-12.el7_5  
+  libmpc.x86_64 0:1.0.1-3.el7       libstdc++-devel.x86_64 0:4.8.5-28.el7_5.1   linuxconsoletools.x86_64 0:1.4.5-3.el7       mpfr.x86_64 0:3.1.1-4.el7                  
+  pcre-devel.x86_64 0:8.32-17.el7  
+
+Dependency Updated:
+  e2fsprogs.x86_64 0:1.42.9-12.el7_5       e2fsprogs-libs.x86_64 0:1.42.9-12.el7_5       glib2.x86_64 0:2.54.2-2.el7            glibc.x86_64 0:2.17-222.el7            
+  glibc-common.x86_64 0:2.17-222.el7       libcom_err.x86_64 0:1.42.9-12.el7_5           libgcc.x86_64 0:4.8.5-28.el7_5.1       libgomp.x86_64 0:4.8.5-28.el7_5.1      
+  libss.x86_64 0:1.42.9-12.el7_5           libstdc++.x86_64 0:4.8.5-28.el7_5.1          
+
+Complete!
+[vagrant@otuslinux SPECS]$ 
+[vagrant@otuslinux SPECS]$ rpmbuild -bb mc.spec
+...
+Making install in tty
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/tty'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/tty'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/tty'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/tty'
+Making install in vfs
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/vfs'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/vfs'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/vfs'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/vfs'
+Making install in strutil
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/strutil'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/strutil'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/strutil'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/strutil'
+Making install in widget
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/widget'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/widget'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/widget'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib/widget'
+Making install in .
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib'
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib'
+make[1]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/lib'
+Making install in src
+make[1]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src'
+Making install in filemanager
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/filemanager'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/filemanager'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/filemanager'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/filemanager'
+Making install in man2hlp
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/man2hlp'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/man2hlp'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/man2hlp'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/man2hlp'
+Making install in vfs
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs'
+Making install in local
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/local'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/local'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/local'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/local'
+Making install in cpio
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/cpio'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/cpio'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/cpio'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/cpio'
+Making install in extfs
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/extfs'
+Making install in helpers
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/extfs/helpers'
+make[5]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/extfs/helpers'
+make[5]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/libexec/mc/extfs.d'
+ /usr/bin/install -c -m 644 README README.extfs '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/libexec/mc/extfs.d'
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/libexec/mc/extfs.d'
+ /usr/bin/install -c bpp changesetfs gitfs+ patchsetfs rpm trpm u7z a+ apt+ audio deb deba debd dpkg+ iso9660 hp48+ lslR mailfs patchfs rpms+ s3+ uace ualz uar uarc uarj uc1541 ucab uha ulha ulib urar uzip uzoo '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/libexec/mc/extfs.d'
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/etc/mc'
+ /usr/bin/install -c -m 644 sfs.ini '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/etc/mc'
+make[5]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/extfs/helpers'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/extfs/helpers'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/extfs'
+make[5]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/extfs'
+make[5]: Nothing to be done for `install-exec-am'.
+make[5]: Nothing to be done for `install-data-am'.
+make[5]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/extfs'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/extfs'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/extfs'
+Making install in fish
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/fish'
+Making install in helpers
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/fish/helpers'
+make[5]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/fish/helpers'
+make[5]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/libexec/mc/fish'
+ /usr/bin/install -c -m 644 README.fish ls mkdir fexists unlink chown chmod rmdir ln mv hardlink get send append info utime '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/libexec/mc/fish'
+make[5]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/fish/helpers'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/fish/helpers'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/fish'
+make[5]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/fish'
+make[5]: Nothing to be done for `install-exec-am'.
+make[5]: Nothing to be done for `install-data-am'.
+make[5]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/fish'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/fish'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/fish'
+Making install in ftpfs
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/ftpfs'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/ftpfs'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/ftpfs'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/ftpfs'
+Making install in sfs
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/sfs'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/sfs'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/sfs'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/sfs'
+Making install in smbfs
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/smbfs'
+Making install in helpers
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/smbfs/helpers'
+make[4]: Nothing to be done for `install'.
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/smbfs/helpers'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/smbfs'
+make[5]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/smbfs'
+make[5]: Nothing to be done for `install-exec-am'.
+make[5]: Nothing to be done for `install-data-am'.
+make[5]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/smbfs'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/smbfs'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/smbfs'
+Making install in tar
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/tar'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/tar'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/tar'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs/tar'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/vfs'
+Making install in viewer
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/viewer'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/viewer'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/viewer'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/viewer'
+Making install in editor
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/editor'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/editor'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/editor'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/editor'
+Making install in diffviewer
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/diffviewer'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/diffviewer'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/diffviewer'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/diffviewer'
+Making install in subshell
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/subshell'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/subshell'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/subshell'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/subshell'
+Making install in consaver
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/consaver'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/consaver'
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/libexec/mc'
+  /bin/sh ../../libtool   --mode=install /usr/bin/install -c cons.saver '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/libexec/mc'
+libtool: install: /usr/bin/install -c cons.saver /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/libexec/mc/cons.saver
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/consaver'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src/consaver'
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src'
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/bin'
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c mc '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/bin'
+libtool: install: /usr/bin/install -c mc /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/bin/mc
+make  install-exec-hook
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src'
+make install_mcview
+make[5]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src'
+cd /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/bin/ && rm -f mcview && ln -s mc mcview
+make[5]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src'
+make install_mcedit
+make[5]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src'
+cd /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/bin/ && rm -f mcedit && ln -s mc mcedit
+make[5]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src'
+make install_mcdiff
+make[5]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src'
+cd /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/bin/ && rm -f mcdiff && ln -s mc mcdiff
+make[5]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src'
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src'
+make[1]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/src'
+Making install in doc
+make[1]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc'
+Making install in hints
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hints'
+Making install in l10n
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hints/l10n'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hints/l10n'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/hints'
+ /usr/bin/install -c -m 644 ./mc.hint.af ./mc.hint.ar ./mc.hint.az ./mc.hint.be ./mc.hint.bg ./mc.hint.br ./mc.hint.ca ./mc.hint.cs ./mc.hint.da ./mc.hint.de ./mc.hint.de_CH ./mc.hint.el ./mc.hint.en_GB ./mc.hint.eo ./mc.hint.es ./mc.hint.et ./mc.hint.eu ./mc.hint.fa ./mc.hint.fi ./mc.hint.fr ./mc.hint.fr_CA ./mc.hint.ga ./mc.hint.gl ./mc.hint.he ./mc.hint.hr ./mc.hint.hu ./mc.hint.ia ./mc.hint.id ./mc.hint.it ./mc.hint.it_IT ./mc.hint.ja ./mc.hint.ka ./mc.hint.kk ./mc.hint.ko ./mc.hint.lt ./mc.hint.nl ./mc.hint.pl ./mc.hint.pt ./mc.hint.pt_BR ./mc.hint.ro '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/hints'
+ /usr/bin/install -c -m 644 ./mc.hint.ru ./mc.hint.sk ./mc.hint.sl ./mc.hint.sr ./mc.hint.sv ./mc.hint.sv_SE ./mc.hint.szl ./mc.hint.te ./mc.hint.tr ./mc.hint.uk ./mc.hint.uz ./mc.hint.zh ./mc.hint.zh_CN '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/hints'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hints/l10n'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hints/l10n'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hints'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hints'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/hints'
+ /usr/bin/install -c -m 644 mc.hint '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/hints'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hints'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hints'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hints'
+Making install in man
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man'
+Making install in es
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/es'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/es'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/man/es/man1'
+ /usr/bin/install -c -m 644 mc.1 '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/man/es/man1'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/es'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/es'
+Making install in hu
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/hu'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/hu'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/man/hu/man1'
+ /usr/bin/install -c -m 644 mc.1 '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/man/hu/man1'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/hu'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/hu'
+Making install in it
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/it'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/it'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/man/it/man1'
+ /usr/bin/install -c -m 644 mc.1 '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/man/it/man1'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/it'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/it'
+Making install in pl
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/pl'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/pl'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/man/pl/man1'
+ /usr/bin/install -c -m 644 mc.1 '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/man/pl/man1'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/pl'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/pl'
+Making install in ru
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/ru'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/ru'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/man/ru/man1'
+ /usr/bin/install -c -m 644 mc.1 '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/man/ru/man1'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/ru'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/ru'
+Making install in sr
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/sr'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/sr'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/man/sr/man1'
+ /usr/bin/install -c -m 644 mc.1 '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/man/sr/man1'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/sr'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man/sr'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/man/man1'
+ /usr/bin/install -c -m 644 mc.1 mcedit.1 mcview.1 '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/man/man1'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/man'
+Making install in hlp
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp'
+Making install in es
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/es'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/es'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/help'
+ /usr/bin/install -c -m 644 mc.hlp.es '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/help'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/es'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/es'
+Making install in hu
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/hu'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/hu'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/help'
+ /usr/bin/install -c -m 644 mc.hlp.hu '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/help'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/hu'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/hu'
+Making install in it
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/it'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/it'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/help'
+ /usr/bin/install -c -m 644 mc.hlp.it '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/help'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/it'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/it'
+Making install in pl
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/pl'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/pl'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/help'
+ /usr/bin/install -c -m 644 mc.hlp.pl '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/help'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/pl'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/pl'
+Making install in ru
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/ru'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/ru'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/help'
+ /usr/bin/install -c -m 644 mc.hlp.ru '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/help'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/ru'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/ru'
+Making install in sr
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/sr'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/sr'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/help'
+ /usr/bin/install -c -m 644 mc.hlp.sr '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/help'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/sr'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp/sr'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp'
+make[4]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/help'
+ /usr/bin/install -c -m 644 mc.hlp '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/help'
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc/hlp'
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc'
+make[1]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/doc'
+Making install in contrib
+make[1]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib'
+Making install in dist
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib/dist'
+Making install in gentoo
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib/dist/gentoo'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib/dist/gentoo'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib/dist/gentoo'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib/dist/gentoo'
+Making install in redhat
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib/dist/redhat'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib/dist/redhat'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib/dist/redhat'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib/dist/redhat'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib/dist'
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib/dist'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib/dist'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib/dist'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib/dist'
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib'
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/libexec/mc'
+ /usr/bin/install -c mc.csh mc.sh mc-wrapper.csh mc-wrapper.sh '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/libexec/mc'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib'
+make[1]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/contrib'
+Making install in misc
+make[1]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc'
+Making install in ext.d
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/ext.d'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/ext.d'
+make[3]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/libexec/mc/ext.d'
+ /usr/bin/install -c archive.sh image.sh package.sh sound.sh video.sh doc.sh misc.sh text.sh web.sh '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/libexec/mc/ext.d'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/ext.d'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/ext.d'
+Making install in macros.d
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/macros.d'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/macros.d'
+make[3]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/examples/macros.d'
+ /usr/bin/install -c -m 644 macro.0.sh macro.1.sh macro.3.sh macro.4.sh macro.5.sh macro.6.sh macro.7.sh '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/examples/macros.d'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/macros.d'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/macros.d'
+Making install in skins
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/skins'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/skins'
+make[3]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/skins'
+ /usr/bin/install -c -m 644 dark.ini darkfar.ini default.ini double-lines.ini featured.ini gotar.ini gray-green-purple256.ini gray-orange-blue256.ini mc46.ini modarcon16-defbg.ini modarcon16.ini modarcon16root-defbg.ini modarcon16root.ini modarin256-defbg.ini modarin256.ini modarin256root-defbg.ini modarin256root.ini nicedark.ini sand256.ini seasons-autumn16M.ini seasons-spring16M.ini seasons-summer16M.ini seasons-winter16M.ini xoria256.ini yadt256-defbg.ini yadt256.ini '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/skins'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/skins'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/skins'
+Making install in syntax
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/syntax'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/syntax'
+make[3]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/syntax'
+ /usr/bin/install -c -m 644 Syntax PKGBUILD.syntax ada95.syntax as.syntax aspx.syntax assembler.syntax awk.syntax c.syntax cabal.syntax changelog.syntax cmake.syntax cs.syntax css.syntax cuda.syntax cxx.syntax cython.syntax d.syntax debian-changelog.syntax debian-control.syntax debian-description.syntax debian-sources-list.syntax diff.syntax dlink.syntax dos.syntax ebuild.syntax eiffel.syntax erlang.syntax f90.syntax filehighlight.syntax fortran.syntax glsl.syntax go.syntax haskell.syntax hive.syntax html.syntax idl.syntax ini.syntax j.syntax jal.syntax java.syntax '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/syntax'
+ /usr/bin/install -c -m 644 js.syntax latex.syntax lisp.syntax lkr.syntax lsm.syntax lua.syntax m4.syntax mail.syntax makefile.syntax markdown.syntax ml.syntax named.syntax nemerle.syntax nroff.syntax octave.syntax opencl.syntax osl.syntax pascal.syntax perl.syntax php.syntax po.syntax povray.syntax procmail.syntax properties.syntax protobuf.syntax puppet.syntax python.syntax r.syntax ruby.syntax rust.syntax sh.syntax slang.syntax smalltalk.syntax spec.syntax sql.syntax strace.syntax swig.syntax syntax.syntax tcl.syntax texinfo.syntax '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/syntax'
+ /usr/bin/install -c -m 644 ts.syntax tt.syntax unknown.syntax verilog.syntax vhdl.syntax xml.syntax yaml.syntax yum-repo.syntax yxx.syntax '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc/syntax'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/syntax'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc/syntax'
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc'
+make[3]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc'
+make[3]: Nothing to be done for `install-exec-am'.
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/etc/mc'
+ /usr/bin/install -c -m 644 filehighlight.ini mc.default.keymap mc.emacs.keymap mc.menu mcedit.menu mc.ext '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/etc/mc'
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/etc/mc'
+ /usr/bin/install -c edit.indent.rc '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/etc/mc'
+ /usr/bin/mkdir -p '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc'
+ /usr/bin/install -c -m 644 mc.lib mc.charsets '/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/mc'
+make  install-data-hook
+make[4]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc'
+cd /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/etc/mc && rm -f mc.keymap && ln -s mc.default.keymap mc.keymap
+make[4]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc'
+make[3]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc'
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc'
+make[1]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21/misc'
+make[1]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21'
+make[2]: Entering directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21'
+make[1]: Leaving directory `/home/vagrant/rpmbuild/BUILD/mc-4.8.21'
++ install -d -m 755 /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/etc/profile.d
++ install contrib/mc.sh contrib/mc.csh /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/etc/profile.d
++ /usr/lib/rpm/find-lang.sh /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64 mc
++ /usr/lib/rpm/find-debuginfo.sh --strict-build-id -m --run-dwz --dwz-low-mem-die-limit 10000000 --dwz-max-die-limit 110000000 /home/vagrant/rpmbuild/BUILD/mc-4.8.21
+extracting debug info from /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/libexec/mc/cons.saver
+extracting debug info from /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/bin/mc
+/usr/lib/rpm/sepdebugcrcfix: Updated 2 CRC32s, 0 CRC32s did match.
+symlinked /usr/lib/debug/usr/bin/mc.debug to /usr/lib/debug/usr/bin/mcview.debug
+symlinked /usr/lib/debug/usr/bin/mc.debug to /usr/lib/debug/usr/bin/mcedit.debug
+symlinked /usr/lib/debug/usr/bin/mc.debug to /usr/lib/debug/usr/bin/mcdiff.debug
+8682 blocks
++ '[' '%{buildarch}' = noarch ']'
++ QA_CHECK_RPATHS=1
++ case "${QA_CHECK_RPATHS:-}" in
++ /usr/lib/rpm/check-rpaths
++ /usr/lib/rpm/check-buildroot
++ /usr/lib/rpm/redhat/brp-compress
++ /usr/lib/rpm/redhat/brp-strip-static-archive /usr/bin/strip
++ /usr/lib/rpm/brp-python-bytecompile /usr/bin/python 1
++ /usr/lib/rpm/redhat/brp-python-hardlink
++ /usr/lib/rpm/redhat/brp-java-repack-jars
+Processing files: mc-4.8-21.el7.centos.x86_64
+Выполняется(%doc): /bin/sh -e /var/tmp/rpm-tmp.xRYzUF
++ umask 022
++ cd /home/vagrant/rpmbuild/BUILD
++ cd mc-4.8.21
++ DOCDIR=/home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/doc/mc-4.8
++ export DOCDIR
++ /usr/bin/mkdir -p /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/doc/mc-4.8
++ cp -pr doc/FAQ /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/doc/mc-4.8
++ cp -pr doc/COPYING /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/doc/mc-4.8
++ cp -pr doc/NEWS /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/doc/mc-4.8
++ cp -pr doc/README /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64/usr/share/doc/mc-4.8
++ exit 0
+Provides: config(mc) = 3:4.8-21.el7.centos mc = 3:4.8-21.el7.centos mc(x86-64) = 3:4.8-21.el7.centos
+Requires(rpmlib): rpmlib(CompressedFileNames) <= 3.0.4-1 rpmlib(FileDigests) <= 4.6.0-1 rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+Requires: /bin/sh /usr/bin/perl /usr/bin/python libc.so.6()(64bit) libc.so.6(GLIBC_2.14)(64bit) libc.so.6(GLIBC_2.15)(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libc.so.6(GLIBC_2.4)(64bit) libc.so.6(GLIBC_2.6)(64bit) libc.so.6(GLIBC_2.7)(64bit) libglib-2.0.so.0()(64bit) libgpm.so.2()(64bit) libslang.so.2()(64bit) libslang.so.2(SLANG2)(64bit) perl(File::Basename) perl(File::Temp) perl(POSIX) perl(bytes) perl(strict) rtld(GNU_HASH)
+Processing files: mc-debuginfo-4.8-21.el7.centos.x86_64
+Provides: mc-debuginfo = 3:4.8-21.el7.centos mc-debuginfo(x86-64) = 3:4.8-21.el7.centos
+Requires(rpmlib): rpmlib(FileDigests) <= 4.6.0-1 rpmlib(PayloadFilesHavePrefix) <= 4.0-1 rpmlib(CompressedFileNames) <= 3.0.4-1
+Проверка на неупакованный(е) файл(ы): /usr/lib/rpm/check-files /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64
+Записан: /home/vagrant/rpmbuild/RPMS/x86_64/mc-4.8-21.el7.centos.x86_64.rpm
+Записан: /home/vagrant/rpmbuild/RPMS/x86_64/mc-debuginfo-4.8-21.el7.centos.x86_64.rpm
+Выполняется(%clean): /bin/sh -e /var/tmp/rpm-tmp.bgkTCo
++ umask 022
++ cd /home/vagrant/rpmbuild/BUILD
++ cd mc-4.8.21
++ rm -rf /home/vagrant/rpmbuild/BUILDROOT/mc-4.8-21.el7.centos.x86_64
++ exit 0
+[vagrant@otuslinux SPECS]$ 
+[vagrant@otuslinux SPECS]$ 
+[vagrant@otuslinux SPECS]$ 
+[vagrant@otuslinux SPECS]$ 
+[vagrant@otuslinux SPECS]$ 
+[vagrant@otuslinux SPECS]$ 
+[vagrant@otuslinux SPECS]$ cd ..
+[vagrant@otuslinux rpmbuild]$ cd RPMS/
+[vagrant@otuslinux RPMS]$ ls
+x86_64
+[vagrant@otuslinux RPMS]$ cd x86_64/
+[vagrant@otuslinux x86_64]$ ls
+mc-4.8-21.el7.centos.x86_64.rpm  mc-debuginfo-4.8-21.el7.centos.x86_64.rpm
+[vagrant@otuslinux x86_64]$ 
+
