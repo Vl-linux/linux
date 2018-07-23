@@ -1,0 +1,43 @@
+Краткая архитектура построенной сети
+
+Сервера:
+
+inetRouter
+centralRouter
+centralServer
+office1Router
+office1Server
+office2Router
+office2Server
+
+Сети:
+
+central:
+192.168.0.0/28 - dir0-net
+192.168.0.32/28 - hw0-net
+192.168.0.64/26 - wifi0-net
+
+office2:
+192.168.1.0/25 - dev2-net
+192.168.1.128/26 - test2-net
+192.168.1.192/26 - hw2-net
+
+office1:
+192.168.2.0/26 - dev1-net
+192.168.2.64/26 - test1-net
+192.168.2.128/26 - mng1-net
+192.168.2.192/26 - hw1-net
+
+дополнительные:
+192.168.3.0/29 - srv-net
+192.168.253.0/30 - router1-net
+192.168.254.0/30 - router2-net
+192.168.255.0/30 - router0-net
+
+Итого:
+- сервера и роутреты имеют настроенный доступ в интернет через inetRouter
+- сервера (central, office1, office2) имеют доступ к друг другу
+- у всех серверов и роутеров отключен default eth0.
+
+Свободные подсети, узлы каждой подсети, broadcast адреса для каждой подсети, приведены в файле "subnet"
+
