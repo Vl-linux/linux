@@ -1,0 +1,157 @@
+[vagrant@inetRouter ~]$ cat /proc/net/bonding/bond1
+Ethernet Channel Bonding Driver: v3.7.1 (April 27, 2011)
+
+Bonding Mode: load balancing (xor)
+Transmit Hash Policy: layer2 (0)
+MII Status: up
+MII Polling Interval (ms): 100
+Up Delay (ms): 0
+Down Delay (ms): 0
+
+Slave Interface: eth1
+MII Status: up
+Speed: 1000 Mbps
+Duplex: full
+Link Failure Count: 0
+Permanent HW addr: 08:00:27:2e:dd:19
+Slave queue ID: 0
+
+Slave Interface: eth4
+MII Status: up
+Speed: 1000 Mbps
+Duplex: full
+Link Failure Count: 0
+Permanent HW addr: 08:00:27:bd:eb:96
+Slave queue ID: 0
+[vagrant@inetRouter ~]$ cat /proc/net/bonding/bond2
+Ethernet Channel Bonding Driver: v3.7.1 (April 27, 2011)
+
+Bonding Mode: adaptive load balancing
+Primary Slave: None
+Currently Active Slave: eth2
+MII Status: up
+MII Polling Interval (ms): 100
+Up Delay (ms): 0
+Down Delay (ms): 0
+
+Slave Interface: eth2
+MII Status: up
+Speed: 1000 Mbps
+Duplex: full
+Link Failure Count: 0
+Permanent HW addr: 08:00:27:06:68:a2
+Slave queue ID: 0
+
+Slave Interface: eth5
+MII Status: up
+Speed: 1000 Mbps
+Duplex: full
+Link Failure Count: 0
+Permanent HW addr: 08:00:27:37:a0:67
+Slave queue ID: 0
+[vagrant@inetRouter ~]$ cat /proc/net/bonding/bond3
+Ethernet Channel Bonding Driver: v3.7.1 (April 27, 2011)
+
+Bonding Mode: transmit load balancing
+Primary Slave: None
+Currently Active Slave: eth3
+MII Status: up
+MII Polling Interval (ms): 100
+Up Delay (ms): 0
+Down Delay (ms): 0
+
+Slave Interface: eth3
+MII Status: up
+Speed: 1000 Mbps
+Duplex: full
+Link Failure Count: 0
+Permanent HW addr: 08:00:27:a9:26:cc
+Slave queue ID: 0
+
+Slave Interface: eth6
+MII Status: up
+Speed: 1000 Mbps
+Duplex: full
+Link Failure Count: 0
+Permanent HW addr: 08:00:27:6e:8b:15
+Slave queue ID: 0
+[vagrant@inetRouter ~]$ ping 192.168.255.2
+PING 192.168.255.2 (192.168.255.2) 56(84) bytes of data.
+64 bytes from 192.168.255.2: icmp_seq=1 ttl=64 time=0.444 ms
+64 bytes from 192.168.255.2: icmp_seq=2 ttl=64 time=1.05 ms
+64 bytes from 192.168.255.2: icmp_seq=3 ttl=64 time=0.533 ms
+^C
+--- 192.168.255.2 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2726ms
+rtt min/avg/max/mdev = 0.444/0.677/1.056/0.271 ms
+[vagrant@inetRouter ~]$ ping 192.168.254.2
+PING 192.168.254.2 (192.168.254.2) 56(84) bytes of data.
+64 bytes from 192.168.254.2: icmp_seq=1 ttl=64 time=0.350 ms
+64 bytes from 192.168.254.2: icmp_seq=2 ttl=64 time=1.14 ms
+^C
+--- 192.168.254.2 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1963ms
+rtt min/avg/max/mdev = 0.350/0.749/1.149/0.400 ms
+[vagrant@inetRouter ~]$ ping 192.168.253.2
+PING 192.168.253.2 (192.168.253.2) 56(84) bytes of data.
+64 bytes from 192.168.253.2: icmp_seq=1 ttl=64 time=0.723 ms
+64 bytes from 192.168.253.2: icmp_seq=2 ttl=64 time=0.538 ms
+64 bytes from 192.168.253.2: icmp_seq=3 ttl=64 time=0.670 ms
+64 bytes from 192.168.253.2: icmp_seq=4 ttl=64 time=0.565 ms
+^C
+--- 192.168.253.2 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3346ms
+rtt min/avg/max/mdev = 0.538/0.624/0.723/0.075 ms
+[vagrant@inetRouter ~]$ sudo ifdown eth3
+[vagrant@inetRouter ~]$ cat /proc/net/bonding/bond3
+Ethernet Channel Bonding Driver: v3.7.1 (April 27, 2011)
+
+Bonding Mode: transmit load balancing
+Primary Slave: None
+Currently Active Slave: eth6
+MII Status: up
+MII Polling Interval (ms): 100
+Up Delay (ms): 0
+Down Delay (ms): 0
+
+Slave Interface: eth6
+MII Status: up
+Speed: 1000 Mbps
+Duplex: full
+Link Failure Count: 0
+Permanent HW addr: 08:00:27:6e:8b:15
+Slave queue ID: 0
+[vagrant@inetRouter ~]$ ping 192.168.254.2
+PING 192.168.254.2 (192.168.254.2) 56(84) bytes of data.
+^C
+--- 192.168.254.2 ping statistics ---
+10 packets transmitted, 0 received, 100% packet loss, time 9312ms
+
+[vagrant@inetRouter ~]$ sudo ifup eth3
+[vagrant@inetRouter ~]$ cat /proc/net/bonding/bond3
+Ethernet Channel Bonding Driver: v3.7.1 (April 27, 2011)
+
+Bonding Mode: transmit load balancing
+Primary Slave: None
+Currently Active Slave: eth6
+MII Status: up
+MII Polling Interval (ms): 100
+Up Delay (ms): 0
+Down Delay (ms): 0
+
+Slave Interface: eth6
+MII Status: up
+Speed: 1000 Mbps
+Duplex: full
+Link Failure Count: 0
+Permanent HW addr: 08:00:27:6e:8b:15
+Slave queue ID: 0
+
+Slave Interface: eth3
+MII Status: up
+Speed: 1000 Mbps
+Duplex: full
+Link Failure Count: 0
+Permanent HW addr: 08:00:27:a9:26:cc
+Slave queue ID: 0
+
