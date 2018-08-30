@@ -1,0 +1,115 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+
+MACHINES = {
+ :centralServer => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.3.1', adapter: 2, netmask: "255.255.255.248", virtualbox__intnet: "srv-net"},
+                ]
+  },
+  :office1Server => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.3.3', adapter: 2, netmask: "255.255.255.248", virtualbox__intnet: "srv-net"},
+                ]
+  },
+  :office2Server => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.3.2', adapter: 2, netmask: "255.255.255.128", virtualbox__intnet: "srv-net"},
+                ]
+  },
+}
+
+Vagrant.configure("2") do |config|
+
+  MACHINES.each do |boxname, boxconfig|
+
+    config.vm.define boxname do |box|
+
+        box.vm.box = boxconfig[:box_name]
+        box.vm.host_name = boxname.to_s
+
+        config.vm.provider "virtualbox" do |v|
+          v.memory = 384
+        end
+
+        boxconfig[:net].each do |ipconf|
+          box.vm.network "private_network", ipconf
+        end
+        
+        if boxconfig.key?(:public)
+          box.vm.network "public_network", boxconfig[:public]
+        end
+
+        box.vm.provision "shell", inline: <<-SHELL
+          mkdir -p ~root/.ssh
+                cp ~vagrant/.ssh/auth* ~root/.ssh
+          echo -e "-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEA4N1EUHj347iT40/rsvcYuhkqpYVPGxXfKfIyYaaztFB7Ddnz
+O0pfC/15mBWEObm0GfA1p7R3HLCApbFedCU4J0fD/YnHRZgca4isT1V8Z3249HBh
+ScU4qqepF30cvT/EN5JSqaiCOggYuLcRG04SBbpK1zYDFK0eV3swP1xn7OofwS8p
+iPJ37yFk4C5VUqIdqQwiDeaEjcfNAbSGUghZnZmZ7e/uJ/va+XZoUyLGcUHkqF69
+wT0Wd8DTrFCLP7pB8mVDK1i6jJAC0ezB+zWdE9yjBwdxq/AHxorAOGdA+vGTTBRZ
+Q9AkF9aEhuN7O9UWvlOQPTKtvTFyX4uYVRdLwQIDAQABAoIBACQAqVhtFdt7CQqj
+GCzOTUI2l1JrFrBSfymbIp/p7enX3Ovp0nzSuocT7W0BPOt1JTXl9OFGDrAkPmTJ
+EkNsViJL5kBo1+P3p80708LcABAd3AgfGiSSlDEWqQcevAQ8+nCfV+bcGQWrmDGy
+9eU2ScJrAmKUvkeINExzZ9UtOWKACPdGoP8u2rWgiMliVXhMwG5QCPojblDJ3GQK
+clLAf/fjGw2m9DWgBZDaP6nwEjgPbHGIqRjYwvCsAXdrLhFhWtbGHK/ALEPs9ltJ
+sFHMp8LJWZ5QBNVigyUoHQS8IsvLtobBsF3o63XMUAcazzqwTBLgTrY5oNmB5h3w
+a66WzMECgYEA+GOXQFuOMEfEDKDBB8rzdkLBKXuStItWLMJRoLha3+b04wrhcCjA
+y65BQYEzhpy4j4kJBL6k+LkW9l2hCEAMJOMu0ORvIAw6AZs84Lb6emrx7hgW7n9Q
+DUXXRqFMRSIpeLrT0qlHuKRTLxG4i5VjLCdjtSKG+O82KQRpzyskULkCgYEA58Ek
+2M+1xOv2sg5P+yAJlsJVCjsfLTnYevJYB/7bclYHVFP9vBLjo81+SCqf+pyzL5N8
+yqlNyHdHUhxjHLZCMwOHEWYk9ijEz10vSrMLNKE6n0bgPGNdJEEj2CIXs5u6NsJV
+gR/CVGcZsrfTK9Nx7BLXUoP8NxtZ7rlqAsP0/0kCgYEAl38GrXYqD0B2Ts1tbndW
+bvbgIZEBNaUWdk4+wywuIQoYqrHkNihlDtXFb1KCPsQvvTvziDVPIXSikLkikomd
+3pHB6B6ruHw8lOY+B0ETHL9Ft9Zxhh2Ykb/bQXT3s+LWMJCiyYX9/JwdMEQ6rsf6
+qN+NbNkWQZaFDhdnAbhqeeECgYAqBzfUbc6r+JLTdY8Bnqy+f12GrnQX8o6UtVBL
+mudXE8zeeSDhs5c+xGxrT/eVLke8kAWohw2JFkCD3owGz/KvZ6td92UqkvgmFuMV
+q+STVc3YxrSxnt9sTLfgYUZlFw+tEI8LDKRkRBI/++A66WyWgFA2MaNSpw4nIc7c
+04ahqQKBgAt53+3RW7DpaJRbA6bZRYdoWMO9J/hjx0gVIcYdqBgk9BYTEg+8gYJg
+kX7o6kI4YUOQQgEUgUdyjlbtTq3pj9xKWJIucX5HDoRKgz671rayX/MP6YOQgE7Z
+Or+Mj+sMMYObjmMDfdrl0I6SOu6kPpA7hQ7cqOspjnxWGwUgsAlX
+-----END RSA PRIVATE KEY-----" > /home/vagrant/.ssh/id_rsa
+          echo -e "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDg3URQePfjuJPjT+uy9xi6GSqlhU8bFd8p8jJhprO0UHsN2fM7Sl8L/XmYFYQ5ubQZ8DWntHccsIClsV50JTgnR8P9icdFmBxriKxPVXxnfbj0cGFJxTiqp6kXfRy9P8Q3klKpqII6CBi4txEbThIFukrXNgMUrR5XezA/XGfs6h/BLymI8nfvIWTgLlVSoh2pDCIN5oSNx80BtIZSCFmdmZnt7+4n+9r5dmhTIsZxQeSoXr3BPRZ3wNOsUIs/ukHyZUMrWLqMkALR7MH7NZ0T3KMHB3Gr8AfGisA4Z0D68ZNMFFlD0CQX1oSG43s71Ra+U5A9Mq29MXJfi5hVF0vB vagrant@testClient1" >> /home/vagrant/.ssh/authorized_keys
+          yum -y install epel-release
+          yum -y install openvpn
+          yum -y install openssl
+        SHELL
+        case boxname.to_s
+        when "centralServer"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            mkdir /etc/openvpn/auth
+            cp /vagrant/openssl/server/* /etc/openvpn/auth
+            cp /vagrant/server.conf /etc/openvpn
+            systemctl start openvpn@server
+            SHELL
+        when "office1Server"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            mkdir /etc/openvpn/auth
+            cp /vagrant/openssl/client/* /etc/openvpn/auth
+            cp /vagrant/client.conf /etc/openvpn
+            systemctl start openvpn@client
+            ping -c 9 10.10.0.1
+            SHELL
+        when "office2Server"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            mkdir /etc/openvpn/auth
+            cp /vagrant/openssl/client/* /etc/openvpn/auth
+            cp /vagrant/client.conf /etc/openvpn
+            systemctl start openvpn@client
+            systemctl status openvpn@client
+            ping -c 10 10.10.0.1
+            SHELL
+        end
+
+      end
+
+  end
+  
+  
+end
