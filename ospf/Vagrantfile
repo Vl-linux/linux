@@ -1,0 +1,140 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+
+MACHINES = {
+  :centralRouter => {
+        :box_name => "centos/7",
+        :net => [
+                   {adapter: 2, auto_config: false, virtualbox__intnet: "vlan1"},
+                   {adapter: 3, auto_config: false, virtualbox__intnet: "vlan3"},
+                   {ip: '192.168.0.1', adapter: 4, netmask: "255.255.255.240", virtualbox__intnet: "area3"},
+                ]
+  },
+#  :centralServer => {
+#        :box_name => "centos/7",
+#        :net => [
+#                   {ip: '192.168.0.2', adapter: 2, netmask: "255.255.255.240", virtualbox__intnet: "area3"},
+#                ]
+#  },
+:office1Router => {
+        :box_name => "centos/7",
+        :net => [
+                   {adapter: 2, auto_config: false, virtualbox__intnet: "vlan1"},
+                   {adapter: 3, auto_config: false, virtualbox__intnet: "vlan2"},
+                   {ip: '192.168.1.1', adapter: 4, netmask: "255.255.255.192", virtualbox__intnet: "area1"},
+                ]
+  },
+#  :office1Server => {
+#        :box_name => "centos/7",
+#        :net => [
+#                   {ip: '192.168.1.2', adapter: 2, netmask: "255.255.255.192", virtualbox__intnet: "area1"},
+#                ]
+#  }, 
+:office2Router => {
+        :box_name => "centos/7",
+        :net => [
+                   {adapter: 2, auto_config: false, virtualbox__intnet: "vlan2"},
+                   {adapter: 3, auto_config: false, virtualbox__intnet: "vlan3"},
+                   {ip: '192.168.2.1', adapter: 4, netmask: "255.255.255.128", virtualbox__intnet: "area2"},
+                ]
+  },
+#  :office2Server => {
+#        :box_name => "centos/7",
+#        :net => [
+#                   {ip: '192.168.2.2', adapter: 2, netmask: "255.255.255.128", virtualbox__intnet: "area2"},
+#                   {adapter: 3, auto_config: false, virtualbox__intnet: true},
+#                ]
+#  },
+}
+
+Vagrant.configure("2") do |config|
+
+  MACHINES.each do |boxname, boxconfig|
+
+    config.vm.define boxname do |box|
+
+        box.vm.box = boxconfig[:box_name]
+        box.vm.host_name = boxname.to_s
+
+        config.vm.provider "virtualbox" do |v|
+          v.memory = 256
+        end
+
+        boxconfig[:net].each do |ipconf|
+          box.vm.network "private_network", ipconf
+        end
+        
+        if boxconfig.key?(:public)
+          box.vm.network "public_network", boxconfig[:public]
+        end
+
+        box.vm.provision "shell", inline: <<-SHELL
+          mkdir -p ~root/.ssh
+                cp ~vagrant/.ssh/auth* ~root/.ssh
+        SHELL
+        
+        case boxname.to_s
+        when "centralRouter"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo -e "net.ipv4.conf.all.forwarding=1\nnet.ipv4.ip_forward=1" > /etc/sysctl.conf
+            sysctl -p /etc/sysctl.conf
+            yum -y install quagga
+            echo -e "ONBOOT=yes\nVLAN=yes\nBOOTPROTO=static\nTYPE=Ethernet\nDEVICE=eth1.1\nIPADDR=10.10.0.1\nPREFIX=30\nNM_CONTROLLED=no" > /etc/sysconfig/network-scripts/ifcfg-eth1.1
+            echo -e "ONBOOT=yes\nVLAN=yes\nBOOTPROTO=static\nTYPE=Ethernet\nDEVICE=eth2.3\nIPADDR=10.10.0.10\nPREFIX=30\nNM_CONTROLLED=no" > /etc/sysconfig/network-scripts/ifcfg-eth2.3
+            cp /vagrant/centralconf/* /etc/quagga/
+            systemctl restart network
+            systemctl start zebra
+            systemctl start ospfd
+            SHELL
+#        when "centralServer"
+#          box.vm.provision "shell", run: "always", inline: <<-SHELL
+#            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+#            echo "GATEWAY=192.168.0.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+#            SHELL
+        when "office1Router"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo -e "net.ipv4.conf.all.forwarding=1\nnet.ipv4.ip_forward=1" > /etc/sysctl.conf
+            sysctl -p /etc/sysctl.conf
+            echo -e "ONBOOT=yes\nVLAN=yes\nBOOTPROTO=static\nTYPE=Ethernet\nDEVICE=eth1.1\nIPADDR=10.10.0.2\nPREFIX=30\nNM_CONTROLLED=no" > /etc/sysconfig/network-scripts/ifcfg-eth1.1
+            echo -e "ONBOOT=yes\nVLAN=yes\nBOOTPROTO=static\nTYPE=Ethernet\nDEVICE=eth2.2\nIPADDR=10.10.0.5\nPREFIX=30\nNM_CONTROLLED=no" > /etc/sysconfig/network-scripts/ifcfg-eth2.2
+            yum -y install quagga
+            cp /vagrant/office1conf/* /etc/quagga/
+            systemctl restart network
+            systemctl start zebra
+            systemctl start ospfd
+            SHELL
+#        when "office1Server"
+#          box.vm.provision "shell", run: "always", inline: <<-SHELL
+#            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+#            echo "GATEWAY=192.168.1.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+#            systemctl restart network
+#            SHELL
+        when "office2Router"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo -e "net.ipv4.conf.all.forwarding=1\nnet.ipv4.ip_forward=1" > /etc/sysctl.conf
+            sysctl -p /etc/sysctl.conf
+            yum -y install mc
+            echo -e "ONBOOT=yes\nVLAN=yes\nBOOTPROTO=static\nTYPE=Ethernet\nDEVICE=eth1.2\nIPADDR=10.10.0.6\nPREFIX=30\nNM_CONTROLLED=no" > /etc/sysconfig/network-scripts/ifcfg-eth1.2
+            echo -e "ONBOOT=yes\nVLAN=yes\nBOOTPROTO=static\nTYPE=Ethernet\nDEVICE=eth2.3\nIPADDR=10.10.0.9\nPREFIX=30\nNM_CONTROLLED=no" > /etc/sysconfig/network-scripts/ifcfg-eth2.3
+            yum -y install quagga
+            cp /vagrant/office2conf/* /etc/quagga/
+            systemctl restart network
+            systemctl start zebra
+            systemctl start ospfd
+            SHELL
+#        when "office2Server"
+#          box.vm.provision "shell", run: "always", inline: <<-SHELL
+#            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+#            echo "GATEWAY=192.168.2.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+#            systemctl restart network
+#            SHELL
+        end
+
+      end
+
+  end
+  
+  
+end
