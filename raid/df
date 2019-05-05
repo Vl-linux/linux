@@ -1,0 +1,13 @@
+Filesystem                       Size  Used Avail Use% Mounted on
+/dev/mapper/VolGroup00-LogVol00   38G  1.5G   36G   4% /
+devtmpfs                         488M     0  488M   0% /dev
+tmpfs                            497M     0  497M   0% /dev/shm
+tmpfs                            497M  6.6M  490M   2% /run
+tmpfs                            497M     0  497M   0% /sys/fs/cgroup
+/dev/sdg2                       1014M   63M  952M   7% /boot
+tmpfs                            100M     0  100M   0% /run/user/1000
+/dev/md10p1                       64M  1.3M   58M   3% /opt/P_1
+/dev/md10p2                       65M  1.3M   58M   3% /opt/P_2
+/dev/md10p3                       65M  1.3M   59M   3% /opt/P_3
+/dev/md10p4                       65M  1.3M   59M   3% /opt/P_4
+/dev/md10p5                       66M  1.3M   60M   3% /opt/P_5
