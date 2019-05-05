@@ -17,7 +17,7 @@ echo $datemsg - "Cleaning of Archive: |Use Old - $var| => |Use New - $var1|" >> 
 exit 0;
 
 --
-добавлена новая верситя!
+добавлена новая версия!
 
 
 
