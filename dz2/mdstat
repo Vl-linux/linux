@@ -1,5 +1,0 @@
-Personalities : [raid1] [raid0] [raid10] 
-md10 : active raid10 sdf[5] sde[4] sdd[3] sdc[2] sdb[1] sda[0]
-      365568 blocks super 1.2 512K chunks 2 near-copies [6/6] [UUUUUU]
-      
-unused devices: <none>
