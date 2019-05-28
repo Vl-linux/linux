@@ -1,0 +1,29 @@
+Start-Date: 2018-05-27  23:30:02
+Commandline: apt-get install make
+Requested-By: vl (1000)
+Install: make:i386 (4.1-6)
+End-Date: 2019-05-27  23:30:10
+
+Start-Date: 2019-05-27  23:34:13
+Commandline: apt-get install gcc
+Requested-By: vl (1000)
+Install: libmpc3:i386 (1.0.3-1, automatic), libmpx0:i386 (5.4.0-6ubuntu1~16.04.11, automatic), libgcc-5-dev:i386 (5.4.0-6ubuntu1~16.04.11, automatic), linux-libc-dev:i386 (4.4.0-148.174, automatic), libc6-dev:i386 (2.23-0ubuntu11, automatic), cpp-5:i386 (5.4.0-6ubuntu1~16.04.11, automatic), binutils:i386 (2.26.1-1ubuntu1~16.04.8, automatic), cpp:i386 (4:5.3.1-1ubuntu1, automatic), libitm1:i386 (5.4.0-6ubuntu1~16.04.11, automatic), gcc:i386 (4:5.3.1-1ubuntu1), libcilkrts5:i386 (5.4.0-6ubuntu1~16.04.11, automatic), libasan2:i386 (5.4.0-6ubuntu1~16.04.11, automatic), libquadmath0:i386 (5.4.0-6ubuntu1~16.04.11, automatic), libisl15:i386 (0.16.1-1, automatic), libubsan0:i386 (5.4.0-6ubuntu1~16.04.11, automatic), gcc-5:i386 (5.4.0-6ubuntu1~16.04.11, automatic), libgomp1:i386 (5.4.0-6ubuntu1~16.04.11, automatic), manpages-dev:i386 (4.04-2, automatic), libc-dev-bin:i386 (2.23-0ubuntu11, automatic), libatomic1:i386 (5.4.0-6ubuntu1~16.04.11, automatic), libcc1-0:i386 (5.4.0-6ubuntu1~16.04.11, automatic)
+End-Date: 2019-05-27  23:35:17
+
+Start-Date: 2019-05-27  23:49:54
+Commandline: apt-get install libncurses5-dev
+Requested-By: vl (1000)
+Install: libncurses5-dev:i386 (6.0+20160213-1ubuntu1), libtinfo-dev:i386 (6.0+20160213-1ubuntu1, automatic)
+End-Date: 2019-05-27  23:49:59
+
+Start-Date: 2019-05-28  00:58:22
+Commandline: apt-get install bc
+Requested-By: vl (1000)
+Install: bc:i386 (1.06.95-9build1)
+End-Date: 2019-05-28  00:58:27
+
+Start-Date: 2019-05-28  01:10:38
+Commandline: apt-get install libssl-dev
+Requested-By: vl (1000)
+Install: zlib1g-dev:i386 (1:1.2.8.dfsg-2ubuntu4.1, automatic), libssl-dev:i386 (1.0.2g-1ubuntu4.15), libssl-doc:i386 (1.0.2g-1ubuntu4.15, automatic)
+End-Date: 2019-05-28  01:10:58
