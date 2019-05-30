@@ -1,0 +1,8 @@
+swapoff -a
+swapoff /swap
+rm /swap
+dd if=/dev/zero of=/swap bs=256MiB count=2
+chmod 600 /swap
+mkswap /swap
+swapon /swap
+free
