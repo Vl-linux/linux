@@ -1,0 +1,11 @@
+dd if=/dev/zero of=./loopfile bs=1M count=100	#создание loop device
+sudo losetup /dev/loop0 ./loopfile		#подключение
+ls -l /dev/loop0				#brw-rw---- 1 root disk 7, 0
+hexdump -C ./loopfile				#просмотр файла
+mkfs.ext2 /dev/loop0				#создание ФС
+hexdump -C ./loopfile				#проверка создания ФС
+mount /dev/loop0 /mnt				#монтирование
+df -h /mnt					#проверка занятого пространтва
+tune2fs -r0 /dev/loop0				#отключение зарезервированных блоков
+df -h /mnt					#проверка после отключение резервирования
+umount /mnt && losetup -d /dev/loop0		#отключение loop device
