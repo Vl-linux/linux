@@ -1,0 +1,13 @@
+lvcreate -T -L 400M -n thin_pool vg1
+lvs && lvs -a
+lvcreate -V 1G -n thinvol1 vg1/thin_pool
+vgs && lvs
+mkfs.ext4 /dev/mapper/vg1-thinvol1
+lvs && vgs
+mkdir /mnt/thinvol1 && mount /dev/vg1/thinvol1 /mnt/thinvol1
+df -h
+lvcreate -V 2G -n thinvol2 vg1/thin_pool
+lvs
+lvresize -L +800M vg1/thin_pool
+vgs && lvs
+mkfs.ext4 /dev/vg1/thinvol2

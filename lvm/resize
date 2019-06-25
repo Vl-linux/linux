@@ -1,0 +1,19 @@
+lsblk
+df -h
+#уменьшение
+resize2fs /dev/vg1/lv1 500M
+e2fsck -f /dev/vg1/vl1
+df -h
+lvresize -L 510M vg1/lv1
+df -h
+#увеличение
+vlresize -L 600M vg1/lv2
+df -h
+resize2fs /dev/vg1/lv2 #увеличит до возможного макс.
+df -h
+
+----
+
+#lvresize -r  --в месте с файловой системой сразу
+lvresize -r -L +4G vg0/home #(увеличение в онлайне, без размонтирования)
+#уменьшение только через unmount
