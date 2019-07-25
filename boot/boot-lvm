@@ -1,0 +1,38 @@
+lsblk
+mkdir /opt/boot
+cp -aR /boot/* /opt/boot/
+umount /boot
+mount | grep boot
+parted /dev/sda rm 2
+parted /dev/sda rm 1
+# (parted)  print 
+# (parted) quit
+parted /dev/sda mkpart primary 0% 1076MB
+pvcreate /dev/sda1 --bootloaderareasize 1m
+pvdisplay
+vgextend VolGroup00 /dev/sda1
+vgdisplay
+lvcreate -n boot -l 100%FREE VolGroup00
+lsblk
+mkfs.xfs /dev/VolGroup00/boot
+# правим /etc/fstab
+sed -i 's/^UUID.*/\/dev\/mapper\/VolGroup00-boot\t\/boot\t\t\txfs\tdefaults\t0 0/' /etc/fstab
+cat /etc/fstab
+mount /dev/VolGroup00/boot /boot
+mount | grep boot
+cp -aR /opt/boot/* /boot
+ls -l /boot
+yum -y remove grub2*
+# добавляем репозиторий с пропатченным под LVM Grub
+yum-config-manager --add-repo=https://yum.rumyantsev.com/centos/7/x86_64/
+# устанавливаем из репозирория отключив проверку GPG-ключей
+yum install grub2 -y --nogpgcheck
+grub2-install /dev/sda
+# добавляем lvm boot
+nano /etc/default/grub 
+nano /boot/grub2/grub.cfg
+# генерация нового файла конфигурации системного загрузчика
+grub2-mkconfig -o /boot/grub2/grub.cfg
+cat /boot/grub2/grub.cfg
+# dracut -v -f  формирует новый initramfs (сейчас - не нужно)
+reboot
