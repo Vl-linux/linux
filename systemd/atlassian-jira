@@ -1,0 +1,23 @@
+https://ru.atlassian.com/software/jira/core/download #download atlassian-jira-core-$VERSION-x64.bin file
+chmod +x atlassian-jira-core-$VERSION-x64.bin
+./atlassion-jira-core-$VERSION-x64.bin
+cd /lib/systemd/system
+nano atlassian-jira.service
+cat atlassian-jira.service
+[Unit]
+Description=Atlassian Jira
+After=network.target
+
+[Service]
+Type=simple
+User=jira
+PIDFile=/opt/atlassian/jira/work/catalina.pid
+ExecStart=/opt/atlassian/jira/bin/start-jira.sh
+ExecStop=/opt/atlassian/jira/bin/stop-jira.sh
+
+[Install]
+WantedBy=multi-user.target
+
+systemctl daemon-reload
+systemctl start atlassian-jira
+systemctl status atlassian-jira

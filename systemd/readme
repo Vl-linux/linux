@@ -42,3 +42,5 @@ ExecStart=/usr/sbin/httpd -f /etc/httpd/conf/httpd%i.conf -DFOREGROUND
 - делаем релоад конфигурации systemd
 - запускаем httpd.service, httpd@-1.service, httpd@-2.service
 -----------(подробное выполнение в файле log.3)-----------
+
+4*. Скачать демо-версию Atlassian Jira и переписать основной скрипт запуска на unit-файл
