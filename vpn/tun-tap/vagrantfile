@@ -156,7 +156,8 @@ kX7o6kI4YUOQQgEUgUdyjlbtTq3pj9xKWJIucX5HDoRKgz671rayX/MP6YOQgE7Z
 Or+Mj+sMMYObjmMDfdrl0I6SOu6kPpA7hQ7cqOspjnxWGwUgsAlX
 -----END RSA PRIVATE KEY-----" > /home/vagrant/.ssh/id_rsa
           echo -e "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDg3URQePfjuJPjT+uy9xi6GSqlhU8bFd8p8jJhprO0UHsN2fM7Sl8L/XmYFYQ5ubQZ8DWntHccsIClsV50JTgnR8P9icdFmBxriKxPVXxnfbj0cGFJxTiqp6kXfRy9P8Q3klKpqII6CBi4txEbThIFukrXNgMUrR5XezA/XGfs6h/BLymI8nfvIWTgLlVSoh2pDCIN5oSNx80BtIZSCFmdmZnt7+4n+9r5dmhTIsZxQeSoXr3BPRZ3wNOsUIs/ukHyZUMrWLqMkALR7MH7NZ0T3KMHB3Gr8AfGisA4Z0D68ZNMFFlD0CQX1oSG43s71Ra+U5A9Mq29MXJfi5hVF0vB vagrant@testClient1" >> /home/vagrant/.ssh/authorized_keys
-          # yum -y install mc
+          yum -y install epel-release net-tools mc
+          yum -y install openvpn
         SHELL
         case boxname.to_s
 #        when "inetRouter"
@@ -189,33 +190,10 @@ Or+Mj+sMMYObjmMDfdrl0I6SOu6kPpA7hQ7cqOspjnxWGwUgsAlX
 #            SHELL
         when "centralServer"
           box.vm.provision "shell", run: "always", inline: <<-SHELL
-            #echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
-            echo "GATEWAY=192.168.0.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
-            yum -y install epel-release
-            yum -y install openvpn
-            echo -e "#
-# 2048 bit OpenVPN static key
-#
------BEGIN OpenVPN Static key V1-----
-a47c47335b23667d474af638a3f397ff
-c75b9814d4edafaac6ecee209aeb7eb8
-39d422fe683b219de44c2175153293ad
-5c87e17914a4a9a3505b9e3affe53757
-4a33caec516df1d76d61a510adf3a381
-6b5c2065da3759aec6ebdfbcd1d5e0fc
-3b984aa630cc54e870785623612aebd8
-a2d8c5e0b8f72b7ebcd79b8e3722384f
-8824bf589c2cd3372acbfba5de7f1f9d
-8f18718493df60563a88ac2f85cca2ad
-28ec432686427569852cef099996d536
-fc077b10a6b5e9e9aa5a499ee61c1509
-944a42e466e9ce95d88eb0513b7ac9f7
-391acd7e05b7c4ca45b1e698c38e30ea
-6be718d7adbb35ffbf913aa317e7b03b
-16386b4aa99a10b67cf75c42de7ceef9
------END OpenVPN Static key V1-----" > /etc/openvpn/static.key
-            echo -e "proto udp\ndev tun\nremote 192.168.3.3\nifconfig 10.1.0.1 10.1.0.2\nsecret /etc/openvpn/static.key" > /etc/openvpn/server.conf
-            systemctl restart network
+            echo "dev tun" > /etc/openvpn/server.conf
+            echo "ifconfig 10.10.10.1 10.10.10.2" >> /etc/openvpn/server.conf
+            echo "secret static.key" >> /etc/openvpn/server.conf
+            cp /vagrant/static.key /etc/openvpn/
             systemctl start openvpn@server
             SHELL
 #        when "office1Router"
@@ -232,35 +210,13 @@ fc077b10a6b5e9e9aa5a499ee61c1509
 #            SHELL
         when "office1Server"
           box.vm.provision "shell", run: "always", inline: <<-SHELL
-            #echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
-            echo "GATEWAY=192.168.2.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
-            yum -y install epel-release
-            yum -y install openvpn
-            echo -e "#
-# 2048 bit OpenVPN static key
-#
------BEGIN OpenVPN Static key V1-----
-a47c47335b23667d474af638a3f397ff
-c75b9814d4edafaac6ecee209aeb7eb8
-39d422fe683b219de44c2175153293ad
-5c87e17914a4a9a3505b9e3affe53757
-4a33caec516df1d76d61a510adf3a381
-6b5c2065da3759aec6ebdfbcd1d5e0fc
-3b984aa630cc54e870785623612aebd8
-a2d8c5e0b8f72b7ebcd79b8e3722384f
-8824bf589c2cd3372acbfba5de7f1f9d
-8f18718493df60563a88ac2f85cca2ad
-28ec432686427569852cef099996d536
-fc077b10a6b5e9e9aa5a499ee61c1509
-944a42e466e9ce95d88eb0513b7ac9f7
-391acd7e05b7c4ca45b1e698c38e30ea
-6be718d7adbb35ffbf913aa317e7b03b
-16386b4aa99a10b67cf75c42de7ceef9
------END OpenVPN Static key V1-----" > /etc/openvpn/static.key
-            echo -e "proto udp\ndev tun\nremote 192.168.3.1\nifconfig 10.1.0.2 10.1.0.1\nsecret /etc/openvpn/static.key" > /etc/openvpn/server.conf
-            systemctl restart network
-            systemctl start openvpn@server
-            ping -c 10 10.1.0.1
+            echo "remote 192.168.3.1" > /etc/openvpn/client.conf
+            echo "dev tun" >> /etc/openvpn/client.conf
+            echo "ifconfig 10.10.10.2 10.10.10.1" >> /etc/openvpn/client.conf
+            echo "secret static.key" >> /etc/openvpn/client.conf
+            cp /vagrant/static.key /etc/openvpn/
+            systemctl start openvpn@client
+            ping -c 10 10.10.10.1
             SHELL
 #        when "testClient1"
 #          box.vm.provision "shell", run: "always", inline: <<-SHELL
@@ -303,66 +259,21 @@ fc077b10a6b5e9e9aa5a499ee61c1509
 #            SHELL
         when "office2Server"
           box.vm.provision "shell", run: "always", inline: <<-SHELL
-            #echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
-            echo "GATEWAY=192.168.1.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
-            yum -y install epel-release
-            yum -y install openvpn
-            echo -e "#
-# 2048 bit OpenVPN static key
-#
------BEGIN OpenVPN Static key V1-----
-a47c47335b23667d474af638a3f397ff
-c75b9814d4edafaac6ecee209aeb7eb8
-39d422fe683b219de44c2175153293ad
-5c87e17914a4a9a3505b9e3affe53757
-4a33caec516df1d76d61a510adf3a381
-6b5c2065da3759aec6ebdfbcd1d5e0fc
-3b984aa630cc54e870785623612aebd8
-a2d8c5e0b8f72b7ebcd79b8e3722384f
-8824bf589c2cd3372acbfba5de7f1f9d
-8f18718493df60563a88ac2f85cca2ad
-28ec432686427569852cef099996d536
-fc077b10a6b5e9e9aa5a499ee61c1509
-944a42e466e9ce95d88eb0513b7ac9f7
-391acd7e05b7c4ca45b1e698c38e30ea
-6be718d7adbb35ffbf913aa317e7b03b
-16386b4aa99a10b67cf75c42de7ceef9
------END OpenVPN Static key V1-----" > /etc/openvpn/static.key
-            echo -e "proto udp\ndev tap\nremote 192.168.1.3\nifconfig 10.1.1.1 10.1.1.2\nsecret /etc/openvpn/static.key" > /etc/openvpn/server.conf
-            systemctl restart network
+            echo "dev tap0" > /etc/openvpn/server.conf
+            echo "ifconfig 10.10.1.1 255.255.255.248" >> /etc/openvpn/server.conf
+            echo "secret static.key" >> /etc/openvpn/server.conf
+            cp /vagrant/static.key /etc/openvpn/
             systemctl start openvpn@server
             SHELL
         when "office2Client"
           box.vm.provision "shell", run: "always", inline: <<-SHELL
-            #echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
-            echo "GATEWAY=192.168.1.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
-            yum -y install epel-release
-            yum -y install openvpn
-            echo -e "#
-# 2048 bit OpenVPN static key
-#
------BEGIN OpenVPN Static key V1-----
-a47c47335b23667d474af638a3f397ff
-c75b9814d4edafaac6ecee209aeb7eb8
-39d422fe683b219de44c2175153293ad
-5c87e17914a4a9a3505b9e3affe53757
-4a33caec516df1d76d61a510adf3a381
-6b5c2065da3759aec6ebdfbcd1d5e0fc
-3b984aa630cc54e870785623612aebd8
-a2d8c5e0b8f72b7ebcd79b8e3722384f
-8824bf589c2cd3372acbfba5de7f1f9d
-8f18718493df60563a88ac2f85cca2ad
-28ec432686427569852cef099996d536
-fc077b10a6b5e9e9aa5a499ee61c1509
-944a42e466e9ce95d88eb0513b7ac9f7
-391acd7e05b7c4ca45b1e698c38e30ea
-6be718d7adbb35ffbf913aa317e7b03b
-16386b4aa99a10b67cf75c42de7ceef9
------END OpenVPN Static key V1-----" > /etc/openvpn/static.key
-            echo -e "proto udp\ndev tap\nremote 192.168.1.2\nifconfig 10.1.1.2 10.1.1.1\nsecret /etc/openvpn/static.key" > /etc/openvpn/server.conf
-            systemctl restart network
-            systemctl start openvpn@server
-            ping -c 10 10.1.1.1
+            echo "remote 192.168.1.2" > /etc/openvpn/client.conf
+            echo "dev tap0" >> /etc/openvpn/client.conf
+            echo "ifconfig 10.10.1.2 255.255.255.248" >> /etc/openvpn/client.conf
+            echo "secret static.key" >> /etc/openvpn/client.conf
+            cp /vagrant/static.key /etc/openvpn/
+            systemctl start openvpn@client
+            ping -c 10 10.10.1.1
             SHELL
         end
 
