@@ -19,7 +19,7 @@ MACHINES = {
   :office2Server => {
         :box_name => "centos/7",
         :net => [
-                   {ip: '192.168.3.2', adapter: 2, netmask: "255.255.255.128", virtualbox__intnet: "srv-net"},
+                   {ip: '192.168.3.2', adapter: 2, netmask: "255.255.255.248", virtualbox__intnet: "srv-net"},
                 ]
   },
 }
@@ -77,8 +77,7 @@ Or+Mj+sMMYObjmMDfdrl0I6SOu6kPpA7hQ7cqOspjnxWGwUgsAlX
 -----END RSA PRIVATE KEY-----" > /home/vagrant/.ssh/id_rsa
           echo -e "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDg3URQePfjuJPjT+uy9xi6GSqlhU8bFd8p8jJhprO0UHsN2fM7Sl8L/XmYFYQ5ubQZ8DWntHccsIClsV50JTgnR8P9icdFmBxriKxPVXxnfbj0cGFJxTiqp6kXfRy9P8Q3klKpqII6CBi4txEbThIFukrXNgMUrR5XezA/XGfs6h/BLymI8nfvIWTgLlVSoh2pDCIN5oSNx80BtIZSCFmdmZnt7+4n+9r5dmhTIsZxQeSoXr3BPRZ3wNOsUIs/ukHyZUMrWLqMkALR7MH7NZ0T3KMHB3Gr8AfGisA4Z0D68ZNMFFlD0CQX1oSG43s71Ra+U5A9Mq29MXJfi5hVF0vB vagrant@testClient1" >> /home/vagrant/.ssh/authorized_keys
           yum -y install epel-release
-          yum -y install openvpn
-          yum -y install openssl
+          yum -y install openvpn openssl net-tools
         SHELL
         case boxname.to_s
         when "centralServer"
@@ -91,19 +90,19 @@ Or+Mj+sMMYObjmMDfdrl0I6SOu6kPpA7hQ7cqOspjnxWGwUgsAlX
         when "office1Server"
           box.vm.provision "shell", run: "always", inline: <<-SHELL
             mkdir /etc/openvpn/auth
-            cp /vagrant/openssl/client/* /etc/openvpn/auth
+            cp /vagrant/openssl/client1/* /etc/openvpn/auth
             cp /vagrant/client.conf /etc/openvpn
             systemctl start openvpn@client
-            ping -c 9 10.10.0.1
+            ping -c 5 10.10.10.1
             SHELL
         when "office2Server"
           box.vm.provision "shell", run: "always", inline: <<-SHELL
             mkdir /etc/openvpn/auth
-            cp /vagrant/openssl/client/* /etc/openvpn/auth
-            cp /vagrant/client.conf /etc/openvpn
+            cp /vagrant/openssl/client2/* /etc/openvpn/auth
+            cp /vagrant/client2/client.conf /etc/openvpn
             systemctl start openvpn@client
             systemctl status openvpn@client
-            ping -c 10 10.10.0.1
+            ping -c 5 10.10.10.1
             SHELL
         end
 
