@@ -1,0 +1,58 @@
+yum -y install ocserv nano
+
+# Используется метод аутентификации использующий пароли!!!
+
+mkdir certificates          #создаем папку для хранения сертификатов
+cd /root/certificates
+nano ca.tmpl                #создаем файл шаблона CA
+
+cn = "your organization’s certificate authority" 
+organization = "your organization" 
+serial = 1 
+expiration_days = 3650
+ca 
+signing_key 
+cert_signing_key 
+crl_signing_key 
+
+#сгенерируем ключ CA и сертификат CA.
+certtool --generate-privkey --outfile ca-key.pem
+certtool --generate-self-signed --load-privkey ca-key.pem --template ca.tmpl --outfile ca-cert.pem
+
+nano server.tmpl            #Создаем шаблон сервера (поле «cn», оно должно соответствовать DNS-имени или IP-адресу сервера)
+
+cn = "you domain name or ip"
+organization = "MyCompany" 
+expiration_days = 3650 
+signing_key 
+encryption_key
+tls_www_server
+
+#генерируем ключ сервера и сертификат
+certtool --generate-privkey --outfile server-key.pem
+certtool --generate-certificate --load-privkey server-key.pem --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem --template server.tmpl --outfile server-cert.pem
+
+cp server-cert.pem server-key.pem /etc/ocserv
+
+nano /etc/ocserv/ocserv.conf
+
+auth = "plain[passwd=./sample.passwd]"
+tcp-port = 443
+udp-port = 443
+socket-file = ocserv.sock
+server-cert = /etc/ocserv/server-cert.pem
+server-key = /etc/ocserv/server-key.pem
+device = vpns
+ipv4-network = 192.168.1.1  
+ipv4-netmask = 255.255.255.0  
+dns = 8.8.8.8
+route = 192.168.1.0/255.255.255.0
+
+ocpasswd -c /etc/ocserv/ocpasswd username       #Создайте пользователя, который будет использоваться для входа в ocserv
+
+ocserv -c /etc/ocserv/ocserv.conf               #Чтобы вручную запустить ocserv
+
+
+----------
+#чтобы подключиться с клиента
+sudo openconnect https://192.168.3.1 -u vagrant

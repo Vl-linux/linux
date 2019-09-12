@@ -11,3 +11,12 @@ VPN
 На Вагрант стенде подняты 3 виртуалки: 
 «centralServer» настроен в качестве OpenVPN Сервера. 
 «office1Server» и «office2Server» подключаются как OpenVPN клиенты.
+
+3.* На тестовом Vagrant-стенде автоматически поднимается OpenConnect VPN сервер
+разворачиваются 2 виртуальные машины
+с клиента (office2Server) соединение:
+sudo openconnect https://192.168.3.1 -u vagrant
+метод аутентификации - Логин-Пароль -- вход настроен без пароля 
+(проверка подключения с другого терминала office2Server)
+создание user-passwd на сервере (centralServer):
+ocpasswd -c /etc/ocserv/ocpasswd username
