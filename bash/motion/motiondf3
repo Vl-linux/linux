@@ -1,0 +1,4 @@
+#! /bin/bash
+find /home/motion/cam* -type d -empty -exec rmdir {} \;
+echo $(date +%d-%m-%Y\ %H:%M:%S) "Удаление пустых каталогов" >> /home/motion/motion-df.log
+exit 0;
