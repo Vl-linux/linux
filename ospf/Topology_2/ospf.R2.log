@@ -1,0 +1,254 @@
+[root@R2 ~]# vtysh
+
+Hello, this is Quagga (version 0.99.22.4).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+R2# 
+R2# show  ru
+Building configuration...
+
+Current configuration:
+!
+hostname Router
+hostname ospfd
+log stdout
+!
+password zebra
+enable password zebra
+!
+interface eth0
+ ipv6 nd suppress-ra
+!
+interface eth1
+ description LAN21
+ ip address 172.16.12.2/30
+ ipv6 nd suppress-ra
+!
+interface eth2
+ description LAN32
+ ip address 172.16.12.5/30
+ ipv6 nd suppress-ra
+!
+interface eth3
+ ip address 172.16.12.18/30
+ ipv6 nd suppress-ra
+!
+interface eth4
+ ip address 10.10.2.1/24
+ ipv6 nd suppress-ra
+!
+interface lo
+!
+router ospf
+ ospf router-id 10.10.2.1
+ network 10.10.2.1/24 area 0.0.0.2
+ network 172.16.12.0/30 area 0.0.0.0
+ network 172.16.12.4/30 area 0.0.0.0
+ network 172.16.12.16/30 area 0.0.0.0
+!
+ip forwarding
+!
+line vty
+!
+end
+R2# 
+R2# show interface  
+Interface eth0 is up, line protocol detection is disabled
+  index 2 metric 1 mtu 1500 
+  flags: <UP,BROADCAST,RUNNING,MULTICAST>
+  HWaddr: 52:54:00:c9:c7:04
+  inet 10.0.2.15/24 broadcast 10.0.2.255
+  inet6 fe80::5054:ff:fec9:c704/64
+Interface eth1 is up, line protocol detection is disabled
+  Description: LAN21
+  index 3 metric 1 mtu 1500 
+  flags: <UP,BROADCAST,RUNNING,MULTICAST>
+  HWaddr: 08:00:27:af:0b:33
+  inet 172.16.12.2/30 broadcast 172.16.12.3
+Interface eth2 is up, line protocol detection is disabled
+  Description: LAN32
+  index 4 metric 1 mtu 1500 
+  flags: <UP,BROADCAST,RUNNING,MULTICAST>
+  HWaddr: 08:00:27:54:0e:68
+  inet 172.16.12.5/30 broadcast 172.16.12.7
+Interface eth3 is up, line protocol detection is disabled
+  index 5 metric 1 mtu 1500 
+  flags: <UP,BROADCAST,RUNNING,MULTICAST>
+  HWaddr: 08:00:27:20:97:b9
+  inet 172.16.12.18/30 broadcast 172.16.12.19
+Interface eth4 is up, line protocol detection is disabled
+  index 6 metric 1 mtu 1500 
+  flags: <UP,BROADCAST,RUNNING,MULTICAST>
+  HWaddr: 08:00:27:27:e6:9e
+  inet 10.10.2.1/24 broadcast 10.10.2.255
+Interface lo is up, line protocol detection is disabled
+  index 1 metric 1 mtu 65536 
+  flags: <UP,LOOPBACK,RUNNING>
+  inet 127.0.0.1/8
+  inet6 ::1/128
+R2# 
+R2# show ip route  
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, A - Babel,
+       > - selected route, * - FIB route
+
+K>* 0.0.0.0/0 via 10.0.2.2, eth0
+C>* 10.0.2.0/24 is directly connected, eth0
+O>* 10.10.1.0/24 [110/20] via 172.16.12.1, eth1, 00:15:41
+O   10.10.2.0/24 [110/10] is directly connected, eth4, 11:43:13
+C>* 10.10.2.0/24 is directly connected, eth4
+O>* 10.10.3.0/24 [110/20] via 172.16.12.6, eth2, 11:05:10
+O>* 10.10.4.0/24 [110/20] via 172.16.12.17, eth3, 00:54:00
+C>* 127.0.0.0/8 is directly connected, lo
+O   172.16.12.0/30 [110/10] is directly connected, eth1, 00:15:41
+C>* 172.16.12.0/30 is directly connected, eth1
+O   172.16.12.4/30 [110/10] is directly connected, eth2, 11:06:14
+C>* 172.16.12.4/30 is directly connected, eth2
+O>* 172.16.12.8/30 [110/20] via 172.16.12.1, eth1, 00:15:41
+  *                         via 172.16.12.6, eth2, 00:15:41
+O>* 172.16.12.12/30 [110/1010] via 172.16.12.6, eth2, 00:45:49
+  *                            via 172.16.12.17, eth3, 00:45:49
+O   172.16.12.16/30 [110/10] is directly connected, eth3, 00:54:00
+C>* 172.16.12.16/30 is directly connected, eth3
+R2# 
+R2# show ip route  ospf  
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, A - Babel,
+       > - selected route, * - FIB route
+
+O>* 10.10.1.0/24 [110/20] via 172.16.12.1, eth1, 00:15:56
+O   10.10.2.0/24 [110/10] is directly connected, eth4, 11:43:28
+O>* 10.10.3.0/24 [110/20] via 172.16.12.6, eth2, 11:05:25
+O>* 10.10.4.0/24 [110/20] via 172.16.12.17, eth3, 00:54:15
+O   172.16.12.0/30 [110/10] is directly connected, eth1, 00:15:56
+O   172.16.12.4/30 [110/10] is directly connected, eth2, 11:06:29
+O>* 172.16.12.8/30 [110/20] via 172.16.12.1, eth1, 00:15:56
+  *                         via 172.16.12.6, eth2, 00:15:56
+O>* 172.16.12.12/30 [110/1010] via 172.16.12.6, eth2, 00:46:04
+  *                            via 172.16.12.17, eth3, 00:46:04
+O   172.16.12.16/30 [110/10] is directly connected, eth3, 00:54:15
+R2# 
+R2# show ip ospf  route  
+============ OSPF network routing table ============
+N IA 10.10.1.0/24          [20] area: 0.0.0.0
+                           via 172.16.12.1, eth1
+N    10.10.2.0/24          [10] area: 0.0.0.2
+                           directly attached to eth4
+N IA 10.10.3.0/24          [20] area: 0.0.0.0
+                           via 172.16.12.6, eth2
+N IA 10.10.4.0/24          [20] area: 0.0.0.0
+                           via 172.16.12.17, eth3
+N    172.16.12.0/30        [10] area: 0.0.0.0
+                           directly attached to eth1
+N    172.16.12.4/30        [10] area: 0.0.0.0
+                           directly attached to eth2
+N    172.16.12.8/30        [20] area: 0.0.0.0
+                           via 172.16.12.1, eth1
+                           via 172.16.12.6, eth2
+N    172.16.12.12/30       [1010] area: 0.0.0.0
+                           via 172.16.12.6, eth2
+                           via 172.16.12.17, eth3
+N    172.16.12.16/30       [10] area: 0.0.0.0
+                           directly attached to eth3
+
+============ OSPF router routing table =============
+R    10.10.1.1             [10] area: 0.0.0.0, ABR
+                           via 172.16.12.1, eth1
+R    10.10.3.1             [10] area: 0.0.0.0, ABR
+                           via 172.16.12.6, eth2
+R    10.10.4.1             [10] area: 0.0.0.0, ABR
+                           via 172.16.12.17, eth3
+
+============ OSPF external routing table ===========
+
+R2# 
+R2# 
+R2# 
+R2# 
+R2# show ip ospf  neighbor  
+
+    Neighbor ID Pri State           Dead Time Address         Interface            RXmtL RqstL DBsmL
+10.10.1.1         1 Full/Backup       30.177s 172.16.12.1     eth1:172.16.12.2         0     0     0
+10.10.3.1         1 Full/Backup       36.902s 172.16.12.6     eth2:172.16.12.5         0     0     0
+10.10.4.1         1 Full/DR           39.171s 172.16.12.17    eth3:172.16.12.18        0     0     0
+R2# 
+R2# exit
+[root@R2 ~]# ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 52:54:00:c9:c7:04 brd ff:ff:ff:ff:ff:ff
+    inet 10.0.2.15/24 brd 10.0.2.255 scope global noprefixroute dynamic eth0
+       valid_lft 77574sec preferred_lft 77574sec
+    inet6 fe80::5054:ff:fec9:c704/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:af:0b:33 brd ff:ff:ff:ff:ff:ff
+    inet 172.16.12.2/30 brd 172.16.12.3 scope global eth1
+       valid_lft forever preferred_lft forever
+4: eth2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:54:0e:68 brd ff:ff:ff:ff:ff:ff
+    inet 172.16.12.5/30 brd 172.16.12.7 scope global eth2
+       valid_lft forever preferred_lft forever
+5: eth3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:20:97:b9 brd ff:ff:ff:ff:ff:ff
+    inet 172.16.12.18/30 brd 172.16.12.19 scope global eth3
+       valid_lft forever preferred_lft forever
+6: eth4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:27:e6:9e brd ff:ff:ff:ff:ff:ff
+    inet 10.10.2.1/24 brd 10.10.2.255 scope global eth4
+       valid_lft forever preferred_lft forever
+[root@R2 ~]# cat /etc/quagga/zebra.conf 
+! -*- zebra -*-
+!
+! zebra sample configuration file
+!
+! $Id: zebra.conf.sample,v 1.1 2002/12/13 20:15:30 paul Exp $
+!
+hostname Router
+password zebra
+enable password zebra
+!
+! Interface's description. 
+!
+!interface lo
+! description test of desc.
+!
+!interface sit0
+! multicast
+
+!
+! Static default route sample.
+!
+!ip route 0.0.0.0/0 203.181.89.241
+!
+
+!log file zebra.log
+[root@R2 ~]# cat /etc/quagga/ospfd.conf 
+! -*- ospf -*-
+!
+! OSPFd sample configuration file
+!
+!
+hostname ospfd
+password zebra
+!enable password please-set-at-here
+!
+!router ospf
+!  network 192.168.1.0/24 area 0
+!
+log stdout
+[root@R2 ~]# 
+[root@R2 ~]# tracepath 10.10.1.1
+ 1?: [LOCALHOST]                                         pmtu 1500
+ 1:  10.10.1.1                                             2.072ms reached
+ 1:  10.10.1.1                                             1.563ms reached
+     Resume: pmtu 1500 hops 1 back 1 
+[root@R2 ~]# 
+
+
+

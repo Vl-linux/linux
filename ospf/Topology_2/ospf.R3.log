@@ -1,0 +1,196 @@
+[root@R3 ~]# vtysh
+
+Hello, this is Quagga (version 0.99.22.4).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+R3# R3# show  interface  
+Interface eth0 is up, line protocol detection is disabled
+  index 2 metric 1 mtu 1500 
+  flags: <UP,BROADCAST,RUNNING,MULTICAST>
+  HWaddr: 52:54:00:c9:c7:04
+  inet 10.0.2.15/24 broadcast 10.0.2.255
+  inet6 fe80::5054:ff:fec9:c704/64
+Interface eth1 is up, line protocol detection is disabled
+  Description: LAN31
+  index 3 metric 1 mtu 1500 
+  flags: <UP,BROADCAST,RUNNING,MULTICAST>
+  HWaddr: 08:00:27:5d:15:d0
+  inet 172.16.12.9/30 broadcast 172.16.12.11
+Interface eth2 is up, line protocol detection is disabled
+  Description: LAN32
+  index 4 metric 1 mtu 1500 
+  flags: <UP,BROADCAST,RUNNING,MULTICAST>
+  HWaddr: 08:00:27:84:81:92
+  inet 172.16.12.6/30 broadcast 172.16.12.7
+Interface eth3 is up, line protocol detection is disabled
+  Description: LAN43
+  index 5 metric 1 mtu 1500 
+  flags: <UP,BROADCAST,RUNNING,MULTICAST>
+  HWaddr: 08:00:27:66:d7:9d
+  inet 172.16.12.13/30 broadcast 172.16.12.15
+Interface eth4 is up, line protocol detection is disabled
+  Description: LAN3
+  index 6 metric 1 mtu 1500 
+  flags: <UP,BROADCAST,RUNNING,MULTICAST>
+  HWaddr: 08:00:27:6e:91:04
+  inet 10.10.3.1/24 broadcast 10.10.3.255
+Interface lo is up, line protocol detection is disabled
+  index 1 metric 1 mtu 65536 
+  flags: <UP,LOOPBACK,RUNNING>
+  inet 127.0.0.1/8
+  inet6 ::1/128
+R3# 
+R3# show  ru
+Building configuration...
+
+Current configuration:
+!
+hostname Router
+hostname ospfd
+log stdout
+!
+password zebra
+enable password zebra
+!
+interface eth0
+ ipv6 nd suppress-ra
+!
+interface eth1
+ description LAN31
+ ip address 172.16.12.9/30
+ ipv6 nd suppress-ra
+!
+interface eth2
+ description LAN32
+ ip address 172.16.12.6/30
+ ipv6 nd suppress-ra
+!
+interface eth3
+ description LAN43
+ ip address 172.16.12.13/30
+ ip ospf cost 1000
+ ipv6 nd suppress-ra
+!
+interface eth4
+ description LAN3
+ ip address 10.10.3.1/24
+ ipv6 nd suppress-ra
+!
+interface lo
+!
+router ospf
+ ospf router-id 10.10.3.1
+ network 10.10.3.1/24 area 0.0.0.3
+ network 172.16.12.4/30 area 0.0.0.0
+ network 172.16.12.8/30 area 0.0.0.0
+ network 172.16.12.12/30 area 0.0.0.0
+!
+ip forwarding
+!
+line vty
+!
+end
+R3# 
+R3# 
+R3# show ip route  ospf  
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, A - Babel,
+       > - selected route, * - FIB route
+
+O>* 10.10.1.0/24 [110/20] via 172.16.12.10, eth1, 01:01:31
+O>* 10.10.2.0/24 [110/20] via 172.16.12.5, eth2, 12:11:28
+O   10.10.3.0/24 [110/10] is directly connected, eth4, 12:49:51
+O>* 10.10.4.0/24 [110/30] via 172.16.12.5, eth2, 01:00:25
+O>* 172.16.12.0/30 [110/20] via 172.16.12.5, eth2, 00:27:46
+O   172.16.12.4/30 [110/10] is directly connected, eth2, 12:11:31
+O   172.16.12.8/30 [110/10] is directly connected, eth1, 01:19:21
+O   172.16.12.12/30 [110/1000] is directly connected, eth3, 01:00:25
+O>* 172.16.12.16/30 [110/20] via 172.16.12.5, eth2, 01:00:25
+R3# 
+R3# show ip ospf neighbor  
+
+    Neighbor ID Pri State           Dead Time Address         Interface            RXmtL RqstL DBsmL
+10.10.1.1         1 Full/Backup       35.104s 172.16.12.10    eth1:172.16.12.9         0     0     0
+10.10.4.1         1 Full/Backup       33.539s 172.16.12.14    eth3:172.16.12.13        0     0     0
+10.10.2.1         1 Full/DR           35.686s 172.16.12.5     eth2:172.16.12.6         0     0     0
+R3# 
+R3# exit
+[root@R3 ~]# 
+[root@R3 ~]# ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 52:54:00:c9:c7:04 brd ff:ff:ff:ff:ff:ff
+    inet 10.0.2.15/24 brd 10.0.2.255 scope global noprefixroute dynamic eth0
+       valid_lft 72232sec preferred_lft 72232sec
+    inet6 fe80::5054:ff:fec9:c704/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:5d:15:d0 brd ff:ff:ff:ff:ff:ff
+    inet 172.16.12.9/30 brd 172.16.12.11 scope global eth1
+       valid_lft forever preferred_lft forever
+4: eth2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:84:81:92 brd ff:ff:ff:ff:ff:ff
+    inet 172.16.12.6/30 brd 172.16.12.7 scope global eth2
+       valid_lft forever preferred_lft forever
+5: eth3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:66:d7:9d brd ff:ff:ff:ff:ff:ff
+    inet 172.16.12.13/30 brd 172.16.12.15 scope global eth3
+       valid_lft forever preferred_lft forever
+6: eth4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:6e:91:04 brd ff:ff:ff:ff:ff:ff
+    inet 10.10.3.1/24 brd 10.10.3.255 scope global eth4
+       valid_lft forever preferred_lft forever
+[root@R3 ~]# cat /etc/quagga/zebra.conf 
+! -*- zebra -*-
+!
+! zebra sample configuration file
+!
+! $Id: zebra.conf.sample,v 1.1 2002/12/13 20:15:30 paul Exp $
+!
+hostname Router
+password zebra
+enable password zebra
+!
+! Interface's description. 
+!
+!interface lo
+! description test of desc.
+!
+!interface sit0
+! multicast
+
+!
+! Static default route sample.
+!
+!ip route 0.0.0.0/0 203.181.89.241
+!
+
+!log file zebra.log
+[root@R3 ~]# cat /etc/quagga/ospfd.conf 
+! -*- ospf -*-
+!
+! OSPFd sample configuration file
+!
+!
+hostname ospfd
+password zebra
+!enable password please-set-at-here
+!
+!router ospf
+!  network 192.168.1.0/24 area 0
+!
+log stdout
+[root@R3 ~]# 
+root@R3 ~]# tracepath 10.10.4.1
+ 1?: [LOCALHOST]                                         pmtu 1500
+ 1:  172.16.12.5                                           1.927ms 
+ 1:  172.16.12.5                                           2.228ms 
+ 2:  10.10.4.1                                             2.616ms reached
+     Resume: pmtu 1500 hops 2 back 2 
+[root@R3 ~]# 
+
