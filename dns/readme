@@ -1,0 +1,17 @@
+настраиваем split-dns
+----------------------
+взят стенд https://github.com/erlong15/vagrant-bind
+добавлен еще один сервер client2
+в зоне dns.lab добавлены имена:
+web1 - смотрит на client
+web2 - смотрит на client2
+
+добавлена новая зона - newdns.lab
+в ней запись "www" смотрит на client и client2
+
+настрен split-dns
+client - видит обе зоны, но в зоне dns.lab только web1
+client2 видит только dns.lab
+
+*) настроено все без выключения selinux
+ddns тоже должен работать без выключения selinux
